@@ -1,0 +1,22 @@
+// Place all the styles related to the chatroom controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+#messages {
+    margin: 50px 0;
+    border: 2px solid teal;
+    height: 60vh;
+    overflow-y: auto;
+}
+
+.chat-line {
+    margin: 10px;
+}
+
+.speaker {
+    font-weight: bold;
+}
+
+textarea {
+    resize: none;
+}
