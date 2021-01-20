@@ -3,6 +3,7 @@ require 'test_helper'
 class UserTest < ActiveSupport::TestCase
 
   setup do
+    User.delete_all
     @user = build_stubbed(:user)
   end
 
@@ -36,6 +37,14 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  test "username is unique" do
+    @control = create(:control_user)
+    assert @user.valid?, 'user with unique username should be valid'
+
+    @user.username = @control.username
+    assert_not @user.valid?, 'user with non-unique username should be invalid'
+  end
+
   ### Test email ###
 
   test "email is not blank" do
@@ -53,6 +62,14 @@ class UserTest < ActiveSupport::TestCase
       @user = build_stubbed(:user, trait)
       assert_not @user.valid?, 'illegal email format should be invalid'
     end
+  end
+
+  test "email is unique" do
+    @control = create(:control_user)
+    assert @user.valid?, 'user with unique email should be valid'
+
+    @user.email = @control.email
+    assert_not @user.valid?, 'user with non-unique email should be invalid'
   end
 
 end
