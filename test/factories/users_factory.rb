@@ -4,6 +4,11 @@ FactoryBot.define do
     email { 'test-user@chatroom.com' }
     password { 'abcdefg' }
 
+    factory :control_user do
+      username { 'ctrl_user-name' }
+      email { 'control-user@chatroom.com' }
+    end
+
     ### username traits ###
 
     trait :username_with_spaces do
