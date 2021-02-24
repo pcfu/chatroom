@@ -1,17 +1,28 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Chatroom</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse"
-          data-target="#navbar-links" aria-controls="navbar-links"
-          aria-expanded="false" aria-label="Toggle navigation"
+  <a class="navbar-brand" href="/">Chatroom</a>
+  <button
+    class="navbar-toggler" type="button" data-toggle="collapse"
+    data-target="#navbar-collapsible" aria-controls="navbar-collapsible"
+    aria-expanded="false" aria-label="Toggle navigation"
   >
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbar-links">
-    <div class="navbar-nav w-100">
+  <div class="collapse navbar-collapse" id="navbar-collapsible">
+    <div class="navbar-nav">
+      <div class="navbar-collapse-show">
+        <a class="navbar-brand" href="/" style="color: blue;">Brand Placement</a>
+        <button
+          type="button" class="close" data-toggle="collapse" data-target="#navbar-collapsible"
+          aria-controls="navbar-collapsible" aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
       <a class="nav-link active" href="#">Home</a>
       <a class="nav-link" href="#">About</a>
-      <a class="nav-link mr-auto" href="#">Link 1</a>
+      <a class="nav-link" href="#">Sample Link</a>
       <a class="nav-link" href="#">Login</a>
     </div>
   </div>
