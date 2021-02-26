@@ -3,14 +3,14 @@
 @import "bootstrap/scss/mixins";
 
 body > .navbar {
-    padding: 1rem;
-
-    .navbar-brand {
-        margin-right: 4rem;
-    }
+    padding: 0.5rem;
 }
 
-@include media-breakpoint-down(xs) {
+@include media-breakpoint-down(sm) {
+    .container {
+        max-width: 100%;
+    }
+
     #navbar-collapsible {
         position: fixed;
         top: 0;
@@ -37,7 +37,7 @@ body > .navbar {
 
     #navbar-collapsible > .navbar-nav > {
         .navbar-nav-header {
-            height: 15vh;
+            height: 20vh;
             padding: 20px;
 
             .navbar-brand {
@@ -46,49 +46,59 @@ body > .navbar {
         }
 
         .nav-link {
-            padding: 10px;
             text-align: center;
-            font-size: 1.5em;
-            color: #000;
+            font-size: 1.3em;
+            color: theme-color("dark");
+        }
+
+        .nav-link:not(#login-btn) {
+            min-width: 200px;
+            padding: 1rem 0;
+            color: theme-color("light");
+            background-color: theme-color("app-primary");
 
             &:hover {
-                background-color: #F0F0F0;
+                background-color: theme-color("app-secondary");
             }
         }
 
         #login-btn {
-            margin: 10px auto;
+            margin: 40px auto 0 auto;
             padding-left: 2rem;
             padding-right: 2rem;
             border-radius: 27px;
-            color: theme-color("light");
-            background-color: theme-color("dark");
+            border: 1px solid theme-color("app-primary");
+            color: theme-color("app-primary");
+            background-color: theme-color("light");
 
             &:hover {
-                background-color: theme-color("secondary");
+                color: theme-color("light");
+                background-color: theme-color("app-secondary");
+                border: theme-color("app-secondary");
             }
         }
     }
 }
 
-@include media-breakpoint-up(sm) {
+@include media-breakpoint-up(md) {
     #navbar-collapsible > .navbar-nav {
         width: 100%;
 
         .nav-link {
-            font-size: 1.3em;
+            font-size: 1.1em;
         }
 
         #login-btn {
-            margin-left: auto;
+            height: 2rem;
+            margin: auto 0;
+            padding: 0.1rem 1.5rem;
             border-radius: 20px;
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-            color: theme-color("dark");
-            background-color: theme-color("light");
+            color: theme-color("light");
+            background-color: theme-color("app-primary");
 
             &:hover {
-                background-color: theme-color("warning");
+                color: theme-color("light");
+                background-color: theme-color("app-secondary");
             }
         }
     }
