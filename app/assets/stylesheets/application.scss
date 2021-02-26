@@ -14,6 +14,23 @@
  *= require_self
  */
 
+$spacer: 1rem;
+$spacers: (
+    6: ($spacer * 5),
+    7: ($spacer * 7),
+    8: ($spacer * 10)
+);
+
+// Color definitions
+$app-primary: #4f003be3;
+$app-secondary: #824172de;
+
+// Add colors to bootstrap theme-colors
+$theme-colors: (
+    "app-primary": $app-primary,
+    "app-secondary": $app-secondary
+);
+
 @import "bootstrap/scss/bootstrap";
 @import "navbar";
 
