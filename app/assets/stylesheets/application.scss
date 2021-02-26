@@ -16,3 +16,12 @@
 
 @import "bootstrap/scss/bootstrap";
 @import "navbar";
+
+@font-face {
+    font-family: 'Signika';
+    src: url('Signika-VariableFont_wght.ttf');
+}
+
+body {
+    font-family: 'Signika';
+}
