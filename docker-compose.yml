@@ -1,0 +1,64 @@
+version: "3.8"
+
+services:
+  app: &app
+    build:
+      context: .dockerdev
+      dockerfile: Dockerfile
+      args:
+        PROJECT_NAME: ${PROJECT_NAME}
+        RUBY_VERSION: ${RUBY_NORVM_VERSION}
+        NODE_MAJOR: ${NODE_MAJOR}
+        YARN_VERSION: ${YARN_VERSION}
+        BUNDLER_VERSION: ${BUNDLER_VERSION}
+        RAILS_VERSION: ${RAILS_VERSION}
+    image: ${PROJECT_NAME}:${PROJECT_VERSION}
+    tmpfs:
+      - /tmp
+
+  backend: &backend
+    <<: *app
+    stdin_open: true
+    tty: true
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - RAILS_ENV=${RAILS_ENV:-development}
+      - WEBPACKER_DEV_SERVER_HOST=webpacker
+    volumes:
+      - .:/${PROJECT_NAME}:cached
+      - bundle:/usr/local/bundle
+      - node_modules:/${PROJECT_NAME}/node_modules
+      - packs:/${PROJECT_NAME}/public/packs
+
+  runner:
+    <<: *backend
+    command: /bin/bash
+    ports:
+      - '3000:3000'
+      - '3002:3002'
+
+  rails:
+    <<: *backend
+    command: rails server -b 0.0.0.0
+    ports:
+      - '3000:3000'
+
+  webpacker:
+    <<: *app
+    command: ./bin/webpack-dev-server
+    ports:
+      - '3035:3035'
+    volumes:
+      - .:/${PROJECT_NAME}:cached
+      - bundle:/usr/local/bundle
+      - node_modules:/${PROJECT_NAME}/node_modules
+      - packs:/${PROJECT_NAME}/public/packs
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - RAILS_ENV=${RAILS_ENV:-development}
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+
+volumes:
+  bundle:
+  node_modules:
+  packs:
