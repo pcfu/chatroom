@@ -12,6 +12,11 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
+ */
+
+/*
+ * SPACING
  */
 
 $spacer: 1rem;
@@ -21,18 +26,32 @@ $spacers: (
     8: ($spacer * 10)
 );
 
-// Color definitions
-$app-primary: #4f003be3;
-$app-secondary: #824172de;
+
+/*
+ * COLORS
+ */
+
+$tyrian-purple: #4f003be3;
+$cadillac: #824172de;
+$black-pearl: #0B0C10;
+$midnight-express: #1F2833;
+$blue-chill: #45A29E;
+$baby-blue: #66FCF1;
+$iron: #C5C6C7;
 
 // Add colors to bootstrap theme-colors
 $theme-colors: (
-    "app-primary": $app-primary,
-    "app-secondary": $app-secondary
+    "app-primary": $black-pearl,
+    "app-secondary": $midnight-express,
+    "app-accent": $blue-chill,
+    "app-highlight": $baby-blue,
+    "app-default": $iron
 );
 
-@import "bootstrap/scss/bootstrap";
-@import "navbar";
+
+/*
+ * FONTS
+ */
 
 @font-face {
     font-family: 'Signika';
@@ -42,3 +61,8 @@ $theme-colors: (
 body {
     font-family: 'Signika';
 }
+
+
+@import "bootstrap/scss/bootstrap";
+@import "font-awesome";
+@import "navbar";

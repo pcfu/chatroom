@@ -1,14 +1,27 @@
 @import "bootstrap/scss/_functions";
 @import "bootstrap/scss/_variables";
-@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/_mixins";
 
 body > .navbar {
     padding: 0.5rem;
+    background-color: theme-color("app-primary");
 }
 
 @include media-breakpoint-down(sm) {
     .container {
         max-width: 100%;
+
+        .navbar-toggler {
+            padding: 0.25rem 0.5rem;
+            border: 2px solid theme-color("app-accent");
+            color: theme-color("app-accent");
+
+            &:hover {
+                color: theme-color("app-primary");
+                background-color: theme-color("app-highlight");
+                border-color: theme-color("app-highlight");
+            }
+        }
     }
 
     #navbar-collapsible {
@@ -86,6 +99,12 @@ body > .navbar {
 
         .nav-link {
             font-size: 1.1em;
+            font-weight: 600;
+            color: theme-color("app-accent");
+
+            &:hover {
+                color: theme-color("app-highlight");
+            }
         }
 
         #login-btn {
@@ -93,12 +112,11 @@ body > .navbar {
             margin: auto 0;
             padding: 0.1rem 1.5rem;
             border-radius: 20px;
-            color: theme-color("light");
-            background-color: theme-color("app-primary");
+            color: theme-color("app-primary");
+            background-color: theme-color("app-accent");
 
             &:hover {
-                color: theme-color("light");
-                background-color: theme-color("app-secondary");
+                background-color: theme-color("app-highlight");
             }
         }
     }
