@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  MIN_AGE = 18
+
   has_secure_password
   auto_strip_attributes :username, :email
 
@@ -10,6 +12,7 @@ class User < ApplicationRecord
                     uniqueness: true
   validates :password, presence: true, length: { minimum: 8, maximum: 30 },
                        format: { with: /(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.?[#?!@$%^&*_-])/ }
+  validates :dob, date: { max: Date.current.advance(years: -MIN_AGE) }
 
   before_save do
     self.email = email.downcase

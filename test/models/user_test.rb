@@ -116,4 +116,11 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?, 'password with no special characters should be invalid'
   end
 
+  ### Test D.O.B ###
+
+  test "DOB is not blank" do
+    @user.dob = nil
+    assert_not @user.valid?, 'blank date of birth should be invalid'
+  end
+
 end
