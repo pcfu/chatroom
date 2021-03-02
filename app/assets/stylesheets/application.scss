@@ -57,10 +57,6 @@ $theme-colors: (
     src: url('Signika-VariableFont_wght.ttf');
 }
 
-body {
-    font-family: 'Signika';
-}
-
 // Font Awesome
 $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import "@fortawesome/fontawesome-free/scss/fontawesome";
@@ -72,3 +68,10 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 
 @import "bootstrap/scss/bootstrap";
 @import "navbar";
+
+body {
+    height: 100vh;
+    color: theme-color("app-default");
+    background-color: theme-color("app-secondary");
+    font-family: 'Signika';
+}
