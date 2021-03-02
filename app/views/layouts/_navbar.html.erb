@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-md navbar-dark">
   <div class="container">
-    <%= link_to 'Chatroom', '/', class: 'navbar-brand ml-3 mx-md-0' %>
+    <%=
+      link_to image_tag("logo.svg", size: "176x38", alt: "Chatroom Logo"), '/',
+      class: 'navbar-brand ml-3 mx-md-0'
+    %>
     <button
       class="navbar-toggler mr-3" type="button" data-toggle="collapse"
       data-target="#navbar-collapsible" aria-controls="navbar-collapsible"
@@ -12,7 +15,10 @@
     <div class="collapse navbar-collapse" id="navbar-collapsible">
       <div class="navbar-nav">
         <div class="d-md-none navbar-nav-header">
-          <%= link_to 'Brand Placement', '/', class: 'navbar-brand' %>
+          <%=
+            link_to image_tag("logo-alt.svg", size: "176x38", alt: "Chatroom Logo"),
+            '/', class: 'navbar-brand'
+          %>
           <button
             type="button" class="close" data-toggle="collapse" data-target="#navbar-collapsible"
             aria-controls="navbar-collapsible" aria-label="Close"

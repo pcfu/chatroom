@@ -59,7 +59,13 @@ body > .navbar {
             }
 
             .close {
+                margin-top: 0.25rem;
                 color: theme-color("app-primary");
+                opacity: 1;
+
+                &:hover {
+                    color: theme-color("light");
+                }
             }
         }
 
