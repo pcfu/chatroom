@@ -30,7 +30,7 @@ body > .navbar {
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: theme-color("light");
+        background-color: theme-color("app-primary");
 
         &.collapsing {
             left: -100%;
@@ -52,26 +52,32 @@ body > .navbar {
         .navbar-nav-header {
             height: 20vh;
             padding: 20px;
+            background-color: theme-color("app-accent");
 
             .navbar-brand {
-                color: theme-color("dark");
+                color: theme-color("app-primary");
+            }
+
+            .close {
+                color: theme-color("app-primary");
             }
         }
 
         .nav-link {
             text-align: center;
             font-size: 1.3em;
-            color: theme-color("dark");
+            font-weight: 600;
         }
 
         .nav-link:not(#login-btn) {
             min-width: 200px;
-            padding: 1rem 0;
+            padding-bottom: 2rem;
             color: theme-color("light");
-            background-color: theme-color("app-primary");
+            background-color: theme-color("app-accent");
 
             &:hover {
-                background-color: theme-color("app-secondary");
+                color: theme-color("app-accent");
+                background-color: theme-color("light");
             }
         }
 
@@ -80,14 +86,13 @@ body > .navbar {
             padding-left: 2rem;
             padding-right: 2rem;
             border-radius: 27px;
-            border: 1px solid theme-color("app-primary");
-            color: theme-color("app-primary");
-            background-color: theme-color("light");
+            border: 2px solid theme-color("app-accent");
+            color: theme-color("app-accent");
 
             &:hover {
-                color: theme-color("light");
-                background-color: theme-color("app-secondary");
-                border: theme-color("app-secondary");
+                color: theme-color("app-primary");
+                background-color: theme-color("app-highlight");
+                border-color: theme-color("app-highlight");
             }
         }
     }
