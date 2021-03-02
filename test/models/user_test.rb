@@ -123,4 +123,16 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?, 'blank date of birth should be invalid'
   end
 
+  test "user is at least 18 years old" do
+    @user = build_stubbed(:user, :dob_too_young)
+    assert_not @user.valid?, "user under 18 y.o. should be invalid"
+  end
+
+  test "DOB is converted to date" do
+    [:dob_datetime, :dob_datetime_str].each do |trait|
+      @user = build_stubbed(:user, trait)
+      assert @user.dob.is_a?(Date), "DOB not converted to date"
+    end
+  end
+
 end

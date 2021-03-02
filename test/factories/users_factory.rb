@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :user, aliases: [:base_user] do
     username { 'test_user-name' }
     email { 'test-user@chatroom.com' }
+    dob { Globals::App::MAX_DOB }
     password { 'P@ssw5rd' }
     password_confirmation { 'P@ssw5rd' }
 
@@ -95,6 +96,20 @@ FactoryBot.define do
     trait :pw_no_special_chars do
       password { 'Passw0rd' }
       password_confirmation { 'Passw0rd' }
+    end
+
+    ### d.o.b traits ###
+
+    trait :dob_too_young do
+      dob { Globals::App::MAX_DOB.advance(days: 1) }
+    end
+
+    trait :dob_datetime do
+      dob { Globals::App::MAX_DOB.to_datetime }
+    end
+
+    trait :dob_datetime_str do
+      dob { Globals::App::MAX_DOB.to_datetime.to_s }
     end
 
   end
