@@ -43,6 +43,12 @@ services:
     ports:
       - '3000:3000'
 
+  test:
+    <<: *backend
+    environment:
+      - RAILS_ENV=test
+    command: rails test ${TARGET}
+
   webpacker:
     <<: *app
     command: ./bin/webpack-dev-server
