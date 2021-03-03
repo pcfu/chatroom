@@ -70,7 +70,9 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import "navbar";
 
 body {
-    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     color: theme-color("app-default");
     background-color: theme-color("app-secondary");
     font-family: 'Signika';

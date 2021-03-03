@@ -11,7 +11,9 @@
   </head>
 
   <body>
-    <%= render 'layouts/navbar' %>
-    <%= yield %>
+    <% unless params[:controller] == 'channels' %>
+      <%= render 'layouts/static/navbar' %>
+      <%= render 'layouts/static/static_content' %>
+    <% end %>
   </body>
 </html>
