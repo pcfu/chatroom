@@ -7,11 +7,11 @@ class DateValidator < ActiveModel::EachValidator
       return record.errors.add attribute, (options[:message] || "is not a date")
     end
 
-    if options.has_key?(:min) && value < options[:min]
+    if options.has_key?(:min) && value < options[:min].to_date
       return record.errors.add attribute, (options[:message] || "exceeded minimum date")
     end
 
-    if options.has_key?(:max) && value > options[:max]
+    if options.has_key?(:max) && value > options[:max].to_date
       return record.errors.add attribute, (options[:message] || "exceeded maximum date")
     end
   end
@@ -33,7 +33,7 @@ class DateValidator < ActiveModel::EachValidator
       if options.has_key?(:min) && options.has_key?(:max)
         raise ArgumentError.new(
           ":min must be <= :max for date validation"
-        ) if options[:min] > options[:max]
+        ) if options[:min].to_date > options[:max].to_date
       end
     end
 
@@ -43,6 +43,8 @@ class DateValidator < ActiveModel::EachValidator
 
     def is_valid_datestr(str)
       return false unless str.is_a? String
+      return false unless str.match? /\A\d{4}.\d{2}.\d{2}/
+
       begin
         str.to_date
       rescue Date::Error
