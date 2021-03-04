@@ -2,7 +2,7 @@
 
 body > .navbar {
     padding: 0.5rem;
-    background-color: theme-color("app-primary");
+    background-color: theme-color("app-dark");
 }
 
 @include media-breakpoint-down(sm) {
@@ -11,11 +11,11 @@ body > .navbar {
 
         .navbar-toggler {
             padding: 0.25rem 0.5rem;
-            border: 2px solid theme-color("app-accent") !important;
-            color: theme-color("app-accent") !important;
+            border: 2px solid theme-color("app-primary") !important;
+            color: theme-color("app-primary") !important;
 
             &:hover {
-                color: theme-color("app-primary") !important;
+                color: theme-color("app-dark") !important;
                 background-color: theme-color("app-highlight") !important;
                 border-color: theme-color("app-highlight") !important;
             }
@@ -29,7 +29,7 @@ body > .navbar {
         z-index: 1000;
         width: 100vw;
         height: 100vh;
-        background-color: theme-color("app-primary");
+        background-color: theme-color("app-dark");
 
         &.collapsing {
             left: -100%;
@@ -51,19 +51,15 @@ body > .navbar {
         .navbar-nav-header {
             height: 20vh;
             padding: 20px;
-            background-color: theme-color("app-accent");
-
-            .navbar-brand {
-                color: theme-color("app-primary");
-            }
+            background-color: theme-color("app-primary");
 
             .close {
                 margin-top: 0.25rem;
-                color: theme-color("app-primary");
+                color: theme-color("app-dark");
                 opacity: 1;
 
                 &:hover {
-                    color: theme-color("light");
+                    color: theme-color("app-light");
                 }
             }
         }
@@ -77,12 +73,12 @@ body > .navbar {
         .nav-link:not(#login-btn) {
             min-width: 200px;
             padding-bottom: 2rem;
-            color: theme-color("light");
-            background-color: theme-color("app-accent");
+            color: theme-color("app-light");
+            background-color: theme-color("app-primary");
 
             &:hover {
-                color: theme-color("app-accent");
-                background-color: theme-color("light");
+                color: theme-color("app-primary");
+                background-color: theme-color("app-light");
             }
         }
 
@@ -91,11 +87,11 @@ body > .navbar {
             padding-left: 2rem;
             padding-right: 2rem;
             border-radius: 27px;
-            border: 2px solid theme-color("app-accent");
-            color: theme-color("app-accent");
+            border: 2px solid theme-color("app-primary");
+            color: theme-color("app-primary");
 
             &:hover {
-                color: theme-color("app-primary");
+                color: theme-color("app-dark");
                 background-color: theme-color("app-highlight");
                 border-color: theme-color("app-highlight");
             }
@@ -110,7 +106,7 @@ body > .navbar {
         .nav-link {
             font-size: 1.1em;
             font-weight: 600;
-            color: theme-color("app-accent");
+            color: theme-color("app-primary");
 
             &:hover {
                 color: theme-color("app-highlight");
@@ -122,8 +118,8 @@ body > .navbar {
             margin: auto 0;
             padding: 0.1rem 1.5rem;
             border-radius: 20px;
-            color: theme-color("app-primary");
-            background-color: theme-color("app-accent");
+            color: theme-color("app-dark");
+            background-color: theme-color("app-primary");
 
             &:hover {
                 background-color: theme-color("app-highlight");

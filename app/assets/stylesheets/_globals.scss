@@ -20,14 +20,16 @@ $midnight-express: #1F2833;
 $blue-chill: #45A29E;
 $baby-blue: #66FCF1;
 $iron: #C5C6C7;
+$solitude: #F8F9FA;
 
 // Add colors to bootstrap theme-colors
 $theme-colors: (
-    "app-primary": $black-pearl,
+    "app-primary": $blue-chill,
     "app-secondary": $midnight-express,
-    "app-accent": $blue-chill,
     "app-highlight": $baby-blue,
-    "app-default": $iron
+    "app-dark": $black-pearl,
+    "app-light": $solitude,
+    "app-plain": $iron
 );
 
 /*
