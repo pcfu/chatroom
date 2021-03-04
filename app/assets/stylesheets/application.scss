@@ -33,3 +33,12 @@ body {
     background-color: theme-color("app-secondary");
     font-family: 'Signika';
 }
+
+.btn-app-primary {
+    color: theme-color("app-light");
+    background-color: theme-color("app-primary");
+
+    &:hover {
+        background-color: lighten(theme-color("app-primary"), 8%);
+    }
+}
