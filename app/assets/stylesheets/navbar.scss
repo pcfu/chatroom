@@ -1,6 +1,4 @@
-@import "bootstrap/scss/_functions";
-@import "bootstrap/scss/_variables";
-@import "bootstrap/scss/_mixins";
+@import "globals";
 
 body > .navbar {
     padding: 0.5rem;
@@ -13,13 +11,13 @@ body > .navbar {
 
         .navbar-toggler {
             padding: 0.25rem 0.5rem;
-            border: 2px solid theme-color("app-accent");
-            color: theme-color("app-accent");
+            border: 2px solid theme-color("app-accent") !important;
+            color: theme-color("app-accent") !important;
 
             &:hover {
-                color: theme-color("app-primary");
-                background-color: theme-color("app-highlight");
-                border-color: theme-color("app-highlight");
+                color: theme-color("app-primary") !important;
+                background-color: theme-color("app-highlight") !important;
+                border-color: theme-color("app-highlight") !important;
             }
         }
     }

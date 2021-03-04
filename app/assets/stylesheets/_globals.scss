@@ -1,0 +1,44 @@
+/*
+ * SPACING
+ */
+
+$spacer: 1rem;
+$spacers: (
+    6: ($spacer * 5),
+    7: ($spacer * 7),
+    8: ($spacer * 10)
+);
+
+/*
+ * COLORS
+ */
+
+$tyrian-purple: #4f003be3;
+$cadillac: #824172de;
+$black-pearl: #0B0C10;
+$midnight-express: #1F2833;
+$blue-chill: #45A29E;
+$baby-blue: #66FCF1;
+$iron: #C5C6C7;
+
+// Add colors to bootstrap theme-colors
+$theme-colors: (
+    "app-primary": $black-pearl,
+    "app-secondary": $midnight-express,
+    "app-accent": $blue-chill,
+    "app-highlight": $baby-blue,
+    "app-default": $iron
+);
+
+/*
+ * FONTS
+ */
+
+@font-face {
+    font-family: 'Signika';
+    src: url('Signika-VariableFont_wght.ttf');
+}
+
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/_mixins";
