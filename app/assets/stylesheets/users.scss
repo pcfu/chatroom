@@ -21,9 +21,27 @@
         height: 100%;
         display: flex;
 
-        div {
+        > div {
             width: 320px;
-            margin: auto;
+            margin: 10% auto auto auto;
+
+            h4 {
+                margin-bottom: 30px;
+            }
+
+            label {
+                margin-bottom: 0.25rem;
+            }
+
+            .form-group > input {
+                color: theme-color("app-plain");
+                background-color: theme-color('app-secondary');
+            }
+
+            .btn-app-primary {
+                width: 100%;
+                margin-top: 20px;
+            }
         }
     }
 }

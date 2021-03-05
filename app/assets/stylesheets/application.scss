@@ -34,10 +34,16 @@ body {
     font-family: 'Signika';
 }
 
+a {
+    color: theme-color("app-primary");
+    &:hover {
+        color: theme-color("app-highlight");
+    }
+}
+
 .btn-app-primary {
     color: theme-color("app-light");
     background-color: theme-color("app-primary");
-
     &:hover {
         background-color: lighten(theme-color("app-primary"), 8%);
     }
