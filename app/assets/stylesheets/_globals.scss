@@ -32,6 +32,25 @@ $theme-colors: (
     "app-plain": $iron
 );
 
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/_mixins";
+
+/*
+ * ELEMENT DIMENSIONS
+ */
+
+$dimensions: (
+    "input-height": calc(1.5em + 0.75rem + 2px),
+    "input-padding-y": 0.375rem,
+    "input-padding-x": 0.75rem,
+    "input-border-radius": 0.25rem
+);
+
+@function dimension($key) {
+    @return map-get($dimensions, $key);
+}
+
 /*
  * FONTS
  */
@@ -40,7 +59,3 @@ $theme-colors: (
     font-family: 'Signika';
     src: url('Signika-VariableFont_wght.ttf');
 }
-
-@import "bootstrap/scss/_functions";
-@import "bootstrap/scss/_variables";
-@import "bootstrap/scss/_mixins";
