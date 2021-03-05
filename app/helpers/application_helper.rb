@@ -14,8 +14,8 @@ module ApplicationHelper
     tag.div(wrapper_opts) do
       tag.div(class: 'styleable-select') do
         content = tag.div(class: 'styleable-select-trigger') do
-          tag.span(prompt, class: 'styleable-select-prompt').concat(
-            tag.div(class: 'styleable-select-toggle') {tag.i class:'fas fa-caret-down'}
+          tag.span(prompt, class: 'styleable-select-prompt default').concat(
+            tag.div(class: 'styleable-select-toggle') {tag.i class:'fas fa-caret-up'}
           )
         end
 

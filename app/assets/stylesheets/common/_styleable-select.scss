@@ -50,9 +50,9 @@
             background-color: theme-color("app-secondary");
             border: 1px solid theme-color("app-dark");
             border-radius: dimension("input-border-radius");
-
             opacity: 0;
             visibility: hidden;
+            transition: all 0.25s;
 
             .styleable-option {
                 display: block;

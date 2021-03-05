@@ -38,6 +38,7 @@ a {
     color: theme-color("app-primary");
     &:hover {
         color: theme-color("app-highlight");
+        text-decoration: none;
     }
 }
 
