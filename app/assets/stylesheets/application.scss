@@ -48,3 +48,20 @@ a {
         background-color: lighten(theme-color("app-primary"), 8%);
     }
 }
+
+.form-group {
+    label {
+        margin-bottom: 0.25rem;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+    }
+
+    .form-control {
+        color: theme-color("app-light");
+        background-color: theme-color('app-secondary');
+        border-color: theme-color("app-dark");
+        &:focus {
+            box-shadow: 0 0 0 0.1rem theme-color("app-primary");
+        }
+    }
+}

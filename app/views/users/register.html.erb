@@ -8,9 +8,35 @@
         <%= form.label :username %>
         <%= form.text_field :username, class: "form-control" %>
       </div>
+
       <div class="form-group">
         <%= form.label :email %>
         <%= form.text_field :email, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :dob_year, "date of birth" %>
+        <div class="d-flex justify-content-between">
+          <div>
+            <%=
+              choices = (1..8).to_a
+              styleable_select_tag choices, {id: 'user_dob_day', prompt: 'day'}
+            %>
+          </div>
+          <div>
+            <%=
+              choices = ["January", "February", 'March', 'April',
+                         'October', 'November', 'December']
+              styleable_select_tag choices, {id: 'user_dob_month', prompt: 'month'}
+            %>
+          </div>
+          <div>
+            <%=
+              choices = (2016..2021).to_a.reverse
+              styleable_select_tag choices, {id: 'user_dob_year', prompt: 'year'}
+            %>
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -19,7 +45,7 @@
       </div>
 
       <div class="form-group">
-        <%= form.label :password_confirmation, "Confirm password" %>
+        <%= form.label :password_confirmation, "confirm password" %>
         <%= form.password_field :password_confirmation, class: "form-control" %>
       </div>
 
