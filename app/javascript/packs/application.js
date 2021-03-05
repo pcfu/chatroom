@@ -3,12 +3,15 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+const requireAll = (r) => r.keys().forEach(r);
+
 import 'bootstrap'
 import "@fortawesome/fontawesome-free/js/all"
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+requireAll(require.context('common', true, /\.js$/));
 
 // Include jQuery in global and window scope
 const jQuery = require('jquery')

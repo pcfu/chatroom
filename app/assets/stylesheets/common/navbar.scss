@@ -1,4 +1,4 @@
-@import "globals";
+@import "/common/globals";
 
 body > .navbar {
     padding: 0.5rem;
@@ -30,6 +30,7 @@ body > .navbar {
         width: 100vw;
         height: 100vh;
         background-color: theme-color("app-dark");
+        overflow-y: auto;
 
         &.collapsing {
             left: -100%;
@@ -83,7 +84,7 @@ body > .navbar {
         }
 
         #login-btn {
-            margin: 40px auto 0 auto;
+            margin: 40px auto;
             padding-left: 2rem;
             padding-right: 2rem;
             border-radius: 27px;

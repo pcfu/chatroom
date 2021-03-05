@@ -1,4 +1,4 @@
-@import "globals";
+@import "/common/globals";
 
 .styleable-select-wrapper {
     position: relative;
@@ -18,13 +18,18 @@
             align-items: center;
             justify-content: space-between;
             padding: dimension("input-padding-y") dimension("input-padding-x");
-            color: theme-color("app-plain");
             border: 1px solid theme-color("app-dark");
             border-radius: dimension("input-border-radius");
-
             &:hover {
                 .styleable-select-toggle {
                     color: theme-color("app-light");
+                }
+            }
+
+            .styleable-select-prompt {
+                color: theme-color("app-light");
+                &.default {
+                    color: darken(theme-color("app-plain"), 40%);
                 }
             }
 
@@ -36,7 +41,7 @@
         .styleable-select-options {
             position: absolute;
             display: block;
-            top: calc(#{dimension("input-height")} * -5);
+            top: calc((#{dimension("input-height")} * -5) - 5px);
             left: 0;
             right: 0;
             height: calc(#{dimension("input-height")} * 5);
@@ -45,6 +50,9 @@
             background-color: theme-color("app-secondary");
             border: 1px solid theme-color("app-dark");
             border-radius: dimension("input-border-radius");
+
+            opacity: 0;
+            visibility: hidden;
 
             .styleable-option {
                 display: block;
@@ -57,6 +65,17 @@
                     background-color: theme-color("app-dark");
                 }
             }
+        }
+    }
+
+    .styleable-select.show {
+        .styleable-select-trigger {
+            box-shadow: 0 0 0 0.1rem theme-color("app-primary");
+        }
+
+        .styleable-select-options {
+            opacity: 1;
+            visibility: visible;
         }
     }
 }
