@@ -25,3 +25,8 @@ window.$ = window.jQuery = jQuery;
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+// Enable Bootstrap tooltips everywhere
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});

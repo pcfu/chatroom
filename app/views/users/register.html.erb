@@ -16,6 +16,11 @@
 
       <div class="form-group">
         <%= form.label :dob_year, "date of birth" %>
+        <span
+          id="age-limit-tooltip" data-toggle="tooltip"
+          data-placement="top" title="<%= Globals::Tooltip::AGE_LIMIT %>"
+        ><i class="far fa-question-circle"></i></span>
+
         <div class="d-flex justify-content-between">
           <div>
             <%=

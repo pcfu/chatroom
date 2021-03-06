@@ -18,6 +18,18 @@
     #user_dob_year {
         width: 100px;
     }
+
+    #age-limit-tooltip {
+        margin: 0 3px;
+
+        svg {
+            width: 0.75em;
+            color: theme-color("app-primary");
+            &:hover {
+                color: theme-color("app-highlight");
+            }
+        }
+    }
 }
 
 @include media-breakpoint-only(xs) {
