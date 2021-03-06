@@ -123,9 +123,10 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?, 'blank date of birth should be invalid'
   end
 
-  test "user is at least 18 years old" do
+  test "user is at least #{Globals::App::MIN_USER_AGE} years old" do
     @user = build_stubbed(:user, :dob_too_young)
-    assert_not @user.valid?, "user under 18 y.o. should be invalid"
+    assert_not @user.valid?,
+               "user under #{Globals::App::MIN_USER_AGE} y.o. should be invalid"
   end
 
   test "DOB is converted to date" do
