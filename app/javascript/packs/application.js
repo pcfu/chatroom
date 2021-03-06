@@ -12,6 +12,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 requireAll(require.context('common', true, /\.js$/));
+requireAll(require.context('pages', true, /\.js$/));
 
 // Include jQuery in global and window scope
 const jQuery = require('jquery')
