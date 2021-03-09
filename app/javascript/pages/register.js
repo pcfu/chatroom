@@ -55,6 +55,7 @@ $(document).ready(function () {
     }
   }
 
+  // Add click listen for each Month and Year option
   ['year', 'month'].forEach(field => {
     const selector = `#user_dob_${field} .styleable-option`;
 
@@ -66,5 +67,13 @@ $(document).ready(function () {
         adjustSelectedDay(maxDate);
       }
     });
+  });
+
+  // Add D.O.B data to form inputs before submit
+  $('form').on('submit', function(e) {
+    e.preventDefault();
+    $('#user_dob').val(`${getYear()}-${getMonth()}-${getDay()}`);
+    $(this).off('submit');
+    $(this).submit();
   });
 });

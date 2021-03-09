@@ -15,7 +15,8 @@
       </div>
 
       <div class="form-group">
-        <%= form.label :dob_year, "date of birth" %>
+        <%= form.label :dob, "date of birth" %>
+        <%= form.hidden_field :dob, value: '' %>
         <span
           id="age-limit-tooltip" data-toggle="tooltip"
           data-placement="top" title="<%= Globals::Tooltip::AGE_LIMIT %>"
