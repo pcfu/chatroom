@@ -65,4 +65,17 @@ a {
             box-shadow: 0 0 0 0.1rem theme-color("app-primary");
         }
     }
+
+    .field_with_errors {
+        display: inline;
+
+        input {
+            border-color: $red;
+        }
+
+        ~ .justify-content-between {
+            border: 1px solid $red;
+            border-radius: dimension("input-border-radius");
+        }
+    }
 }
