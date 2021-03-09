@@ -36,6 +36,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # FactoryBot as a fixtures replacement
   gem 'factory_bot_rails'
+  # RSpec for testing
+  gem 'rspec-rails', '~> 4.1.0'
 end
 
 group :development do
