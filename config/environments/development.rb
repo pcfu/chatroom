@@ -59,4 +59,7 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Allow web-console on the entire network
+  config.web_console.permissions = '172.22.0.0/16'
 end
