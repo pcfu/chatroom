@@ -12,7 +12,7 @@ module DateValidatables
 
   class LegalOptionsDateValidatable < BaseDateValidatable
     MIN_DATE = Date.current.advance(years: -100)
-    MAX_DATE = Globals::App::MAX_DOB
+    MAX_DATE = User.max_dob
     MESSAGE = "is invalid"
     validates :date, date: { min: MIN_DATE, max: MAX_DATE, message: MESSAGE }
   end
@@ -50,8 +50,7 @@ module DateValidatables
   end
 
   class MinMoreThanMaxDateValidatable < BaseDateValidatable
-    validates :date, date: { min: Globals::App::MAX_DOB + 1,
-                             max: Globals::App::MAX_DOB }
+    validates :date, date: { min: User.max_dob + 1, max: User.max_dob }
   end
 end
 
@@ -72,7 +71,7 @@ class DateValidatorTest < ActiveSupport::TestCase
 
   test "validate object with basic date validation does not raise exception" do
     @obj = DateValidatable.new
-    @obj.date = Globals::App::MAX_DOB
+    @obj.date = User.max_dob
     assert @obj.valid?, "should validate without exceptions"
   end
 

@@ -15,40 +15,34 @@
       </div>
 
       <div class="form-group">
-        <%= form.label :dob, "date of birth" %>
-        <%= form.hidden_field :dob, value: '' %>
+        <%= form.label :dob, 'date of birth' %>
         <span
           id="age-limit-tooltip" data-toggle="tooltip"
           data-placement="top" title="<%= Globals::Tooltip::AGE_LIMIT %>"
         ><i class="far fa-question-circle"></i></span>
+        <%= form.hidden_field :dob, value: '' %>
 
         <div class="d-flex justify-content-between">
           <div>
-            <%=
-              options = (1..31).to_a
-              styleable_select_tag options, {id: 'user_dob_day', prompt: 'day'}
-            %>
+            <%= styleable_select_tag (1..31).to_a, {id: 'user_dob_day', prompt: 'day'} %>
           </div>
           <div>
-            <%=
-              options = [
-                "January", "February", 'March', 'April', 'May', 'June', 'July',
-                'August', 'September', 'October', 'November', 'December'
-              ]
-              styleable_select_tag options, {id: 'user_dob_month', prompt: 'month'}
-            %>
+            <%= styleable_select_tag Date::MONTHNAMES.compact,
+                                     {id: 'user_dob_month', prompt: 'month'} %>
           </div>
           <div>
-            <%=
-              options = (Globals::App::MIN_DOB.year..Globals::App::MAX_DOB.year).to_a.reverse
-              styleable_select_tag options, {id: 'user_dob_year', prompt: 'year'}
-            %>
+            <%= styleable_select_tag (User.min_dob.year..User.max_dob.year).to_a.reverse,
+                                     {id: 'user_dob_year', prompt: 'year'} %>
           </div>
         </div>
       </div>
 
       <div class="form-group">
         <%= form.label :password %>
+        <span
+          id="password-tooltip" data-toggle="tooltip"
+          data-placement="top" title="<%= Globals::Tooltip::PW_REQS %>"
+        ><i class="far fa-question-circle"></i></span>
         <%= form.password_field :password, class: "form-control" %>
       </div>
 

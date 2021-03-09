@@ -7,6 +7,18 @@
 .registration {
     background-color: lighten(theme-color("app-secondary"), 3%);
 
+    #age-limit-tooltip, #password-tooltip {
+        margin: 0 3px;
+
+        svg {
+            width: 0.75em;
+            color: theme-color("app-primary");
+            &:hover {
+                color: theme-color("app-highlight");
+            }
+        }
+    }
+
     #user_dob_day {
         width: 70px;
     }
@@ -17,18 +29,6 @@
 
     #user_dob_year {
         width: 100px;
-    }
-
-    #age-limit-tooltip {
-        margin: 0 3px;
-
-        svg {
-            width: 0.75em;
-            color: theme-color("app-primary");
-            &:hover {
-                color: theme-color("app-highlight");
-            }
-        }
     }
 }
 

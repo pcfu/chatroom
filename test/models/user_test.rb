@@ -87,8 +87,8 @@ class UserTest < ActiveSupport::TestCase
   ### Test password ###
 
   test "password is not blank" do
-    @user.password = ' ' * 8
-    @user.password_confirmation = ' ' * 8
+    @user.password = ' ' * User::MIN_PW_LEN
+    @user.password_confirmation = ' ' * User::MIN_PW_LEN
     assert_not @user.valid?, 'blank password should be invalid'
   end
 
@@ -99,10 +99,12 @@ class UserTest < ActiveSupport::TestCase
 
   test "password has correct length" do
     @user = build_stubbed(:user, :pw_too_short)
-    assert_not @user.valid?, 'password less than 8 characters should be invalid'
+    assert_not @user.valid?, "password less than #{User::MIN_PW_LEN} " +
+                             "characters should be invalid"
 
     @user = build_stubbed(:user, :pw_too_long)
-    assert_not @user.valid?, 'password more than 30 characters should be invalid'
+    assert_not @user.valid?, "password more than #{User::MAX_PW_LEN} " +
+                             "characters should be invalid"
   end
 
   test "password has at least one letter digit and special character" do
@@ -123,10 +125,10 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?, 'blank date of birth should be invalid'
   end
 
-  test "user is at least #{Globals::App::MIN_USER_AGE} years old" do
+  test "user is at least #{User::MIN_USER_AGE} years old" do
     @user = build_stubbed(:user, :dob_too_young)
     assert_not @user.valid?,
-               "user under #{Globals::App::MIN_USER_AGE} y.o. should be invalid"
+               "user under #{User::MIN_USER_AGE} y.o. should be invalid"
   end
 
   test "DOB is converted to date" do
