@@ -58,7 +58,6 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    ansi (1.5.0)
     auto_strip_attributes (2.6.0)
       activerecord (>= 4.0)
     bcrypt (3.1.16)
@@ -105,11 +104,6 @@ GEM
     mimemagic (0.3.5)
     mini_mime (1.0.2)
     minitest (5.14.4)
-    minitest-reporters (1.4.3)
-      ansi
-      builder
-      minitest (>= 5.0)
-      ruby-progressbar
     msgpack (1.4.2)
     nio4r (2.5.5)
     nokogiri (1.11.1-x86_64-linux)
@@ -154,7 +148,6 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (2.1.1)
-    ruby-progressbar (1.11.0)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -221,7 +214,6 @@ DEPENDENCIES
   factory_bot_rails
   jbuilder (~> 2.7)
   listen (~> 3.2)
-  minitest-reporters
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
   sass-rails (>= 6)
