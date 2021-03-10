@@ -10,4 +10,12 @@ RSpec.describe User, type: :model do
     expect(@user).to be_valid
   end
 
+  ### Test username ###
+
+  it "is invalid with blank username" do
+    generate_blanks.each do |username|
+      @user.username = username
+      expect(@user).not_to be_valid
+    end
+  end
 end

@@ -8,11 +8,4 @@ class ActiveSupport::TestCase
 
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
-
-  # Add more helper methods to be used by all tests here...
-  def generate_blanks(type: String, include_nil: true)
-    blanks = include_nil ? [ nil ] : [ ]
-    blanks += [ '', '     ' ] if type == String
-    return blanks
-  end
 end
