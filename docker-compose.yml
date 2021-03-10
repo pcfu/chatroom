@@ -43,11 +43,11 @@ services:
     ports:
       - '3000:3000'
 
-  test:
+  rspec:
     <<: *backend
     environment:
       - RAILS_ENV=test
-    command: rails test ${TARGET}
+    command: bundle exec rspec ${TARGET}
 
   webpacker:
     <<: *app
