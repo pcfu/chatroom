@@ -13,28 +13,32 @@ FactoryBot.define do
 
     ### username traits ###
 
+    trait :username_too_short do
+      username { 'a' * (User::MIN_UNAME_LEN - 1) }
+    end
+
+    trait :username_too_long do
+      username { 'a' * (User::MAX_UNAME_LEN + 1) }
+    end
+
     trait :username_with_spaces do
       username { 't e s t u s e r' }
     end
 
-    trait :username_only_underscores do
+    trait :username_no_letters do
       username { '_____' }
     end
 
-    trait :username_underscore_at_edges do
-      username { '_test_user_' }
+    trait :username_dash_start do
+      username { '-test-user' }
+    end
+
+    trait :username_dash_end do
+      username { 'test-user-' }
     end
 
     trait :username_double_special_chars do
       username { 'test_-user' }
-    end
-
-    trait :username_too_short do
-      username { 'ab' }
-    end
-
-    trait :username_too_long do
-      username { 'abcdefghijklmnop' }
     end
 
     ### email traits ###
@@ -67,11 +71,25 @@ FactoryBot.define do
       email { 'TEST_USER@chatroom.com' }
     end
 
-    ### password traits ###
+    ### d.o.b traits ###
 
-    trait :pw_not_equal_confirmation do
-      password_confirmation { 'P@55w0rd' }
+    trait :dob_too_old do
+      dob { User.min_dob.advance(days: -1) }
     end
+
+    trait :dob_too_young do
+      dob { User.max_dob.advance(days: 1) }
+    end
+
+    trait :dob_datetime do
+      dob { User.max_dob.to_datetime }
+    end
+
+    trait :dob_datetime_str do
+      dob { User.max_dob.to_datetime.to_s }
+    end
+
+    ### password traits ###
 
     trait :pw_too_short do
       password { 'P@ssw0r' }
@@ -88,7 +106,7 @@ FactoryBot.define do
       password_confirmation { '1111111@' }
     end
 
-    trait :pw_no_digits do
+    trait :pw_no_numbers do
       password { 'P@ssword' }
       password_confirmation { 'P@ssword' }
     end
@@ -98,19 +116,8 @@ FactoryBot.define do
       password_confirmation { 'Passw0rd' }
     end
 
-    ### d.o.b traits ###
-
-    trait :dob_too_young do
-      dob { User.max_dob.advance(days: 1) }
+    trait :pw_not_equal_confirmation do
+      password_confirmation { 'P@55w0rd' }
     end
-
-    trait :dob_datetime do
-      dob { User.max_dob.to_datetime }
-    end
-
-    trait :dob_datetime_str do
-      dob { User.max_dob.to_datetime.to_s }
-    end
-
   end
 end
