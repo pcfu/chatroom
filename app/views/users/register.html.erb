@@ -1,60 +1,56 @@
 <% provide(:title, 'Registration')  %>
 
 <div class="registration">
-  <div>
-    <h4 class="text-center">Create an account</h4>
-    <%= form_with(model: @user, url: register_path, local: true) do |form| %>
-      <div class="form-group">
-        <%= form.label :username %>
-        <%= form.text_field :username, class: "form-control" %>
+  <div class="form-header text-center">Create an account</div>
+  <%= form_with(model: @user, url: register_path, local: true) do |form| %>
+    <div class="form-group">
+      <%= form.label :username %>
+      <%= form.text_field :username, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :email %>
+      <%= form.text_field :email, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :dob, 'date of birth' %>
+      <span
+        id="age-limit-tooltip" data-toggle="tooltip"
+        data-placement="top" title="<%= Globals::Tooltip::AGE_LIMIT %>"
+      ><i class="far fa-question-circle"></i></span>
+      <%= form.hidden_field :dob, value: '' %>
+
+      <div class="d-flex justify-content-between">
+        <%= styleable_select_tag (1..31).to_a, {id: 'user_dob_day', prompt: 'day'} %>
+        <%=
+          styleable_select_tag Date::MONTHNAMES.compact,
+                               {id: 'user_dob_month', prompt: 'month'}
+        %>
+        <%=
+          styleable_select_tag (User.min_dob.year..User.max_dob.year).to_a.reverse,
+                               {id: 'user_dob_year', prompt: 'year'}
+        %>
       </div>
+    </div>
 
-      <div class="form-group">
-        <%= form.label :email %>
-        <%= form.text_field :email, class: "form-control" %>
-      </div>
+    <div class="form-group">
+      <%= form.label :password %>
+      <span
+        id="password-tooltip" data-toggle="tooltip"
+        data-placement="top" title="<%= Globals::Tooltip::PW_REQS %>"
+      ><i class="far fa-question-circle"></i></span>
+      <%= form.password_field :password, class: "form-control" %>
+    </div>
 
-      <div class="form-group">
-        <%= form.label :dob, 'date of birth' %>
-        <span
-          id="age-limit-tooltip" data-toggle="tooltip"
-          data-placement="top" title="<%= Globals::Tooltip::AGE_LIMIT %>"
-        ><i class="far fa-question-circle"></i></span>
-        <%= form.hidden_field :dob, value: '' %>
+    <div class="form-group">
+      <%= form.label :password_confirmation, "confirm password" %>
+      <%= form.password_field :password_confirmation, class: "form-control" %>
+    </div>
 
-        <div class="d-flex justify-content-between">
-          <div>
-            <%= styleable_select_tag (1..31).to_a, {id: 'user_dob_day', prompt: 'day'} %>
-          </div>
-          <div>
-            <%= styleable_select_tag Date::MONTHNAMES.compact,
-                                     {id: 'user_dob_month', prompt: 'month'} %>
-          </div>
-          <div>
-            <%= styleable_select_tag (User.min_dob.year..User.max_dob.year).to_a.reverse,
-                                     {id: 'user_dob_year', prompt: 'year'} %>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :password %>
-        <span
-          id="password-tooltip" data-toggle="tooltip"
-          data-placement="top" title="<%= Globals::Tooltip::PW_REQS %>"
-        ><i class="far fa-question-circle"></i></span>
-        <%= form.password_field :password, class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= form.label :password_confirmation, "confirm password" %>
-        <%= form.password_field :password_confirmation, class: "form-control" %>
-      </div>
-
-      <%= form.submit "register", class: "btn btn-app-primary" %>
-      <small class="form-text">
-        <a href="#"> Already have an account?</a>
-      </small>
-    <% end %>
-  </div>
+    <%= form.submit "register", class: "btn btn-app-primary" %>
+    <small class="form-text">
+      <a href="#"> Already have an account?</a>
+    </small>
+  <% end %>
 </div>

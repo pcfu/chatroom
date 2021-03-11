@@ -32,6 +32,10 @@ body {
     color: theme-color("app-plain");
     background-color: theme-color("app-secondary");
     font-family: 'Signika';
+
+    > div.container {
+        min-height: 640px;
+    }
 }
 
 a {
@@ -48,6 +52,13 @@ a {
     &:hover {
         background-color: lighten(theme-color("app-primary"), 8%);
     }
+}
+
+.form-header {
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
 }
 
 .form-group {
@@ -77,5 +88,11 @@ a {
             border: 1px solid $red;
             border-radius: dimension("input-border-radius");
         }
+    }
+}
+
+@include media-breakpoint-only(xs) {
+    body {
+        background-color: lighten(theme-color("app-secondary"), 3%);
     }
 }

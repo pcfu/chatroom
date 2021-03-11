@@ -15,6 +15,7 @@ $spacers: (
 
 $tyrian-purple: #4f003be3;
 $cadillac: #824172de;
+$shadow: rgba(0,0,0,.2);
 $black-pearl: #0B0C10;
 $midnight-express: #1F2833;
 $blue-chill: #45A29E;
@@ -29,7 +30,8 @@ $theme-colors: (
     "app-highlight": $baby-blue,
     "app-dark": $black-pearl,
     "app-light": $solitude,
-    "app-plain": $iron
+    "app-plain": $iron,
+    "app-shadow": $shadow
 );
 
 @import "bootstrap/scss/_functions";
