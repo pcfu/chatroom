@@ -1,7 +1,0 @@
-class BlanksGenerator
-  def self.generate_blanks(:type, include_nil: true)
-    if type == String
-      
-    end
-  end
-end

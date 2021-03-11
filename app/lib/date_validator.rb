@@ -26,7 +26,7 @@ class DateValidator < ActiveModel::EachValidator
 
       [:min, :max].each do |key|
         raise ArgumentError.new(
-          "#{options[key]} is not a valid date for date validation"
+          "#{options[key].inspect} is not a valid #{key}_date for date validation"
         ) if options.has_key?(key) && !is_valid_date(options[key])
       end
 
