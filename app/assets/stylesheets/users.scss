@@ -5,46 +5,46 @@
 @import "/common/globals";
 
 .registration {
-    background-color: lighten(theme-color("app-secondary"), 3%);
+  background-color: lighten(theme-color("app-secondary"), 3%);
 
-    .btn-app-primary {
-        width: 100%;
-        margin-top: 20px;
+  .btn-app-primary {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  #age-limit-tooltip, #password-tooltip {
+    margin: 0 3px;
+
+    svg {
+      width: 0.75em;
+      color: theme-color("app-primary");
+      &:hover {
+        color: theme-color("app-highlight");
+      }
     }
+  }
 
-    #age-limit-tooltip, #password-tooltip {
-        margin: 0 3px;
+  #user_dob_day {
+    width: 20vw;
+    max-width: 90px;
+  }
 
-        svg {
-            width: 0.75em;
-            color: theme-color("app-primary");
-            &:hover {
-                color: theme-color("app-highlight");
-            }
-        }
-    }
+  #user_dob_month {
+    width: 40vw;
+    max-width: 140px;
+    margin: 0 5px;
+  }
 
-    #user_dob_day {
-        width: 20vw;
-        max-width: 90px;
-    }
-
-    #user_dob_month {
-        width: 40vw;
-        max-width: 140px;
-        margin: 0 5px;
-    }
-
-    #user_dob_year {
-        width: 25vw;
-        max-width: 110px;
-    }
+  #user_dob_year {
+    width: 25vw;
+    max-width: 110px;
+  }
 }
 
 @include media-breakpoint-up(sm) {
-    .registration {
-        padding: 30px;
-        border-radius: 5px;
-        box-shadow: 0 2px 7px 0 theme-color("app-shadow");
-    }
+  .registration {
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 2px 7px 0 theme-color("app-shadow");
+  }
 }

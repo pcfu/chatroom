@@ -26,73 +26,73 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import "@fortawesome/fontawesome-free/scss/v4-shims";
 
 body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    color: theme-color("app-plain");
-    background-color: theme-color("app-secondary");
-    font-family: 'Signika';
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: theme-color("app-plain");
+  background-color: theme-color("app-secondary");
+  font-family: 'Signika';
 
-    > div.container {
-        min-height: 640px;
-    }
+  > div.container {
+    min-height: 640px;
+  }
 }
 
 a {
-    color: theme-color("app-primary");
-    &:hover {
-        color: theme-color("app-highlight");
-        text-decoration: none;
-    }
+  color: theme-color("app-primary");
+  &:hover {
+    color: theme-color("app-highlight");
+    text-decoration: none;
+  }
 }
 
 .btn-app-primary {
-    color: theme-color("app-light");
-    background-color: theme-color("app-primary");
-    &:hover {
-        background-color: lighten(theme-color("app-primary"), 8%);
-    }
+  color: theme-color("app-light");
+  background-color: theme-color("app-primary");
+  &:hover {
+    background-color: lighten(theme-color("app-primary"), 8%);
+  }
 }
 
 .form-header {
-    margin-bottom: 30px;
-    font-size: 1.5rem;
-    font-weight: 500;
-    line-height: 1.2;
+  margin-bottom: 30px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 .form-group {
-    label {
-        margin-bottom: 0.25rem;
-        font-size: 0.8rem;
-        text-transform: uppercase;
+  label {
+    margin-bottom: 0.25rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+
+  .form-control {
+    color: theme-color("app-light");
+    background-color: theme-color('app-secondary');
+    border-color: theme-color("app-dark");
+    &:focus {
+      box-shadow: 0 0 0 0.1rem theme-color("app-primary");
+    }
+  }
+
+  .field_with_errors {
+    display: inline;
+
+    input {
+      border-color: $red;
     }
 
-    .form-control {
-        color: theme-color("app-light");
-        background-color: theme-color('app-secondary');
-        border-color: theme-color("app-dark");
-        &:focus {
-            box-shadow: 0 0 0 0.1rem theme-color("app-primary");
-        }
+    ~ .justify-content-between {
+      border: 1px solid $red;
+      border-radius: dimension("input-border-radius");
     }
-
-    .field_with_errors {
-        display: inline;
-
-        input {
-            border-color: $red;
-        }
-
-        ~ .justify-content-between {
-            border: 1px solid $red;
-            border-radius: dimension("input-border-radius");
-        }
-    }
+  }
 }
 
 @include media-breakpoint-only(xs) {
-    body {
-        background-color: lighten(theme-color("app-secondary"), 3%);
-    }
+  body {
+    background-color: lighten(theme-color("app-secondary"), 3%);
+  }
 }

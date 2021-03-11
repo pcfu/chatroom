@@ -1,82 +1,82 @@
 @import "/common/globals";
 
 .styleable-select-wrapper {
+  position: relative;
+  width: 100%;
+
+  .styleable-select {
     position: relative;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: theme-color("app-secondary");
+    border-radius: dimension("input-border-radius");
+    cursor: pointer;
 
-    .styleable-select {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        background-color: theme-color("app-secondary");
-        border-radius: dimension("input-border-radius");
-        cursor: pointer;
-
-        .styleable-select-trigger {
-            height: dimension("input-height");
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: dimension("input-padding-y") dimension("input-padding-x");
-            border: 1px solid theme-color("app-dark");
-            border-radius: dimension("input-border-radius");
-            &:hover {
-                .styleable-select-toggle {
-                    color: theme-color("app-light");
-                }
-            }
-
-            .styleable-select-prompt {
-                color: theme-color("app-light");
-                &.default {
-                    color: darken(theme-color("app-plain"), 40%);
-                }
-            }
-
-            .styleable-select-toggle {
-                padding-left: 10px;
-            }
+    .styleable-select-trigger {
+      height: dimension("input-height");
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: dimension("input-padding-y") dimension("input-padding-x");
+      border: 1px solid theme-color("app-dark");
+      border-radius: dimension("input-border-radius");
+      &:hover {
+        .styleable-select-toggle {
+          color: theme-color("app-light");
         }
+      }
 
-        .styleable-select-options {
-            position: absolute;
-            display: block;
-            top: calc((#{dimension("input-height")} * -5) - 5px);
-            left: 0;
-            right: 0;
-            height: calc(#{dimension("input-height")} * 5);
-            overflow-y: auto;
-            z-index: 2;
-            background-color: theme-color("app-secondary");
-            border: 1px solid theme-color("app-dark");
-            border-radius: dimension("input-border-radius");
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.25s;
-
-            .styleable-option {
-                display: block;
-                height: dimension("input-height");
-                padding: dimension("input-padding-y") dimension("input-padding-x");
-                &:hover {
-                    background-color: darken(theme-color("app-secondary"), 3%);
-                }
-                &.selected {
-                    background-color: theme-color("app-dark");
-                }
-            }
+      .styleable-select-prompt {
+        color: theme-color("app-light");
+        &.default {
+          color: darken(theme-color("app-plain"), 40%);
         }
+      }
+
+      .styleable-select-toggle {
+        padding-left: 10px;
+      }
     }
 
-    .styleable-select.show {
-        .styleable-select-trigger {
-            box-shadow: 0 0 0 0.1rem theme-color("app-primary");
-        }
+    .styleable-select-options {
+      position: absolute;
+      display: block;
+      top: calc((#{dimension("input-height")} * -5) - 5px);
+      left: 0;
+      right: 0;
+      height: calc(#{dimension("input-height")} * 5);
+      overflow-y: auto;
+      z-index: 2;
+      background-color: theme-color("app-secondary");
+      border: 1px solid theme-color("app-dark");
+      border-radius: dimension("input-border-radius");
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s;
 
-        .styleable-select-options {
-            opacity: 1;
-            visibility: visible;
+      .styleable-option {
+        display: block;
+        height: dimension("input-height");
+        padding: dimension("input-padding-y") dimension("input-padding-x");
+        &:hover {
+          background-color: darken(theme-color("app-secondary"), 3%);
         }
+        &.selected {
+          background-color: theme-color("app-dark");
+        }
+      }
     }
+  }
+
+  .styleable-select.show {
+    .styleable-select-trigger {
+      box-shadow: 0 0 0 0.1rem theme-color("app-primary");
+    }
+
+    .styleable-select-options {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }

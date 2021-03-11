@@ -1,130 +1,130 @@
 @import "/common/globals";
 
 body > .navbar {
-    padding: 0.5rem;
-    background-color: theme-color("app-dark");
+  padding: 0.5rem;
+  background-color: theme-color("app-dark");
 }
 
 @include media-breakpoint-down(sm) {
-    .container {
-        max-width: 100%;
+  .container {
+    max-width: 100%;
 
-        .navbar-toggler {
-            padding: 0.25rem 0.5rem;
-            border: 2px solid theme-color("app-primary") !important;
-            color: theme-color("app-primary") !important;
+    .navbar-toggler {
+      padding: 0.25rem 0.5rem;
+      border: 2px solid theme-color("app-primary") !important;
+      color: theme-color("app-primary") !important;
 
-            &:hover {
-                color: theme-color("app-dark") !important;
-                background-color: theme-color("app-highlight") !important;
-                border-color: theme-color("app-highlight") !important;
-            }
+      &:hover {
+        color: theme-color("app-dark") !important;
+        background-color: theme-color("app-highlight") !important;
+        border-color: theme-color("app-highlight") !important;
+      }
+    }
+  }
+
+  #navbar-collapsible {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100vw;
+    height: 100vh;
+    background-color: theme-color("app-dark");
+    overflow-y: auto;
+
+    &.collapsing {
+      left: -100%;
+      -webkit-transition: left 0.2s ease;
+      -moz-transition: left 0.2s ease;
+      -o-transition: left 0.2s ease;
+      transition: left 0.2s ease;
+    }
+    &.show {
+      left: 0;
+      -webkit-transition: left 0.2s ease-in;
+      -moz-transition: left 0.2s ease-in;
+      -o-transition: left 0.2s ease-in;
+      transition: left 0.2s ease-in;
+    }
+  }
+
+  #navbar-collapsible > .navbar-nav > {
+    .navbar-nav-header {
+      height: 20vh;
+      padding: 20px;
+      background-color: theme-color("app-primary");
+
+      .close {
+        margin-top: 0.25rem;
+        color: theme-color("app-dark");
+        opacity: 1;
+
+        &:hover {
+          color: theme-color("app-light");
         }
+      }
     }
 
-    #navbar-collapsible {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        width: 100vw;
-        height: 100vh;
-        background-color: theme-color("app-dark");
-        overflow-y: auto;
-
-        &.collapsing {
-            left: -100%;
-            -webkit-transition: left 0.2s ease;
-            -moz-transition: left 0.2s ease;
-            -o-transition: left 0.2s ease;
-            transition: left 0.2s ease;
-        }
-        &.show {
-            left: 0;
-            -webkit-transition: left 0.2s ease-in;
-            -moz-transition: left 0.2s ease-in;
-            -o-transition: left 0.2s ease-in;
-            transition: left 0.2s ease-in;
-        }
+    .nav-link {
+      text-align: center;
+      font-size: 1.3em;
+      font-weight: 600;
     }
 
-    #navbar-collapsible > .navbar-nav > {
-        .navbar-nav-header {
-            height: 20vh;
-            padding: 20px;
-            background-color: theme-color("app-primary");
+    .nav-link:not(#login-btn) {
+      min-width: 200px;
+      padding-bottom: 2rem;
+      color: theme-color("app-light");
+      background-color: theme-color("app-primary");
 
-            .close {
-                margin-top: 0.25rem;
-                color: theme-color("app-dark");
-                opacity: 1;
-
-                &:hover {
-                    color: theme-color("app-light");
-                }
-            }
-        }
-
-        .nav-link {
-            text-align: center;
-            font-size: 1.3em;
-            font-weight: 600;
-        }
-
-        .nav-link:not(#login-btn) {
-            min-width: 200px;
-            padding-bottom: 2rem;
-            color: theme-color("app-light");
-            background-color: theme-color("app-primary");
-
-            &:hover {
-                color: theme-color("app-primary");
-                background-color: theme-color("app-light");
-            }
-        }
-
-        #login-btn {
-            margin: 40px auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            border-radius: 27px;
-            border: 2px solid theme-color("app-primary");
-            color: theme-color("app-primary");
-
-            &:hover {
-                color: theme-color("app-dark");
-                background-color: theme-color("app-highlight");
-                border-color: theme-color("app-highlight");
-            }
-        }
+      &:hover {
+        color: theme-color("app-primary");
+        background-color: theme-color("app-light");
+      }
     }
+
+    #login-btn {
+      margin: 40px auto;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      border-radius: 27px;
+      border: 2px solid theme-color("app-primary");
+      color: theme-color("app-primary");
+
+      &:hover {
+        color: theme-color("app-dark");
+        background-color: theme-color("app-highlight");
+        border-color: theme-color("app-highlight");
+      }
+    }
+  }
 }
 
 @include media-breakpoint-up(md) {
-    #navbar-collapsible > .navbar-nav {
-        width: 100%;
+  #navbar-collapsible > .navbar-nav {
+    width: 100%;
 
-        .nav-link {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: theme-color("app-primary");
+    .nav-link {
+      font-size: 1.1em;
+      font-weight: 600;
+      color: theme-color("app-primary");
 
-            &:hover {
-                color: theme-color("app-highlight");
-            }
-        }
-
-        #login-btn {
-            height: 2rem;
-            margin: auto 0;
-            padding: 0.1rem 1.5rem;
-            border-radius: 20px;
-            color: theme-color("app-dark");
-            background-color: theme-color("app-primary");
-
-            &:hover {
-                background-color: theme-color("app-highlight");
-            }
-        }
+      &:hover {
+        color: theme-color("app-highlight");
+      }
     }
+
+    #login-btn {
+      height: 2rem;
+      margin: auto 0;
+      padding: 0.1rem 1.5rem;
+      border-radius: 20px;
+      color: theme-color("app-dark");
+      background-color: theme-color("app-primary");
+
+      &:hover {
+        background-color: theme-color("app-highlight");
+      }
+    }
+  }
 }
