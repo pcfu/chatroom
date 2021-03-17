@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'register', to: 'users#register'
+  get 'register', to: 'static#register'
   post 'register', to: 'users#create'
 
   get '/chatroom', to: 'chatroom#index'
