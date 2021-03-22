@@ -11,8 +11,8 @@ ARG BUNDLER_VERSION
 RUN apt-get update -qq \
   && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
     build-essential \
+    iproute2 \
     gnupg2 \
-    wget \
     curl \
     less \
     git \
@@ -28,10 +28,6 @@ RUN curl -sL https://deb.nodesource.com/setup_$NODE_MAJOR.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
   && echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
 
-# Add Chrome to sources list
-RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
-  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list
-
 # Application dependencies
 # Using an external Aptfile
 COPY Aptfile /tmp/Aptfile
@@ -40,7 +36,6 @@ RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrad
     libsqlite3-dev \
     nodejs \
     yarn=$YARN_VERSION-1 \
-    google-chrome-stable \
     $(cat /tmp/Aptfile | xargs) && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \

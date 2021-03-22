@@ -45,9 +45,14 @@ services:
 
   rspec:
     <<: *backend
+    command: bundle exec rspec ${TARGET}
+    ports:
+      - '43447:43447'
     environment:
       - RAILS_ENV=test
-    command: bundle exec rspec ${TARGET}
+      - SELENIUM_REMOTE_HOST=selenium
+    depends_on:
+      - selenium
 
   webpacker:
     <<: *app
@@ -63,6 +68,10 @@ services:
       - NODE_ENV=${NODE_ENV:-development}
       - RAILS_ENV=${RAILS_ENV:-development}
       - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+
+  selenium:
+    image: selenium/standalone-chrome
+
 
 volumes:
   bundle:

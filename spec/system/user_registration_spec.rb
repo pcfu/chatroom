@@ -1,8 +1,8 @@
 require 'rails_helper'
 require 'support/shared_examples_for_pages'
 
-RSpec.feature "UserRegistrations", type: :feature do
-  describe "page is displayed correctly", js: true do
+RSpec.describe "UserRegistrations", type: :system do
+  describe "page is displayed correctly" do
     before { visit register_path }
 
     it_behaves_like 'static page'
@@ -11,7 +11,7 @@ RSpec.feature "UserRegistrations", type: :feature do
       expect(page).to have_title('Chatroom | Registration', exact: true)
     end
 
-    it "has correct form elements" do
+    it "has correct form elements", js: true do
       within('form') do
         expect(page).to have_css('div.form-header', text: 'Create an account')
         has_field_with_label 'user_username', 'username'
@@ -30,7 +30,7 @@ RSpec.feature "UserRegistrations", type: :feature do
     end
   end
 
-  scenario "user creates a new account" do
-    visit register_path
+  context "user creates a new account" do
+    before { visit '/register' }
   end
 end
