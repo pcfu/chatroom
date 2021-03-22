@@ -81,5 +81,3 @@ volumes:
     external:
       name: ${PROJECT_NAME}_${PROJECT_VERSION}_node_modules
   packs:
-    external:
-      name: ${PROJECT_NAME}_${PROJECT_VERSION}_packs
