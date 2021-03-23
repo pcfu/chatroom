@@ -4,6 +4,8 @@ RSpec.configure do |config|
   end
 
   config.before :each, type: :system, js: true do
+    headless = ENV['HEADLESS'] == 'true'
+
     url = "http://#{ENV['SELENIUM_REMOTE_HOST']}:4444/wd/hub"
     driven_by :selenium, using: :chrome, options: {
       browser: :remote,

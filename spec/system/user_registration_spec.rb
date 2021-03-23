@@ -11,7 +11,7 @@ RSpec.describe "UserRegistrations", type: :system do
       expect(page).to have_title('Chatroom | Registration', exact: true)
     end
 
-    it "has correct form elements", js: true do
+    it "has correct form elements" do
       within('form') do
         expect(page).to have_css('div.form-header', text: 'Create an account')
         has_field_with_label 'user_username', 'username'
