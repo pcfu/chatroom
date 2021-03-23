@@ -6,15 +6,15 @@ module CommonHelpers
   end
 
   def resize_window_to_small
-    resize_window_to(767, 1080)
+    resize_window_to(767, 900)
   end
 
   def resize_window_to_medium
-    resize_window_to(768, 1080)
+    resize_window_to(768, 900)
   end
 
   def resize_window_to_default
-    resize_window_to(1920, 1080)
+    resize_window_to(1440, 900)
   end
 
   def icase_exact(string)
