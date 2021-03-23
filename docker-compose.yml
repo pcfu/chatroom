@@ -43,16 +43,27 @@ services:
     ports:
       - '3000:3000'
 
-  rspec:
+  rspec-base: &rspec-base
     <<: *backend
     command: bundle exec rspec ${TARGET}
     ports:
       - '43447:43447'
+    depends_on:
+      - selenium
+
+  rspec:
+    <<: *rspec-base
     environment:
       - RAILS_ENV=test
       - SELENIUM_REMOTE_HOST=selenium
-    depends_on:
-      - selenium
+      - HEADLESS=true
+
+  rspec-browser:
+    <<: *rspec-base
+    environment:
+      - RAILS_ENV=test
+      - SELENIUM_REMOTE_HOST=selenium
+      - HEADLESS=false
 
   webpacker:
     <<: *app
