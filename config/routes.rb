@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'static#register'
+
   get 'register', to: 'static#register'
   post 'register', to: 'users#create'
 
