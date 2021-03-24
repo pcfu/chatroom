@@ -2,9 +2,9 @@ require 'rails_helper'
 require 'support/shared_examples_for_pages'
 
 RSpec.describe "UserRegistrations", type: :system do
-  describe "page is displayed correctly" do
-    before { visit register_path }
+  before { visit register_path }
 
+  describe "page is displayed correctly" do
     it_behaves_like 'static page'
 
     it "has correct title" do
@@ -50,7 +50,6 @@ RSpec.describe "UserRegistrations", type: :system do
     end
   end
 
-  context "user creates a new account" do
-    before { visit register_path }
+  scenario "user creates a new account", js: true do
   end
 end
