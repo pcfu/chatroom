@@ -1,8 +1,9 @@
 NAME=`grep -i 'project_name' .env | cut -f2- -d=`
-VERS=`grep -i 'project_version' .env | cut -f2- -d=`
+GEM_VERS=`grep -i 'gemset_vers' .env | cut -f2- -d=`
+NM_VERS=`grep -i 'node_modules_vers' .env | cut -f2- -d=`
 
-BUNDLE=${NAME}_${VERS}_bundle
-NODE_MODULES=${NAME}_${VERS}_node_modules
+BUNDLE=${NAME}_${GEM_VERS}_bundle
+NODE_MODULES=${NAME}_${NM_VERS}_node_modules
 
 output=$({ `docker volume inspect $BUNDLE`; } 2>&1)
 if [[ "$output" == *"No such volume"* ]]; then

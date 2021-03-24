@@ -7,12 +7,12 @@ services:
       dockerfile: Dockerfile
       args:
         PROJECT_NAME: ${PROJECT_NAME}
-        RUBY_VERSION: ${RUBY_NORVM_VERSION}
-        NODE_MAJOR: ${NODE_MAJOR}
-        YARN_VERSION: ${YARN_VERSION}
-        BUNDLER_VERSION: ${BUNDLER_VERSION}
-        RAILS_VERSION: ${RAILS_VERSION}
-    image: ${PROJECT_NAME}:${PROJECT_VERSION}
+        RUBY_VERSION: ${RUBY_VERS}
+        NODE_MAJOR: ${NODE_VERS}
+        YARN_VERSION: ${YARN_VERS}
+        BUNDLER_VERSION: ${BUNDLER_VERS}
+        RAILS_VERSION: ${RAILS_VERS}
+    image: ${PROJECT_NAME}:${PROJECT_VERS}
     tmpfs:
       - /tmp
 
@@ -96,8 +96,8 @@ services:
 volumes:
   bundle:
     external:
-      name: ${PROJECT_NAME}_${PROJECT_VERSION}_bundle
+      name: ${PROJECT_NAME}_${GEMSET_VERS}_bundle
   node_modules:
     external:
-      name: ${PROJECT_NAME}_${PROJECT_VERSION}_node_modules
+      name: ${PROJECT_NAME}_${NODE_MODULES_VERS}_node_modules
   packs:
