@@ -26,6 +26,10 @@ module CommonHelpers
     expect(page).to have_field field_name
   end
 
+  def find_and_click_styleable_select_option(field_id, target_value)
+    find("#{field_id} .styleable-select").click
+    find("#{field_id} .styleable-option[data-value='#{target_value}']").click
+  end
 
   private
 
