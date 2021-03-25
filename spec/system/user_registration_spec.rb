@@ -2,9 +2,9 @@ require 'rails_helper'
 require 'support/shared_examples_for_pages'
 
 RSpec.describe "UserRegistrations", type: :system do
-  before { visit register_path }
-
   describe "page is displayed correctly" do
+    before { visit register_path }
+
     it_behaves_like 'static page'
 
     it "has correct title" do
@@ -51,5 +51,44 @@ RSpec.describe "UserRegistrations", type: :system do
   end
 
   scenario "user creates a new account", js: true do
+    user = build_stubbed(:user)
+
+    visit register_path
+    fill_in :user_username, with: user.username
+    fill_in :user_email, with: user.email
+
+    mth = Date::MONTHNAMES[user.dob.month]
+    scroll_y = page.evaluate_script("$('.styleable-option:nth-child(1)').outerHeight(true)") * 5
+
+    find("#user_dob_day .styleable-select").click
+    while true
+      break if find("#user_dob_day .styleable-option[data-value='#{user.dob.day}']")
+      find("#user_dob_day .styleable-select-options").scroll_to(0, scroll_y)
+      scroll_y += scroll_y
+    end
+    find("#user_dob_day .styleable-option[data-value='#{user.dob.day}']").click
+
+    find("#user_dob_month .styleable-select").click
+    while true
+      break if find("#user_dob_month .styleable-option[data-value='#{mth}']")
+      find("#user_dob_month .styleable-select-options").scroll_to(0, scroll_y)
+      scroll_y += scroll_y
+    end
+    find("#user_dob_month .styleable-option[data-value='#{mth}']").click
+
+    find("#user_dob_year .styleable-select").click
+    while true
+      break if find("#user_dob_year .styleable-option[data-value='#{user.dob.year}']")
+      find("#user_dob_year .styleable-select-options").scroll_to(0, scroll_y)
+      scroll_y += scroll_y
+    end
+    find("#user_dob_year .styleable-option[data-value='#{user.dob.year}']").click
+
+    fill_in :user_password, with: user.password
+    fill_in :user_password_confirmation, with: user.password_confirmation
+
+    expect {
+      find(".btn[value=register]").click
+    }.to change(User.all, :count).by(1)
   end
 end
