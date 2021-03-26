@@ -2,7 +2,7 @@ ARG RUBY_VERSION
 FROM ruby:$RUBY_VERSION-slim-buster
 
 ARG PROJECT_NAME
-ARG NODE_MAJOR
+ARG NODE_VERSION
 ARG YARN_VERSION
 ARG RAILS_VERSION
 ARG BUNDLER_VERSION
@@ -16,13 +16,14 @@ RUN apt-get update -qq \
     gnupg2 \
     iproute2 \
     less \
+    shared-mime-info \
   && apt-get clean \
   && rm -rf /var/cache/apt/archives/* \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && truncate -s 0 /var/log/*log
 
 # Add NodeJS to sources list
-RUN curl -sL https://deb.nodesource.com/setup_$NODE_MAJOR.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash -
 
 # Add Yarn to sources list
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
@@ -33,7 +34,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 COPY Aptfile /tmp/Aptfile
 RUN apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get -yq dist-upgrade && \
   DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
-    libsqlite3-dev \
+    libpq-dev \
     nodejs \
     yarn=$YARN_VERSION-1 \
     $(cat /tmp/Aptfile | xargs) && \
