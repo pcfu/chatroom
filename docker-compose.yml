@@ -1,5 +1,12 @@
 version: "3.8"
 
+x-common-env: &common-env
+  DATABASE_URL: postgres://postgres:postgres@postgres:5432
+  DATABASE_USERNAME: ${PG_USERNAME}
+  DATABASE_PASSWORD: ${PG_PASSWORD}
+  SELENIUM_REMOTE_HOST: selenium
+  WEBPACKER_DEV_SERVER_HOST: webpacker
+
 services:
   app: &app
     build:
@@ -21,10 +28,9 @@ services:
     stdin_open: true
     tty: true
     environment:
-      - NODE_ENV=${NODE_ENV:-development}
-      - RAILS_ENV=${RAILS_ENV:-development}
-      - DATABASE_URL=postgres://postgres:postgres@postgress:5432
-      - WEBPACKER_DEV_SERVER_HOST=webpacker
+      <<: *common-env
+      NODE_ENV: ${NODE_ENV:-development}
+      RAILS_ENV: ${RAILS_ENV:-development}
     volumes:
       - .:/${PROJECT_NAME}:cached
       - bundle:/usr/local/bundle
@@ -33,13 +39,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-
-  shell:
-    <<: *backend
-    command: /bin/bash
-    ports:
-      - '3000:3000'
-      - '3002:3002'
 
   rails:
     <<: *backend
@@ -51,50 +50,61 @@ services:
     <<: *backend
     command: rails server -b 0.0.0.0 -p ${TEST_PORT} -P tmp/pids/test_server.pid
     environment:
-      - RAILS_ENV=test
-      - WEBPACKER_DEV_SERVER_HOST=webpacker
+      <<: *common-env
+      RAILS_ENV: test
     ports:
       - ${TEST_PORT}:${TEST_PORT}
     depends_on:
-      - selenium
+      postgres:
+        condition: service_healthy
+      selenium:
+        condition: service_healthy
 
-  rspec:
+  runner:
+    <<: *backend
+    command: /bin/bash
+    ports:
+      - '3000:3000'
+      - '3002:3002'
+
+  rspec: &rspec
     <<: *backend
     command: bundle exec rspec ${TARGET}
     environment:
-      - SELENIUM_REMOTE_HOST=selenium
-      - HEADLESS=true
-    depends_on:
-      - selenium
-
-  rspec-browser:
-    <<: *backend
-    command: bundle exec rspec ${TARGET}
-    environment:
-      - SELENIUM_REMOTE_HOST=selenium
-      - HEADLESS=false
+      <<: *common-env
+      HEADLESS: 'true'
     depends_on:
       - rails-test
+
+  rspec-browser:
+    <<: *rspec
+    environment:
+      <<: *common-env
+      HEADLESS: 'false'
 
   postgres:
     image: postgres:${PG_VERS}
     volumes:
-      - .psqlrc:/root/.psqlrc:ro
       - postgres:/var/lib/postgresql/data
       - ./log:/root/log:cached
     environment:
       - PSQL_HISTFILE=/root/log/.psql_history
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
     ports:
-      - 5432
+      - '5432:5432'
     healthcheck:
-      test: pg_isready -U postgres -h 127.0.0.1
+      test: pg_isready -U ${PG_USERNAME} -h 127.0.0.1
       interval: 5s
 
   selenium:
     image: selenium/standalone-chrome
     ports:
       - '4444:4444'
+    healthcheck:
+      test: ["CMD", "curl", "-I", "http://127.0.0.1:4444/wd/hub/status"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   webpacker:
     <<: *app
