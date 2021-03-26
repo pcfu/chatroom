@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.save
 
-    render 'register'
+    redirect_to register_url
   end
 
   private

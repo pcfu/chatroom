@@ -65,8 +65,8 @@ RSpec.describe "UserRegistrations", type: :system do
     fill_in :user_password, with: user.password
     fill_in :user_password_confirmation, with: user.password_confirmation
 
-    # expect {
-    #   find(".btn[value=register]").click
-    # }.to change(User.all, :count).by(1)
+    expect {
+      find(".btn[value=register]").click
+    }.to change(User.all, :count).by(1)
   end
 end

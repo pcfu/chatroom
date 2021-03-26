@@ -34,7 +34,7 @@ class User < ApplicationRecord
   validates :dob, presence: true, date: { min: min_dob, max: max_dob }
   validates :password, presence: true,
                        length: { in: MIN_PW_LEN..MAX_PW_LEN },
-                       format: { with: /(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.?[#?!@$%^&*_-])/ }
+                       format: { with: /(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_-])/ }
 
   before_save do
     self.email = email.downcase
