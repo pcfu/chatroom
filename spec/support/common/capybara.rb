@@ -28,9 +28,7 @@ RSpec.configure do |config|
   config.before(:each, type: :system, js: true) do
     driven_by headless ? :remote_chrome_headless : :remote_chrome
 
-    Capybara.server_host = headless ?
-                           `/sbin/ip route|awk '/scope/ { print $9 }'`.strip :
-                           '0.0.0.0'
+    Capybara.server_host = `/sbin/ip route|awk '/scope/ { print $9 }'`.strip
     Capybara.server_port = ENV.fetch('TEST_PORT', 3001)
     session_server       = Capybara.current_session.server
     Capybara.app_host    = "http://#{session_server.host}:#{session_server.port}"

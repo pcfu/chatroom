@@ -42,23 +42,9 @@ services:
 
   rails:
     <<: *backend
-    command: rails server -b 0.0.0.0 -P tmp/pids/dev_server.pid
+    command: rails server -b 0.0.0.0
     ports:
       - '3000:3000'
-
-  rails-test: 
-    <<: *backend
-    command: rails server -b 0.0.0.0 -p ${TEST_PORT} -P tmp/pids/test_server.pid
-    environment:
-      <<: *common-env
-      RAILS_ENV: test
-    ports:
-      - ${TEST_PORT}:${TEST_PORT}
-    depends_on:
-      postgres:
-        condition: service_healthy
-      selenium:
-        condition: service_healthy
 
   runner:
     <<: *backend
@@ -74,7 +60,10 @@ services:
       <<: *common-env
       HEADLESS: 'true'
     depends_on:
-      - rails-test
+      postgres:
+        condition: service_healthy
+      selenium:
+        condition: service_healthy
 
   rspec-browser:
     <<: *rspec
