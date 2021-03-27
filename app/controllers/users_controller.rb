@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
-    @user.save
-
-    redirect_to register_url
+    if @user.save
+      redirect_to chatroom_url
+    else
+      render 'static/register'
+    end
   end
 
   private
