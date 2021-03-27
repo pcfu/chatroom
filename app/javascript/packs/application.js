@@ -11,6 +11,8 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+// client-side-validations MUST come AFTER turbolinks
+require('@client-side-validations/client-side-validations')
 requireAll(require.context('common', true, /\.js$/));
 requireAll(require.context('pages', true, /\.js$/));
 
