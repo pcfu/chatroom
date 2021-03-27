@@ -77,8 +77,31 @@ a {
     }
   }
 
+  .tooltip-anchor {
+    margin: 0 3px;
+    visibility: hidden;
+
+    svg {
+      width: 0.75em;
+      color: theme-color("app-primary");
+      &:hover {
+        color: theme-color("app-highlight");
+      }
+    }
+  }
+
+  .field_with_errors + .tooltip-anchor {
+    visibility: visible !important;
+  }
+
   .field_with_errors {
     display: inline;
+
+    span.message {
+      margin-left: 15px;
+      text-transform: lowercase;
+      color: $red
+    }
 
     input {
       border-color: $red;

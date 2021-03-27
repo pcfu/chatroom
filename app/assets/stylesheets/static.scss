@@ -7,21 +7,13 @@
 .registration {
   background-color: lighten(theme-color("app-secondary"), 3%);
 
+  form {
+    max-width: 350px;
+  }
+
   .btn-app-primary {
     width: 100%;
     margin-top: 20px;
-  }
-
-  #age-limit-tooltip, #password-tooltip {
-    margin: 0 3px;
-
-    svg {
-      width: 0.75em;
-      color: theme-color("app-primary");
-      &:hover {
-        color: theme-color("app-highlight");
-      }
-    }
   }
 
   #user_dob_day {
