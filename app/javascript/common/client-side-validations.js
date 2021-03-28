@@ -56,3 +56,12 @@ window.ClientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'] = 
      * } */
   }
 }
+
+window.ClientSideValidations.validators.local['date'] = function(element, options) {
+  const dateRegex = /^\d{4}(-|\/)(0[1-9]|1[0-2])(-|\/)(0[1-9]|[12]\d|3[01])$/;
+  if (!dateRegex.test(element.val()) ||
+      options['min'] && element.val() < options['min'] ||
+      options['max'] && element.val() > options['max']) {
+    return 'is invalid';
+  }
+}
