@@ -73,10 +73,6 @@ FactoryBot.define do
 
     ### d.o.b traits ###
 
-    trait :dob_too_old do
-      dob { User.min_dob.advance(days: -1) }
-    end
-
     trait :dob_too_young do
       dob { User.max_dob.advance(days: 1) }
     end

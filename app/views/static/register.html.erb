@@ -32,10 +32,7 @@
           styleable_select_tag Date::MONTHNAMES.compact,
                                {id: 'user_dob_month', prompt: 'month'}
         %>
-        <%=
-          styleable_select_tag (User.min_dob.year..User.max_dob.year).to_a.reverse,
-                               {id: 'user_dob_year', prompt: 'year'}
-        %>
+        <%= styleable_select_tag User.dob_years, {id: 'user_dob_year', prompt: 'year'} %>
       </div>
     </div>
 
