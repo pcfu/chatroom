@@ -11,6 +11,21 @@ $(document).ready(function () {
     return parseInt($('#user_dob_year .styleable-select-prompt').text());
   }
 
+  function getMonthNames() {
+    const names = [];
+    Object.entries($('#user_dob_month .styleable-option'))
+          .forEach(([k, v]) => {
+            if (!isNaN(k)) {
+              names.push(v.getAttribute('data-value').toLowerCase())
+            }
+          });
+    return names;
+  }
+
+  function getMonthNumber(month) {
+    return MONTHS.indexOf(month) + 1;
+  }
+
   function getMonthAndYear(changedField, val) {
     return changedField === 'month' ?
            [val.toLowerCase(), getYear()] :
@@ -55,7 +70,16 @@ $(document).ready(function () {
     }
   }
 
-  // Add click listen for each Month and Year option
+  function setDobValue() {
+    const month = `${getMonthNumber(getMonth())}`.padStart(2, '0');
+    const day = `${getDay()}`.padStart(2, '0');
+    $('#user_dob').val(`${getYear()}-${month}-${day}`);
+  }
+
+
+  const MONTHS = getMonthNames();
+
+  // Add listener to fix invalid dates when month or year changes
   ['year', 'month'].forEach(field => {
     const selector = `#user_dob_${field} .styleable-option`;
 
@@ -65,15 +89,11 @@ $(document).ready(function () {
         const maxDate = getMaxDate(month, year);
         updateDayOptions(maxDate);
         adjustSelectedDay(maxDate);
+        setDobValue();
       }
     });
   });
 
-  // Add D.O.B data to form inputs before submit
-  $('form').on('submit', function(e) {
-    e.preventDefault();
-    $('#user_dob').val(`${getYear()}-${getMonth()}-${getDay()}`);
-    $(this).off('submit');
-    $(this).submit();
-  });
+  // Update user dob field when a date option is clicked
+  $('.styleable-option').click(setDobValue);
 });
