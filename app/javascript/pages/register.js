@@ -95,5 +95,9 @@ $(document).ready(function () {
   });
 
   // Update user dob field when a date option is clicked
-  $('.styleable-option').click(setDobValue);
+  $('.styleable-option').click(function () {
+    setDobValue();
+    $('#user_dob').trigger('change');
+    $('#user_dob').trigger('focusout');
+  });
 });
