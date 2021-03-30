@@ -4,29 +4,13 @@ function _interopDefaultLegacy (e) {
 
 const $__default = /*#__PURE__*/_interopDefaultLegacy($);
 
-const DATE_REGEX = /^\d{4}(-|\/)(0[1-9]|1[0-2])(-|\/)(0[1-9]|[12]\d|3[01])$/;
 
-function initTemp() {
-  if (!window.temp) { window.temp = []; }
-}
+/***************************************
+ * Adding and Removing form error tags *
+ ***************************************/
 
-function shouldSetDobChanged() {
-  const element = $('#user_dob');
-  if (element.data('changed')) {
-    return true;
-  } else {
-    return DATE_REGEX.test(element.val());
-  }
-}
-
-window.ClientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'] = {
+ClientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'] = {
   add: function add(element, settings, message) {
-    initTemp();
-    let idx = window.temp.length;
-    window.temp[idx] = {
-      element: element, settings: settings, message: message
-    }
-
     const form = $__default['default'](element[0].form);
 
     if (element.data('valid') !== false &&
@@ -52,39 +36,50 @@ window.ClientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'] = 
         .text(message.replace(/\(.+\)/, '').trim());
   },
   remove: function remove(element, settings) {
-    /* var form = $__default['default'](element[0].form);
-     * var inputErrorFieldClass = $__default['default'](settings.input_tag).attr('class');
-     * var inputErrorField = element.closest('.' + inputErrorFieldClass.replace(/ /g, '.'));
-     * var label = form.find("label[for='" + element.attr('id') + "']:not(.message)");
-     * var labelErrorFieldClass = $__default['default'](settings.label_tag).attr('class');
-     * var labelErrorField = label.closest('.' + labelErrorFieldClass.replace(/ /g, '.'));
+    const form = $__default['default'](element[0].form);
+    const inputErrorFieldClass = $__default['default'](settings.input_tag).attr('class');
+    const inputErrorField = element.closest('.' + inputErrorFieldClass.replace(/ /g, '.'));
+    const label = form.find("label[for='" + element.attr('id') + "']:not(.message)");
+    const labelErrorFieldClass = $__default['default'](settings.label_tag).attr('class');
+    const labelErrorField = label.closest('.' + labelErrorFieldClass.replace(/ /g, '.'));
 
-     * if (inputErrorField[0]) {
-     *   inputErrorField.find('#' + element.attr('id')).detach();
-     *   inputErrorField.replaceWith(element);
-     *   label.detach();
-     *   labelErrorField.replaceWith(label);
-     * } */
+    if (inputErrorField[0]) {
+      inputErrorField.find('#' + element.attr('id')).detach();
+      inputErrorField.replaceWith(element);
+      label.find('span').remove();
+      label.detach();
+      labelErrorField.replaceWith(label);
+    }
   }
 }
 
-window.ClientSideValidations.validators.local['date'] = function(element, options) {
-  if (!DATE_REGEX.test(element.val()) ||
-      options['min'] && element.val() < options['min'] ||
-      options['max'] && element.val() > options['max']) {
-    return 'is invalid';
+
+/*************************
+ * User D.O.B Validation *
+ *************************/
+
+const DATE_REGEX = /^\d{4}(-|\/)(0[1-9]|1[0-2])(-|\/)(0[1-9]|[12]\d|3[01])$/;
+
+function shouldSetDobChanged() {
+  const element = $('#user_dob');
+  if (element.data('changed')) {
+    return true;
+  } else {
+    return DATE_REGEX.test(element.val());
   }
 }
 
-const originalFn = window.ClientSideValidations.eventsToBind.input;
-window.ClientSideValidations.eventsToBind.input = function input(form) {
-  const listeners = originalFn(form);
+const inputEventBindings = window.ClientSideValidations.eventsToBind.input;
+
+// Enable validation for user d.o.b
+ClientSideValidations.eventsToBind.input = function input(form) {
+  const listeners = inputEventBindings(form);
 
   listeners['change.ClientSideValidations'] = function changeClientSideValidations() {
     const $element = $__default['default'](this);
     if (($element.attr('id') === 'user_dob' && shouldSetDobChanged()) ||
         $element.attr('id') !== 'user_dob') {
-      console.log($element.data());
+      $element.data('changed', true);
     }
   };
 
@@ -97,3 +92,73 @@ window.ClientSideValidations.eventsToBind.input = function input(form) {
 
   return listeners;
 }
+
+// Set error message for invalid user d.o.b
+ClientSideValidations.validators.local['date'] = function(element, options) {
+  if (!DATE_REGEX.test(element.val()) ||
+      options['min'] && element.val() < options['min'] ||
+      options['max'] && element.val() > options['max']) {
+    return 'is invalid';
+  }
+}
+
+
+/************************************
+ * Password Confirmation Validation *
+ ************************************/
+
+function validatePasswordConfirmation() {
+  const element = $('#user_password')
+  element.data({'changed': true, 'validateConfirmation': true});
+  element.trigger('focusout');
+  element.removeData('validateConfirmation');
+}
+
+function customConfirmationValidator(element, options) {
+  const selector = '#' + element.attr('id') + '_confirmation';
+  const confirmationValue = $__default['default'](selector).val();
+
+  if (element.data('validateConfirmation') || confirmationValue.length > 0) {
+    var value = element.val();
+
+    if (!options.case_sensitive) {
+      value = value.toLowerCase();
+      confirmationValue = confirmationValue.toLowerCase();
+    }
+
+    if (value !== confirmationValue) {
+      return options.message;
+    }
+  }
+};
+
+// Set custom conditions for validating password confirmation
+ClientSideValidations.validators.local.confirmation = customConfirmationValidator;
+
+// Force validation of password confirmation on submitting form
+ClientSideValidations.callbacks.form.after = function(form, eventData) {
+  validatePasswordConfirmation();
+}
+
+
+/*****************
+ * On DOM loaded *
+ *****************/
+
+function changePasswordValidationOrder() {
+  const form = $__default['default']('form')[0];
+  const validators = form.ClientSideValidations.settings.validators;
+
+  const reOrdered = {
+    presence: validators['user[password]'].presence,
+    length: validators['user[password]'].length,
+    format: validators['user[password]'].format,
+    confirmation: validators['user[password]'].confirmation
+  };
+
+  validators['user[password]'] = reOrdered;
+}
+
+$(document).ready(function () {
+  changePasswordValidationOrder();
+});
