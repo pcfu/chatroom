@@ -5,27 +5,67 @@ function _interopDefaultLegacy (e) {
 const $__default = /*#__PURE__*/_interopDefaultLegacy($);
 
 
-/***************************************
- * Adding and Removing form error tags *
- ***************************************/
+/******************************************************
+ * Callbacks to run for Password/Password Confirmaton *
+ ******************************************************/
+
+// Force validation of password confirmation on submitting form
+ClientSideValidations.callbacks.form.before = function(form, eventData) {
+  const element = $('#user_password')
+  element.data({'changed': true, 'validateConfirmation': true});
+  element.trigger('focusout');
+  element.removeData('validateConfirmation');
+}
+
+ClientSideValidations.callbacks.element.fail = function(element, message, callback, eventData) {
+  if (message.includes("doesn't match")) {
+    // remove errors from main field as those have all passed
+    const settings = element[0].form.ClientSideValidations.settings.html_settings;
+    ClientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'].remove(element, settings);
+
+    // add errors to confirmation field
+    const confInput = $(`#${element.attr('id')}_confirmation`);
+    if (element.data('validateConfirmation') || confInput.data('interacted')) {
+      ClientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'].add(confInput, settings, message);
+      confInput.focus();
+    }
+
+  } else {
+    callback();
+  }
+}
+
+ClientSideValidations.callbacks.element.pass = function(element, callback, eventData) {
+  const id = element.attr('id');
+  const conf = $(`#${id}_confirmation`);
+  if (conf.length > 0) {
+    const settings = element[0].form.ClientSideValidations.settings.html_settings;
+    ClientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'].remove(conf, settings);
+  }
+  callback();
+}
+
+
+/******************************************
+ * Change position of error message label *
+ ******************************************/
 
 ClientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'] = {
   add: function add(element, settings, message) {
     const form = $__default['default'](element[0].form);
 
-    if (element.data('valid') !== false &&
-        form.find("label.message[for='" + element.attr('id') + "']")[0] == null) {
-      const inputErrorField = $__default['default'](settings.input_tag);
-      const labelErrorField = $__default['default'](settings.label_tag);
-      const label = form.find("label[for='" + element.attr('id') + "']:not(.message)");
-
+    // Only wrap with error tags if error message not already present
+    if (form.find("label[for='" + element.attr('id') + "'] > span.message")[0] == null) {
       if (element.attr('autofocus')) {
         element.attr('autofocus', false);
       }
 
+      const inputErrorField = $__default['default'](settings.input_tag);
       element.before(inputErrorField);
       inputErrorField.find('span#input_tag').replaceWith(element);
 
+      const labelErrorField = $__default['default'](settings.label_tag);
+      const label = form.find("label[for='" + element.attr('id') + "']:not(.message)");
       const msg = inputErrorField.find('label.message')
       msg.appendTo(label).replaceWith($('<span>').attr('class', 'message'));
       labelErrorField.insertAfter(label);
@@ -103,44 +143,6 @@ ClientSideValidations.validators.local['date'] = function(element, options) {
 }
 
 
-/************************************
- * Password Confirmation Validation *
- ************************************/
-
-function validatePasswordConfirmation() {
-  const element = $('#user_password')
-  element.data({'changed': true, 'validateConfirmation': true});
-  element.trigger('focusout');
-  element.removeData('validateConfirmation');
-}
-
-function customConfirmationValidator(element, options) {
-  const selector = '#' + element.attr('id') + '_confirmation';
-  const confirmationValue = $__default['default'](selector).val();
-
-  if (element.data('validateConfirmation') || confirmationValue.length > 0) {
-    var value = element.val();
-
-    if (!options.case_sensitive) {
-      value = value.toLowerCase();
-      confirmationValue = confirmationValue.toLowerCase();
-    }
-
-    if (value !== confirmationValue) {
-      return options.message;
-    }
-  }
-};
-
-// Set custom conditions for validating password confirmation
-ClientSideValidations.validators.local.confirmation = customConfirmationValidator;
-
-// Force validation of password confirmation on submitting form
-ClientSideValidations.callbacks.form.after = function(form, eventData) {
-  validatePasswordConfirmation();
-}
-
-
 /*****************
  * On DOM loaded *
  *****************/
@@ -159,6 +161,33 @@ function changePasswordValidationOrder() {
   validators['user[password]'] = reOrdered;
 }
 
+function changePasswordConfirmationKeyUpBehaviour() {
+  const element = $('#user_password_confirmation');
+  handler = jQuery._data(element[0], 'events').keyup[0].handler;
+
+  element.off('keyup', handler);
+  element.on('keyup', function () {
+    $(this).data('interacted', true);
+    handler();
+  });
+}
+
+function changePasswordConfirmationFocusOutBehaviour() {
+  const element = $('#user_password_confirmation');
+  handler = jQuery._data(element[0], 'events').focusout[0].handler;
+
+  element.off('focusout', handler);
+  element.on('focusout', function () {
+    if ($(this).data('interacted')) {
+      handler();
+    }
+  });
+}
+
 $(document).ready(function () {
-  changePasswordValidationOrder();
+  if ($('form[action="/register"]')[0]) {
+    changePasswordValidationOrder();
+    changePasswordConfirmationKeyUpBehaviour();
+    changePasswordConfirmationFocusOutBehaviour();
+  }
 });
