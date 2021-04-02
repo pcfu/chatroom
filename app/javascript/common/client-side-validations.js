@@ -65,9 +65,9 @@ ClientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'] = {
       inputErrorField.find('span#input_tag').replaceWith(element);
 
       const labelErrorField = $__default['default'](settings.label_tag);
-      const label = form.find("label[for='" + element.attr('id') + "']:not(.message)");
-      const msg = inputErrorField.find('label.message')
-      msg.appendTo(label).replaceWith($('<span>').attr('class', 'message'));
+      const errorMsgContainer = labelErrorField.find('span');
+      const label = form.find("label[for='" + element.attr('id') + "']");
+      label.append(errorMsgContainer);
       labelErrorField.insertAfter(label);
       labelErrorField.find('label#label_tag').replaceWith(label);
     }
