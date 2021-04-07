@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'static#register'
+  root to: 'static#homepage'
 
   get 'register', to: 'static#register'
   post 'register', to: 'users#create'
