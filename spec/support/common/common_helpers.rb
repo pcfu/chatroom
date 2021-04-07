@@ -5,6 +5,24 @@ module CommonHelpers
     return blanks
   end
 
+  def icase_exact(string)
+    /\A#{string}\z/i
+  end
+
+  def page_should_reload
+    page.evaluate_script "$(document.body).addClass('not-reloaded')"
+    yield
+    sleep 0.1
+    expect(page).to have_no_selector("body.not-reloaded")
+  end
+
+  def page_should_not_reload
+    page.evaluate_script "$(document.body).addClass('not-reloaded')"
+    yield
+    sleep 0.1
+    expect(page).to have_selector("body.not-reloaded")
+  end
+
   def resize_window_to_small
     resize_window_to(767, 900)
   end
@@ -15,10 +33,6 @@ module CommonHelpers
 
   def resize_window_to_default
     resize_window_to(1440, 900)
-  end
-
-  def icase_exact(string)
-    /\A#{string}\z/i
   end
 
   def has_field_with_label(field_name, label_text)
