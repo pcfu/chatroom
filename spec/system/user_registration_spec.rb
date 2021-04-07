@@ -51,11 +51,12 @@ RSpec.describe "UserRegistrations", type: :system do
   end
 
   describe "user creates a new account", js: true do
+    before { visit register_path }
+
     context "when valid user info" do
       it "creates account and redirects to another page" do
         user = build_stubbed(:user)
 
-        visit register_path
         fill_in :user_username, with: user.username
         fill_in :user_email, with: user.email
 
@@ -76,26 +77,91 @@ RSpec.describe "UserRegistrations", type: :system do
     end
 
     context "when invalid user info" do
-      it "does not create account and stays on same page" do
+      it "has error messages beside field labels" do
+        user = build_stubbed(:user, :username_too_short, :email_no_username, :pw_too_long)
+
+        field = 'user_username'
+        fill_in field, with: user.username
+        find("label[for='#{field}']").click
+        expect(page).to have_css("label[for='#{field}'] span.message", text: "is too short")
+
+        field = 'user_email'
+        fill_in field, with: user.email
+        find("label[for='#{field}']").click
+        expect(page).to have_css("label[for='#{field}'] span.message", text: "is invalid")
+
+        field = 'user_password'
+        fill_in field, with: user.password
+        find("label[for='#{field}']").click
+        expect(page).to have_css("label[for='#{field}'] span.message", text: "is too long")
+
+        user = build_stubbed(:user, :pw_not_equal_confirmation)
+
+        field = 'user_password_confirmation'
+        fill_in :user_password, with: user.password
+        fill_in field, with: user.password_confirmation
+        find("label[for='#{field}']").click
+        expect(page).to have_css("label[for='#{field}'] span.message", text: "doesn't match password")
+      end
+
+      it "does not create account and does not reload page" do
         user = build_stubbed(:user, :username_too_short)
 
-        visit register_path
-        fill_in :user_username, with: user.username
-        fill_in :user_email, with: user.email
+        page_should_not_reload do
+          fill_in :user_username, with: user.username
+          fill_in :user_email, with: user.email
 
-        mth = Date::MONTHNAMES[user.dob.month]
-        find_and_click_styleable_select_option('#user_dob_day', user.dob.day)
-        find_and_click_styleable_select_option('#user_dob_month', mth)
-        find_and_click_styleable_select_option('#user_dob_year', user.dob.year)
+          mth = Date::MONTHNAMES[user.dob.month]
+          find_and_click_styleable_select_option('#user_dob_day', user.dob.day)
+          find_and_click_styleable_select_option('#user_dob_month', mth)
+          find_and_click_styleable_select_option('#user_dob_year', user.dob.year)
 
-        fill_in :user_password, with: user.password
-        fill_in :user_password_confirmation, with: user.password_confirmation
+          fill_in :user_password, with: user.password
+          fill_in :user_password_confirmation, with: user.password_confirmation
 
-        expect {
+          expect {
+            find(".btn[value=register]").click
+          }.to change(User.all, :count).by(0)
+        end
+      end
+    end
+
+    context "when unique fields are not unique" do
+      it "reloads the page with pre-filled data" do
+        user = create(:user)
+
+        page_should_reload do
+          fill_in :user_username, with: user.username
+          fill_in :user_email, with: user.email
+
+          mth = Date::MONTHNAMES[user.dob.month]
+          find_and_click_styleable_select_option('#user_dob_day', user.dob.day)
+          find_and_click_styleable_select_option('#user_dob_month', mth)
+          find_and_click_styleable_select_option('#user_dob_year', user.dob.year)
+
+          fill_in :user_password, with: user.password
+          fill_in :user_password_confirmation, with: user.password_confirmation
           find(".btn[value=register]").click
-        }.to change(User.all, :count).by(0)
+        end
 
-        expect(current_path).to have_content(register_path)
+        expect(page).to have_field('user_username', with: user.username)
+        expect(page).to have_field('user_email', with: user.email)
+
+        expect(page).to have_css('#user_dob_day .styleable-select-prompt', text: user.dob.day)
+        day = page.evaluate_script "$('#user_dob_day .selected').data('value')"
+        expect(day).to eq(user.dob.day)
+
+        target_mth = Date::MONTHNAMES[user.dob.month]
+        expect(page).to have_css('#user_dob_month .styleable-select-prompt', text: target_mth)
+        month = page.evaluate_script "$('#user_dob_month .selected').data('value')"
+        expect(month).to eq(target_mth)
+
+        expect(page).to have_css('#user_dob_year .styleable-select-prompt', text: user.dob.year)
+        year = page.evaluate_script "$('#user_dob_year .selected').data('value')"
+        expect(year).to eq(user.dob.year)
+
+        expect(page).to have_field('user_password', with: '')
+        expect(page).to have_field('user_password_confirmation', with: '')
       end
     end
   end
