@@ -19,7 +19,7 @@ services:
         YARN_VERSION: ${YARN_VERS}
         BUNDLER_VERSION: ${BUNDLER_VERS}
         RAILS_VERSION: ${RAILS_VERS}
-    image: ${PROJECT_NAME}:${PROJECT_VERS}
+    image: ${PROJECT_NAME}:${ENV_VERS}
     tmpfs:
       - /tmp
 
