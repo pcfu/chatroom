@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: 'static#homepage'
 
+  get 'login', to: 'static#login'
+
   get 'register', to: 'static#register'
   post 'register', to: 'users#create'
 

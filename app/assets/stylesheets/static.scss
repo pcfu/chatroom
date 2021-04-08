@@ -4,7 +4,8 @@
 
 @import "/common/globals";
 
-.registration {
+.registration, .login {
+  margin: 40px 0;
   background-color: lighten(theme-color("app-secondary"), 3%);
 
   form {
@@ -42,7 +43,7 @@
 }
 
 @include media-breakpoint-up(sm) {
-  .registration {
+  .registration, .login {
     padding: 30px;
     border-radius: 5px;
     box-shadow: 0 2px 7px 0 theme-color("app-shadow");
