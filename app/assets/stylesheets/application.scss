@@ -32,10 +32,6 @@ body {
   color: theme-color("app-plain");
   background-color: theme-color("app-secondary");
   font-family: 'Signika';
-
-  > div.container {
-    min-height: 640px;
-  }
 }
 
 a {
