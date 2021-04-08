@@ -113,5 +113,10 @@ a {
 @include media-breakpoint-only(xs) {
   body {
     background-color: lighten(theme-color("app-secondary"), 3%);
+
+    > div.container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
   }
 }
