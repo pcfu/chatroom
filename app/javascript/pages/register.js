@@ -81,7 +81,7 @@ function getSupportingFunctions() {
   };
 }
 
-$(document).ready(function () {
+$(document).on('turbolinks:load', function () {
   if (window.location.pathname === '/register') {
     const funcs = getSupportingFunctions();
 

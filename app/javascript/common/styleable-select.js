@@ -1,4 +1,4 @@
-$(document).ready(() => {
+$(document).on('turbolinks:load', function () {
   $('.styleable-select').click(function () {
     $('.styleable-select').not(this).removeClass('show');
     if ($(this).hasClass('show')) {
