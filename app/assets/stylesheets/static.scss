@@ -5,12 +5,10 @@
 @import "/common/globals";
 
 .registration, .login {
+  width: 100%;
+  max-width: 350px;
   margin: 40px 0;
   background-color: lighten(theme-color("app-secondary"), 3%);
-
-  form {
-    max-width: 350px;
-  }
 
   .btn-app-primary {
     width: 100%;
@@ -44,6 +42,7 @@
 
 @include media-breakpoint-up(sm) {
   .registration, .login {
+    max-width: 420px;
     padding: 30px;
     border-radius: 5px;
     box-shadow: 0 2px 7px 0 theme-color("app-shadow");
