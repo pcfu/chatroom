@@ -28,7 +28,7 @@ RSpec.describe "UserRegistrations", type: :system do
         has_field_with_label('user_password', 'password')
         has_field_with_label('user_password_confirmation', 'confirm password')
         expect(page).to have_button('register')
-        expect(page).to have_link('Already have an account?', href: 'login')
+        expect(page).to have_link('Already have an account?', href: login_path)
       end
     end
 

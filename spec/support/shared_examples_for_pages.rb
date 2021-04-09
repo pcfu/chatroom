@@ -14,7 +14,7 @@ RSpec.shared_examples_for 'static page' do
         expect(page).to have_link('About', href: '#')
         expect(page).to have_link('Features', href: '#')
         expect(page).to have_link('Sample Link', href: '#')
-        expect(page).to have_link('Login', href: '#')
+        expect(page).to have_link('Login', href: login_path)
 
         expect(page).to have_no_css('button.navbar-toggler')
       end
