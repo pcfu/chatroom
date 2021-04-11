@@ -3,7 +3,7 @@ require 'support/shared_examples_for_pages'
 
 RSpec.describe "UserRegistrations", type: :system do
   describe "page is displayed correctly" do
-    before { visit register_path }
+    before { visit '/register' }
 
     it_behaves_like 'static page'
 
@@ -28,7 +28,7 @@ RSpec.describe "UserRegistrations", type: :system do
         has_field_with_label('user_password', 'password')
         has_field_with_label('user_password_confirmation', 'confirm password')
         expect(page).to have_button('register')
-        expect(page).to have_link('Already have an account?', href: login_path)
+        expect(page).to have_link('Already have an account?', href: '/login')
       end
     end
 
@@ -51,7 +51,7 @@ RSpec.describe "UserRegistrations", type: :system do
   end
 
   describe "user creates a new account", js: true do
-    before { visit register_path }
+    before { visit '/register' }
 
     context "when valid user info" do
       it "creates account and redirects to another page" do
@@ -72,7 +72,7 @@ RSpec.describe "UserRegistrations", type: :system do
           find(".btn[value=register]").click
         }.to change(User.all, :count).by(1)
 
-        expect(current_path).to have_content(chatroom_path)
+        expect(current_path).to have_content('/chatroom')
       end
     end
 

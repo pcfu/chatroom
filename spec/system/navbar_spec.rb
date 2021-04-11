@@ -4,7 +4,7 @@ RSpec.describe "Navbar", type: :system, js: true do
   context "when collapsed" do
     before do
       resize_window_to_small
-      visit root_path
+      visit '/'
     end
     after { resize_window_to_default }
 
@@ -14,7 +14,7 @@ RSpec.describe "Navbar", type: :system, js: true do
       expect(page).to have_link('About', href: '#')
       expect(page).to have_link('Features', href: '#')
       expect(page).to have_link('Sample Link', href: '#')
-      expect(page).to have_link('Login', href: login_path)
+      expect(page).to have_link('Login', href: '/login')
       expect(page).to have_css('button.close')
     end
 
@@ -24,7 +24,7 @@ RSpec.describe "Navbar", type: :system, js: true do
       expect(page).to have_no_link('About', href: '#')
       expect(page).to have_no_link('Features', href: '#')
       expect(page).to have_no_link('Sample Link', href: '#')
-      expect(page).to have_no_link('Login', href: login_path)
+      expect(page).to have_no_link('Login', href: '/login')
       expect(page).to have_no_css('button.close')
     end
   end
