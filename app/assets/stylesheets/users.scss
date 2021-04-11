@@ -1,0 +1,23 @@
+#user_dob {
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+}
+
+#user_dob_day {
+  width: 20vw;
+  max-width: 90px;
+}
+
+#user_dob_month {
+  width: 40vw;
+  max-width: 140px;
+  margin: 0 5px;
+}
+
+#user_dob_year {
+  width: 25vw;
+  max-width: 110px;
+}
