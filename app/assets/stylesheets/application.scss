@@ -50,66 +50,6 @@ a {
   }
 }
 
-.form-header {
-  margin-bottom: 30px;
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.2;
-}
-
-.form-group {
-  label {
-    margin-bottom: 0.25rem;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-  }
-
-  .form-control {
-    color: theme-color("app-light");
-    background-color: theme-color('app-secondary');
-    border-color: theme-color("app-dark");
-    &:focus {
-      box-shadow: 0 0 0 0.1rem theme-color("app-primary");
-    }
-  }
-
-  .tooltip-anchor {
-    margin: 0 3px;
-    visibility: hidden;
-
-    svg {
-      width: 0.75em;
-      color: theme-color("app-primary");
-      &:hover {
-        color: theme-color("app-highlight");
-      }
-    }
-  }
-
-  .field_with_errors + .tooltip-anchor {
-    visibility: visible !important;
-  }
-
-  .field_with_errors {
-    display: inline;
-
-    span.message {
-      margin-left: 15px;
-      text-transform: lowercase;
-      color: $red
-    }
-
-    input {
-      border-color: $red;
-    }
-
-    ~ .justify-content-between {
-      border: 1px solid $red;
-      border-radius: dimension("input-border-radius");
-    }
-  }
-}
-
 @include media-breakpoint-only(xs) {
   body {
     background-color: lighten(theme-color("app-secondary"), 3%);
