@@ -14,7 +14,7 @@ require("channels")
 // client-side-validations MUST come AFTER turbolinks
 require('@client-side-validations/client-side-validations')
 requireAll(require.context('common', true, /\.js$/));
-requireAll(require.context('pages', true, /\.js$/));
+require('pages/index');
 
 // Include jQuery in global and window scope
 const jQuery = require('jquery')
