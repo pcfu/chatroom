@@ -94,55 +94,6 @@ ClientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'] = {
 }
 
 
-/*************************
- * User D.O.B Validation *
- *************************/
-
-const DATE_REGEX = /^\d{4}(-|\/)(0[1-9]|1[0-2])(-|\/)(0[1-9]|[12]\d|3[01])$/;
-
-function shouldSetDobChanged() {
-  const element = $('#user_dob');
-  if (element.data('changed')) {
-    return true;
-  } else {
-    return DATE_REGEX.test(element.val());
-  }
-}
-
-const inputEventBindings = window.ClientSideValidations.eventsToBind.input;
-
-// Enable validation for user d.o.b
-ClientSideValidations.eventsToBind.input = function input(form) {
-  const listeners = inputEventBindings(form);
-
-  listeners['change.ClientSideValidations'] = function changeClientSideValidations() {
-    const $element = $__default['default'](this);
-    if (($element.attr('id') === 'user_dob' && shouldSetDobChanged()) ||
-        $element.attr('id') !== 'user_dob') {
-      $element.data('changed', true);
-    }
-  };
-
-  listeners['focusout.ClientSideValidations'] = function focusoutClientSideValidations() {
-    const $element = $__default['default'](this);
-    if ($element.data('changed')) {
-      $element.isValid(form.ClientSideValidations.settings.validators);
-    }
-  };
-
-  return listeners;
-}
-
-// Set error message for invalid user d.o.b
-ClientSideValidations.validators.local['date'] = function(element, options) {
-  if (!DATE_REGEX.test(element.val()) ||
-      options['min'] && element.val() < options['min'] ||
-      options['max'] && element.val() > options['max']) {
-    return 'is invalid';
-  }
-}
-
-
 /*****************
  * On DOM loaded *
  *****************/
