@@ -72,7 +72,7 @@ RSpec.describe "UserRegistrations", type: :system do
           find(".btn[value=register]").click
         }.to change(User.all, :count).by(1)
 
-        expect(current_path).to have_content('/chatroom')
+        expect(page).to have_current_path('/chatroom')
       end
     end
 
