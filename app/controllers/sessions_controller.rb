@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
+  include SessionsHelper
+
   def new
+    redirect_to chatroom_url if current_user.present?
   end
 
   def create
@@ -8,23 +11,23 @@ class SessionsController < ApplicationController
     render response
   end
 
-  private
+
+    private
 
     def create_params
       params.require(:session).permit(:username, :password)
     end
 
     def authenticate_user(username, password)
-      user = User.where(username: username).first
+      user = User.find_by(username: username)
+      return unauthorized(:username, 'not recognized') if user.nil?
+      return unauthorized(:password, 'incorrect password') if !user.authenticate(password)
 
-      if user.present?
-        if user.authenticate(password)
-          Hash[:json => nil, :status => :ok]
-        else
-          Hash[:json => { field: :password, msg: 'incorrect password' }, :status => :unauthorized]
-        end
-      else
-        Hash[:json => { field: :username, msg: 'not recognized' }, :status => :unauthorized]
-      end
+      log_in user
+      { json: nil, status: :ok }
+    end
+
+    def unauthorized(err_field, err_msg)
+      { json: { field: err_field, msg: err_msg }, status: :unauthorized }
     end
 end
