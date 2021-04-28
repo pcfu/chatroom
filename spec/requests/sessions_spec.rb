@@ -2,18 +2,26 @@ require 'rails_helper'
 
 RSpec.describe "Sessions", type: :request do
   describe "GET /login" do
-    it "returns http success" do
-      get '/login'
-      expect(response).to have_http_status(:success)
+    context "when logged out" do
+      it "returns http success" do
+        get '/login'
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context "when logged in" do
+      it "returns http 302" do
+        login_user
+        get '/login'
+        expect(response).to have_http_status(:found)
+      end
     end
   end
 
   describe "POST /login" do
     context "when valid login" do
       it "returns http success" do
-        create(:user)
-        params = { session: attributes_for(:user).extract!(:username, :password) }
-        post '/login', params: params
+        login_user
         expect(controller.logged_in?).to be true
         expect(response).to have_http_status(:success)
       end
@@ -26,6 +34,15 @@ RSpec.describe "Sessions", type: :request do
         expect(controller.logged_in?).to be false
         expect(response).to have_http_status(:unauthorized)
       end
+    end
+  end
+
+  describe "DELETE /logout" do
+    it "returns http success" do
+      login_user
+      delete '/logout'
+      expect(controller.logged_in?).to be false
+      expect(response).to have_http_status(:found)
     end
   end
 end
