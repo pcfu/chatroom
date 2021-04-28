@@ -35,6 +35,12 @@ module CommonHelpers
     resize_window_to(1440, 900)
   end
 
+  def login_user
+    create :user
+    params = { session: attributes_for(:user).extract!(:username, :password) }
+    post '/login', params: params
+  end
+
   def has_field_with_label(field_name, label_text)
     expect(page).to have_css "label[for=#{field_name}]", text: icase_exact(label_text)
     expect(page).to have_field field_name
