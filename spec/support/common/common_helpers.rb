@@ -9,55 +9,11 @@ module CommonHelpers
     /\A#{string}\z/i
   end
 
-  def page_should_reload
-    page.evaluate_script "$(document.body).addClass('not-reloaded')"
-    yield
-    sleep 0.1
-    expect(page).to have_no_selector("body.not-reloaded")
-  end
-
-  def page_should_not_reload
-    page.evaluate_script "$(document.body).addClass('not-reloaded')"
-    yield
-    sleep 0.1
-    expect(page).to have_selector("body.not-reloaded")
-  end
-
-  def resize_window_to_small
-    resize_window_to(767, 900)
-  end
-
-  def resize_window_to_medium
-    resize_window_to(768, 900)
-  end
-
-  def resize_window_to_default
-    resize_window_to(1440, 900)
-  end
-
   def login_user
     create :user
     params = { session: attributes_for(:user).extract!(:username, :password) }
     post '/login', params: params
   end
-
-  def has_field_with_label(field_name, label_text)
-    expect(page).to have_css "label[for=#{field_name}]", text: icase_exact(label_text)
-    expect(page).to have_field field_name
-  end
-
-  def find_and_click_styleable_select_option(field_id, target_value)
-    find("#{field_id} .styleable-select").click
-    find("#{field_id} .styleable-option[data-value='#{target_value}']").click
-  end
-
-  private
-
-    def resize_window_to(width, height)
-      if Capybara.current_session.driver.browser.respond_to? 'manage'
-        Capybara.current_session.driver.browser.manage.window.resize_to(width, height)
-      end
-    end
 end
 
 RSpec.configure do |config|
