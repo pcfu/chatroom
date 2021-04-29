@@ -3,6 +3,10 @@
 body > .navbar {
   padding: 0.5rem;
   background-color: theme-color("app-dark");
+
+  .nav-link-alt > svg {
+    margin-right: 8px;
+  }
 }
 
 @include media-breakpoint-down(sm) {
@@ -44,11 +48,17 @@ body > .navbar {
       -o-transition: left 0.2s ease-in;
       transition: left 0.2s ease-in;
     }
+
+    .nav-link {
+      text-align: center;
+      font-size: 1.3em;
+      font-weight: 600;
+    }
   }
 
   #navbar-collapsible > .navbar-nav > {
     .navbar-nav-header {
-      height: 20vh;
+      height: 15vh;
       padding: 20px;
       background-color: theme-color("app-primary");
 
@@ -63,12 +73,6 @@ body > .navbar {
     }
 
     .nav-link {
-      text-align: center;
-      font-size: 1.3em;
-      font-weight: 600;
-    }
-
-    .nav-link:not(#login-btn) {
       min-width: 200px;
       padding-bottom: 2rem;
       color: theme-color("app-light");
@@ -77,19 +81,46 @@ body > .navbar {
         color: theme-color("app-primary");
         background-color: theme-color("app-light");
       }
+      &:nth-of-type(3) {
+        margin-bottom: 50px;
+      }
     }
 
-    #login-btn {
-      margin: 40px auto;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      border-radius: 27px;
-      border: 2px solid theme-color("app-primary");
-      color: theme-color("app-primary");
-      &:hover {
-        color: theme-color("app-dark");
-        background-color: theme-color("app-highlight");
-        border-color: theme-color("app-highlight");
+    div.navbar-user-panel {
+      margin: 0 auto;
+      text-align: center;
+
+      .gravatar {
+        border-radius: 35px;
+        border: 3px solid theme-color("app-primary");
+      }
+
+      .navbar-username {
+        margin-top: 5px;
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+    }
+
+    div.navbar-user-links {
+      display: flex;
+      margin: 0 auto;
+
+      .nav-link-alt {
+        margin: 3px 8px;
+        width: 130px;
+        height: 45px;
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+        border-radius: 15px;
+        color: theme-color("app-plain");
+        background-color: theme-color("app-secondary");
+        border: 2px solid theme-color("app-primary");
+
+        &:hover {
+          color: theme-color("app-light");
+          background-color: theme-color("app-primary");
+        }
       }
     }
   }
@@ -108,7 +139,7 @@ body > .navbar {
       }
     }
 
-    #login-btn {
+    .nav-link.log-btn {
       height: 2rem;
       margin: auto 0;
       padding: 0.1rem 1.5rem;

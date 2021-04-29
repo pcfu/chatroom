@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def new
+    return redirect_to chatroom_url if helpers.current_user.present?
     @user = User.new
   end
 
