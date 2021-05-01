@@ -2,7 +2,7 @@
   <div class="container">
     <%=
       link_to image_tag("logo.svg", size: "176x38", alt: "Chatroom Logo"), '/',
-      class: 'navbar-brand ml-3 mx-md-0'
+              class: 'navbar-brand ml-3 mx-md-0'
     %>
     <button
       class="navbar-toggler mr-3" type="button" data-toggle="collapse"
@@ -17,7 +17,7 @@
         <div class="d-md-none navbar-nav-header">
           <%=
             link_to image_tag("logo-alt.svg", size: "176x38", alt: "Chatroom Logo"),
-            '/', class: 'navbar-brand'
+                    '/', class: 'navbar-brand'
           %>
           <button
             type="button" class="close" data-toggle="collapse" data-target="#navbar-collapsible"
@@ -31,29 +31,32 @@
         <%= link_to 'Features', '#', class: 'nav-link mx-md-3' %>
         <%= link_to 'Sample Link', '#', class: 'nav-link mr-md-auto ml-md-3 ml-lg-5' %>
 
-        <% if logged_in? %>
-          <div class="navbar-user-panel">
-            <%= avatar_for current_user  %>
-            <div class="navbar-username"><%= current_user.username %></div>
-          </div>
-          <div class="navbar-user-links">
-            <%=
-              link_to content_tag(:i, nil, class: "fas fa-user-cog") + 'Account',
-                      '#', class: 'nav-link nav-link-alt'
-            %>
-            <%=
-              link_to content_tag(:i, nil, class: "fas fa-sign-out-alt") + 'Logout',
-                      logout_path, class: 'nav-link nav-link-alt', method: :delete
-            %>
-          </div>
-        <% else %>
-          <div class="navbar-user-links">
-            <%=
-              link_to content_tag(:i, nil, class: "fas fa-sign-in-alt") + 'Login',
-                      login_path, class: 'nav-link nav-link-alt'
-            %>
-          </div>
-        <% end %>
+        <div class="session">
+          <% if logged_in? %>
+            <div class="navbar-user-panel">
+              <%= avatar_for current_user %>
+              <div class="navbar-username"><%= current_user.username %></div>
+            </div>
+            <div class="navbar-user-links logged-in">
+              <%=
+                link_to content_tag(:i, nil, class: "fas fa-user-cog") + 'Account',
+                        '#', class: 'nav-link nav-link-alt'
+              %>
+              <%=
+                link_to content_tag(:i, nil, class: "fas fa-sign-out-alt") + 'Logout',
+                        logout_path, class: 'nav-link nav-link-alt', method: :delete
+              %>
+            </div>
+
+          <% else %>
+            <div class="navbar-user-links">
+              <%=
+                link_to content_tag(:i, nil, class: "fas fa-sign-in-alt") + 'Login',
+                        login_path, class: 'nav-link nav-link-alt'
+              %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

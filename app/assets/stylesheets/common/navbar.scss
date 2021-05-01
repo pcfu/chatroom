@@ -4,8 +4,34 @@ body > .navbar {
   padding: 0.5rem;
   background-color: theme-color("app-dark");
 
-  .nav-link-alt > svg {
-    margin-right: 8px;
+  #navbar-collapsible > .navbar-nav > .session {
+    position: relative;
+    display: flex;
+
+    .navbar-user-links {
+      display: flex;
+
+      .nav-link-alt {
+        width: 130px;
+        height: 40px;
+        margin: 3px 8px;
+        padding: 0.3rem 0;;
+        border-radius: 15px;
+        color: theme-color("app-plain");
+        background-color: theme-color("app-secondary");
+        border: 2px solid theme-color("app-primary");
+        text-align: center;
+        font-weight: 600;
+        color: theme-color("app-light");
+        &:hover {
+          background-color: theme-color("app-primary");
+        }
+
+        svg {
+          margin-right: 8px;
+        }
+      }
+    }
   }
 }
 
@@ -53,6 +79,7 @@ body > .navbar {
       text-align: center;
       font-size: 1.3em;
       font-weight: 600;
+      color: theme-color("app-light");
     }
   }
 
@@ -75,7 +102,6 @@ body > .navbar {
     .nav-link {
       min-width: 200px;
       padding-bottom: 2rem;
-      color: theme-color("app-light");
       background-color: theme-color("app-primary");
       &:hover {
         color: theme-color("app-primary");
@@ -85,9 +111,13 @@ body > .navbar {
         margin-bottom: 50px;
       }
     }
+  }
 
-    div.navbar-user-panel {
-      margin: 0 auto;
+  .session {
+    flex-direction: column;
+    align-items: center;
+
+    .navbar-user-panel {
       text-align: center;
 
       .gravatar {
@@ -102,26 +132,8 @@ body > .navbar {
       }
     }
 
-    div.navbar-user-links {
-      display: flex;
-      margin: 0 auto;
-
-      .nav-link-alt {
-        margin: 3px 8px;
-        width: 130px;
-        height: 45px;
-        padding-top: 0.3rem;
-        padding-bottom: 0.3rem;
-        border-radius: 15px;
-        color: theme-color("app-plain");
-        background-color: theme-color("app-secondary");
-        border: 2px solid theme-color("app-primary");
-
-        &:hover {
-          color: theme-color("app-light");
-          background-color: theme-color("app-primary");
-        }
-      }
+    .navbar-user-links .nav-link-alt {
+      height: 45px !important;
     }
   }
 }
@@ -133,21 +145,54 @@ body > .navbar {
     .nav-link {
       font-size: 1.1em;
       font-weight: 600;
-      color: theme-color("app-primary");
-      &:hover {
-        color: theme-color("app-highlight");
+      &:not(.nav-link-alt) {
+        color: theme-color("app-primary");
+        &:hover {
+          color: theme-color("app-highlight");
+        }
       }
     }
 
-    .nav-link.log-btn {
-      height: 2rem;
-      margin: auto 0;
-      padding: 0.1rem 1.5rem;
-      border-radius: 20px;
-      color: theme-color("app-dark");
-      background-color: theme-color("app-primary");
-      &:hover {
-        background-color: theme-color("app-highlight");
+    .session {
+      .navbar-user-panel {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        padding-right: 0.5rem;
+        border-radius: 20px;
+        color: theme-color("app-dark");
+        background-color: theme-color("app-primary");
+        cursor: pointer;
+        &:hover {
+          background-color: theme-color("app-highlight");
+        }
+
+        .gravatar {
+          height: 40px;
+          margin-right: 8px;
+          border-radius: 20px;
+          border: 3px solid theme-color("app-secondary");
+        }
+
+        .navbar-username {
+          font-size: 1.1em;
+          font-weight: 600;
+        }
+      }
+
+      .navbar-user-links.logged-in {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 200px;
+        top: 50px;
+        right: 0;
+        padding: 10px 0;
+        background-color: rgba(theme-color("app-dark"), 0.5);
+        border-radius: 5px;
+        border: 2px solid theme-color("app-secondary");
+        box-shadow: 0 2px 7px 0 theme-color("app-shadow");
       }
     }
   }
