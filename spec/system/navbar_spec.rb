@@ -91,6 +91,26 @@ RSpec.describe "Navbar", type: :system, js: true do
         expect_static_pages_links
         expect(page).to have_css('img.gravatar')
         expect(page).to have_css('.navbar-username', text: user.username)
+        expect(page).to have_no_link('Account', href: '#')
+        expect(page).to have_no_link('Logout', href: '/logout')
+      end
+
+      context "when account panel closed" do
+        it "opens account panel on clicking user profile" do
+          find('.navbar-user-panel').click
+          expect(page).to have_link('Account', href: '#')
+          expect(page).to have_link('Logout', href: '/logout')
+        end
+      end
+
+      context "when account panel open" do
+        before { find('.navbar-user-panel').click }
+
+        it "closes account panel on clicking user profile" do
+          find('.navbar-user-panel').click
+          expect(page).to have_no_link('Account', href: '#')
+          expect(page).to have_no_link('Logout', href: '/logout')
+        end
       end
     end
   end
