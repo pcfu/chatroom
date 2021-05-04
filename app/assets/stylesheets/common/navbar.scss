@@ -119,6 +119,7 @@ body > .navbar {
 
     .navbar-user-panel {
       text-align: center;
+      pointer-events: none;
 
       .gravatar {
         border-radius: 35px;
@@ -189,10 +190,11 @@ body > .navbar {
         top: 50px;
         right: 0;
         padding: 10px 0;
-        background-color: rgba(theme-color("app-dark"), 0.5);
+        background-color: rgba(theme-color("app-dark"), 0.7);
         border-radius: 5px;
         border: 2px solid theme-color("app-secondary");
         box-shadow: 0 2px 7px 0 theme-color("app-shadow");
+        visibility: hidden;
       }
     }
   }
