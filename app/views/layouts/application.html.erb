@@ -12,8 +12,8 @@
 
   <body>
     <% unless params[:controller] == 'channels' %>
-      <%= render 'layouts/general/navbar' %>
-      <%= render 'layouts/general/main_content' %>
+      <%= render 'navbar/navbar' %>
+      <%= render 'layouts/partials/main_content' %>
     <% end %>
   </body>
 </html>

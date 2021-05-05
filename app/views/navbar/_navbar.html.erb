@@ -1,0 +1,38 @@
+<%
+  imgs = {
+    brand: image_tag("logo.svg", size: "176x38", alt: "Chatroom Logo"),
+    brand_alt: image_tag("logo-alt.svg", size: "176x38", alt: "Chatroom Logo")
+  }
+%>
+
+<nav class="navbar navbar-expand-md navbar-dark">
+  <div class="container">
+    <%= link_to imgs[:brand], '/', class: 'navbar-brand ml-3 mx-md-0' %>
+    <button
+      class="navbar-toggler mr-3" type="button" data-toggle="collapse"
+      data-target="#navbar-collapsible" aria-controls="navbar-collapsible"
+      aria-expanded="false" aria-label="Toggle navigation"
+    >
+      <span><i class="fas fa-bars"></i></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbar-collapsible">
+      <div class="navbar-nav">
+        <div class="d-md-none navbar-nav-header">
+          <%= link_to imgs[:brand_alt], '/', class: 'navbar-brand' %>
+          <button
+            type="button" class="close" data-toggle="collapse" data-target="#navbar-collapsible"
+            aria-controls="navbar-collapsible" aria-label="Close"
+          >
+            <span aria-hidden="true"><i class="fas fa-times-circle"></i></span>
+          </button>
+        </div>
+
+        <%= link_to 'About', '#', class: 'nav-link ml-md-auto mr-md-3 mr-lg-5' %>
+        <%= link_to 'Features', '#', class: 'nav-link mx-md-3' %>
+        <%= link_to 'Sample Link', '#', class: 'nav-link mr-md-auto ml-md-3 ml-lg-5' %>
+        <%= render 'navbar/session' %>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,24 @@
+<%
+  icons = {
+    cog: content_tag(:i, nil, class: "fas fa-user-cog"),
+    logout: content_tag(:i, nil, class: "fas fa-sign-out-alt"),
+    login: content_tag(:i, nil, class: "fas fa-sign-in-alt")
+  }
+%>
+
+<div class="session">
+  <% if logged_in? %>
+    <div class="navbar-user-panel">
+      <%= avatar_for current_user %>
+      <div class="navbar-username"><%= current_user.username %></div>
+    </div>
+    <div class="navbar-user-links logged-in">
+      <%= link_to icons[:cog] + 'Account', '#', class: 'nav-link nav-link-alt' %>
+      <%= link_to icons[:logout] + 'Logout', logout_path, class: 'nav-link nav-link-alt', method: :delete %>
+    </div>
+  <% else %>
+    <div class="navbar-user-links">
+      <%= link_to icons[:login] + 'Login', login_path, class: 'nav-link nav-link-alt' %>
+    </div>
+  <% end %>
+</div>
