@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  include SessionsHelper
 
   def new
     redirect_to chatroom_url if current_user.present?
