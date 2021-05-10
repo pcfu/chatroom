@@ -54,9 +54,8 @@ RSpec.describe "UserRegistrations", type: :system do
     before { visit '/register' }
 
     context "when valid user info" do
-      it "creates account and redirects to another page" do
-        user = build_stubbed(:user)
-
+      let(:user) { build_stubbed(:user) }
+      before do
         fill_in :user_username, with: user.username
         fill_in :user_email, with: user.email
 
@@ -67,11 +66,21 @@ RSpec.describe "UserRegistrations", type: :system do
 
         fill_in :user_password, with: user.password
         fill_in :user_password_confirmation, with: user.password_confirmation
+      end
 
+      it "creates account" do
         expect {
           find(".btn[value=register]").click
         }.to change(User.all, :count).by(1)
+      end
 
+      it "logs user in automatically" do
+        find(".btn[value=register]").click
+        expect(page).to have_css('.navbar-user-panel')
+      end
+
+      it "redirects to chatroom lobby" do
+        find(".btn[value=register]").click
         expect(page).to have_current_path('/chatroom')
       end
     end
