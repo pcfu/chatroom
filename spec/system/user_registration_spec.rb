@@ -76,7 +76,7 @@ RSpec.describe "UserRegistrations", type: :system do
 
       it "logs user in automatically" do
         find(".btn[value=register]").click
-        expect(page).to have_css('.navbar-user-panel')
+        expect_user_panel(user.username)
       end
 
       it "redirects to chatroom lobby" do

@@ -32,6 +32,16 @@ module SystemHelpers
     find(".btn[value=login]").click
   end
 
+  def expect_user_panel(username)
+    expect(page).to have_css('.navbar-user-panel')
+    expect(page).to have_css('.gravatar')
+    expect(page).to have_css('.navbar-username', text: username)
+  end
+
+  def expect_no_user_panel
+    expect(page).to have_no_css('.navbar-user-panel')
+  end
+
   def expect_static_pages_links
     expect(page).to have_link('About', href: '#')
     expect(page).to have_link('Features', href: '#')

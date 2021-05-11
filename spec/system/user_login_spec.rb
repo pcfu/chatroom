@@ -2,6 +2,8 @@ require 'rails_helper'
 require 'support/shared_examples_for_pages'
 
 RSpec.describe "UserLogins", type: :system do
+  let(:user) { create(:user) }
+
   describe "page is displayed correctly" do
     before { visit '/login' }
 
@@ -33,12 +35,8 @@ RSpec.describe "UserLogins", type: :system do
     end
   end
 
-  describe "user logins with account", js: true do
-    let(:user) { create(:user) }
-
-    before do
-      visit '/login'
-    end
+  describe "user logs in with account", js: true do
+    before { visit '/login' }
 
     context "when valid info" do
       it "logs in and redirects to another page" do
@@ -46,6 +44,7 @@ RSpec.describe "UserLogins", type: :system do
         fill_in 'session_password', with: user.password
         find(".btn[value=login]").click
         expect(page).to have_current_path('/chatroom')
+        expect_user_panel(user.username)
       end
     end
 
@@ -79,6 +78,17 @@ RSpec.describe "UserLogins", type: :system do
         fill_in "session_password", with: user.password
         expect(page).to have_no_css("label[for='session_password'] span.message")
       end
+    end
+  end
+
+  describe "user logs out of account", js: true do
+    before { gui_login_user user }
+
+    it "logs user out and redirects to homepage" do
+      find('.navbar-user-panel').click
+      find(".nav-link-alt[href='/logout']").click
+      expect(page).to have_current_path('/')
+      expect_no_user_panel
     end
   end
 end
