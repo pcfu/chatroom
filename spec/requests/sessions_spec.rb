@@ -10,10 +10,10 @@ RSpec.describe "Sessions", type: :request do
     end
 
     context "when logged in" do
-      it "returns http 302" do
+      it "returns redirect" do
         login_user
         get '/login'
-        expect(response).to have_http_status(:found)
+        expect(response).to be_redirect
       end
     end
   end
@@ -38,11 +38,11 @@ RSpec.describe "Sessions", type: :request do
   end
 
   describe "DELETE /logout" do
-    it "returns http success" do
+    it "returns redirect" do
       login_user
       delete '/logout'
       expect(controller.logged_in?).to be false
-      expect(response).to have_http_status(:found)
+      expect(response).to be_redirect
     end
   end
 end
