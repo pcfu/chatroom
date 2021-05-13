@@ -3,12 +3,12 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  host: postgres
   username: <%= ENV.fetch("DATABASE_USERNAME", nil) %>
   password: <%= ENV.fetch("DATABASE_PASSWORD", nil) %>
 
 development:
   <<: *default
+  host: postgres
   database: chatroom_development
 
 # Warning: The database defined as "test" will be erased and
@@ -16,6 +16,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  host: postgres
   database: chatroom_test
 
 production:
