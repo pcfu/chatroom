@@ -1,0 +1,37 @@
+@import "imports";
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: theme-color("app-plain");
+  background-color: theme-color("app-secondary");
+  font-family: 'Signika';
+}
+
+a {
+  color: theme-color("app-primary");
+  &:hover {
+    color: theme-color("app-highlight");
+    text-decoration: none;
+  }
+}
+
+.btn-app-primary {
+  color: theme-color("app-light");
+  background-color: theme-color("app-primary");
+  &:hover {
+    background-color: lighten(theme-color("app-primary"), 8%);
+  }
+}
+
+@include media-breakpoint-only(xs) {
+  body {
+    background-color: lighten(theme-color("app-secondary"), 3%);
+
+    > div.container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+}

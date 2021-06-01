@@ -5,14 +5,14 @@
 
 const requireAll = (r) => r.keys().forEach(r);
 
-import 'bootstrap'
-import "@fortawesome/fontawesome-free/js/all"
-require("@rails/ujs").start()
-require("turbolinks").start()
-require("@rails/activestorage").start()
-require("channels")
+import 'bootstrap';
+import "@fortawesome/fontawesome-free/js/all";
+require("@rails/ujs").start();
+require("turbolinks").start();
+require("@rails/activestorage").start();
+require("channels");
 // client-side-validations MUST come AFTER turbolinks
-require('@client-side-validations/client-side-validations')
+require('@client-side-validations/client-side-validations');
 requireAll(require.context('common', true, /\.js$/));
 require('pages/index');
 
@@ -32,3 +32,8 @@ window.$ = window.jQuery = jQuery;
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
+
+require('styles/application');
+if (process.env.NODE_ENV === 'test') {
+  require('styles/spec_setup/disable-animation');
+}
