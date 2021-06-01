@@ -58,6 +58,7 @@ services:
     command: bundle exec rspec ${TARGET}
     environment:
       <<: *common-env
+      NODE_ENV: ${NODE_ENV:-test}
       HEADLESS: 'true'
     depends_on:
       postgres:
@@ -69,6 +70,7 @@ services:
     <<: *rspec
     environment:
       <<: *common-env
+      NODE_ENV: ${NODE_ENV:-test}
       HEADLESS: 'false'
 
   postgres:
