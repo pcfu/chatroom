@@ -136,7 +136,7 @@ export function registerFns() {
     const listeners = inputEventBindings(form);
 
     listeners['change.ClientSideValidations'] = function changeClientSideValidations() {
-      const $element = $__default['default'](this);
+      const $element = $(this);
       if (($element.attr('id') === 'user_dob' && shouldSetDobChanged()) ||
           $element.attr('id') !== 'user_dob') {
         $element.data('changed', true);
@@ -144,7 +144,7 @@ export function registerFns() {
     };
 
     listeners['focusout.ClientSideValidations'] = function focusoutClientSideValidations() {
-      const $element = $__default['default'](this);
+      const $element = $(this);
       if ($element.data('changed')) {
         $element.isValid(form.ClientSideValidations.settings.validators);
       }
