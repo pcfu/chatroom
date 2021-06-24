@@ -111,6 +111,12 @@ RSpec.describe "Navbar", type: :system, js: true do
           expect(page).to have_no_link('Account', href: '#')
           expect(page).to have_no_link('Logout', href: '/logout')
         end
+
+        it "closes account panel on clicking outside the panel" do
+          click_at(5, 5, css: 'nav')
+          expect(page).to have_no_link('Account', href: '#')
+          expect(page).to have_no_link('Logout', href: '/logout')
+        end
       end
     end
   end
