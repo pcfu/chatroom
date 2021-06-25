@@ -12,7 +12,7 @@
       <%= avatar_for current_user %>
       <div class="navbar-username"><%= current_user.username %></div>
     </div>
-    <div class="navbar-user-links logged-in">
+    <div class="navbar-user-links logged-in hide">
       <%= link_to icons[:cog] + 'Account', '#', class: 'nav-link nav-link-alt' %>
       <%= link_to icons[:logout] + 'Logout', logout_path, class: 'nav-link nav-link-alt', method: :delete %>
     </div>

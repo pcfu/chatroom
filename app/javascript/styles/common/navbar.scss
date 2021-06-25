@@ -194,7 +194,12 @@ body > .navbar {
         border-radius: 5px;
         border: 2px solid theme-color("app-secondary");
         box-shadow: 0 2px 7px 0 theme-color("app-shadow");
-        visibility: hidden;
+        &.show {
+          visibility: show;
+        }
+        &.hide {
+          visibility: hidden;
+        }
       }
     }
   }
