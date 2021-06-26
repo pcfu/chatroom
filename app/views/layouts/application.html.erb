@@ -11,9 +11,11 @@
   </head>
 
   <body>
-    <% unless params[:controller] == 'channels' %>
+    <% unless params[:controller] == 'chat' %>
       <%= render 'navbar/navbar' %>
       <%= render 'layouts/partials/main_content' %>
+    <% else %>
+      <%# render layout for chat page here %>
     <% end %>
   </body>
 </html>
