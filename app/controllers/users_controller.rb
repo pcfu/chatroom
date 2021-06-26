@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       log_in @user
       redirect_to chat_url
     else
-      render :new
+      render :new, status: :conflict
     end
   end
 
