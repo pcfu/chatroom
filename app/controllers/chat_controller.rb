@@ -1,4 +1,4 @@
-class ChatroomController < ApplicationController
+class ChatController < ApplicationController
 
   def index
     @user = rand(1..1000).to_s.rjust(4, '0')

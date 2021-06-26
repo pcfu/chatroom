@@ -43,7 +43,7 @@ RSpec.describe "UserLogins", type: :system do
         fill_in 'session_username', with: user.username
         fill_in 'session_password', with: user.password
         find(".btn[value=login]").click
-        expect(page).to have_current_path('/chatroom')
+        expect(page).to have_current_path('/chat')
         expect_user_panel(user.username)
       end
     end

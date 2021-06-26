@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def new
-    return redirect_to chatroom_url if helpers.current_user.present?
+    return redirect_to chat_url if helpers.current_user.present?
     @user = User.new
   end
 
@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      redirect_to chatroom_url
+      redirect_to chat_url
     else
       render :new
     end

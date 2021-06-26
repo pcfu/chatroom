@@ -81,7 +81,7 @@ RSpec.describe "UserRegistrations", type: :system do
 
       it "redirects to chatroom lobby" do
         find(".btn[value=register]").click
-        expect(page).to have_current_path('/chatroom')
+        expect(page).to have_current_path('/chat')
       end
     end
 

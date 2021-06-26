@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
-    redirect_to chatroom_url if current_user.present?
+    redirect_to chat_url if current_user.present?
   end
 
   def create

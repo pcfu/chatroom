@@ -62,7 +62,7 @@ export function loginFns() {
   });
 
   $('form').on('ajax:success', event => {
-    window.location.replace('/chatroom');
+    window.location.replace('/chat');
   })
 
   $('input.form-control').on('keyup', function () {
