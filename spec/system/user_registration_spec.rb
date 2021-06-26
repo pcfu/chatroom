@@ -74,12 +74,7 @@ RSpec.describe "UserRegistrations", type: :system do
         }.to change(User.all, :count).by(1)
       end
 
-      it "logs user in automatically" do
-        find(".btn[value=register]").click
-        expect_user_panel(user.username)
-      end
-
-      it "redirects to chatroom lobby" do
+      it "redirects to chat page" do
         find(".btn[value=register]").click
         expect(page).to have_current_path('/chat')
       end

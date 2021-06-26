@@ -30,6 +30,7 @@ module SystemHelpers
     fill_in 'session_username', with: user.username
     fill_in 'session_password', with: user.password
     find(".btn[value=login]").click
+    sleep 0.1
   end
 
   def expect_user_panel(username)

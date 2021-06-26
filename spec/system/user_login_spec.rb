@@ -39,12 +39,11 @@ RSpec.describe "UserLogins", type: :system do
     before { visit '/login' }
 
     context "when valid info" do
-      it "logs in and redirects to another page" do
+      it "logs in and redirects to chat page" do
         fill_in 'session_username', with: user.username
         fill_in 'session_password', with: user.password
         find(".btn[value=login]").click
         expect(page).to have_current_path('/chat')
-        expect_user_panel(user.username)
       end
     end
 
@@ -82,7 +81,10 @@ RSpec.describe "UserLogins", type: :system do
   end
 
   describe "user logs out of account", js: true do
-    before { gui_login_user user }
+    before do
+      gui_login_user user
+      visit '/'
+    end
 
     it "logs user out and redirects to homepage" do
       find('.navbar-user-panel').click

@@ -39,6 +39,8 @@ RSpec.describe "Navbar", type: :system, js: true do
           expect(page).to have_css('a.navbar-brand[href="/"]')
           expect(page).to have_css('button.close')
           expect_static_pages_links
+
+          expect_no_user_panel
           expect(page).to have_link('Login', href: '/login')
         end
       end
@@ -47,6 +49,7 @@ RSpec.describe "Navbar", type: :system, js: true do
         let(:user) { create :user }
         before do
           gui_login_user user
+          visit '/'
           find('button.navbar-toggler').click
         end
 
@@ -55,8 +58,7 @@ RSpec.describe "Navbar", type: :system, js: true do
           expect(page).to have_css('button.close')
           expect_static_pages_links
 
-          expect(page).to have_css('img.gravatar')
-          expect(page).to have_css('.navbar-username', text: user.username)
+          expect_user_panel(user.username)
           expect(page).to have_link('Account', href: '#')
           expect(page).to have_link('Logout', href: '/logout')
         end
@@ -78,21 +80,23 @@ RSpec.describe "Navbar", type: :system, js: true do
       it "has full links with login button" do
         expect(page).to have_css('a.navbar-brand[href="/"]')
         expect_static_pages_links
+        expect_no_user_panel
         expect(page).to have_link('Login', href: '/login')
       end
     end
 
     context "when logged in" do
       let(:user) { create :user }
-      before { gui_login_user user }
+      before do
+        gui_login_user user
+        visit '/'
+      end
 
       it "has full links with user profile" do
         expect(page).to have_css('a.navbar-brand[href="/"]')
         expect_static_pages_links
-        expect(page).to have_css('img.gravatar')
-        expect(page).to have_css('.navbar-username', text: user.username)
-        expect(page).to have_no_link('Account', href: '#')
-        expect(page).to have_no_link('Logout', href: '/logout')
+        expect_user_panel(user.username)
+        expect(page).to have_no_link('Login', href: '/login')
       end
 
       context "when account panel closed" do
