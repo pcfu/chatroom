@@ -1,0 +1,8 @@
+<% brand = image_pack_tag("media/images/logo.svg", size: "132x30", alt: "Chatroom Logo") %>
+
+<nav class="topbar">
+  <div class="container-fluid">
+    <%= link_to brand, '/', class: 'navbar-brand' %>
+    <%= render 'layouts/bars/session' %>
+  </div>
+</nav>
