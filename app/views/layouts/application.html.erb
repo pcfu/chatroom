@@ -12,7 +12,7 @@
 
   <body>
     <% unless params[:controller] == 'chat' %>
-      <%= render 'navbar/navbar' %>
+      <%= render 'layouts/bars/navbar' %>
       <%= render 'layouts/partials/main_content' %>
     <% else %>
       <%# render layout for chat page here %>
