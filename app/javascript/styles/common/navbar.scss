@@ -1,36 +1,6 @@
 body > .navbar {
   padding: 0.5rem;
   background-color: theme-color("app-dark");
-
-  #navbar-collapsible > .navbar-nav > .session {
-    position: relative;
-    display: flex;
-
-    .navbar-user-links {
-      display: flex;
-
-      .nav-link-alt {
-        width: 130px;
-        height: 40px;
-        margin: 3px 8px;
-        padding: 0.3rem 0;;
-        border-radius: 15px;
-        color: theme-color("app-plain");
-        background-color: theme-color("app-secondary");
-        border: 2px solid theme-color("app-primary");
-        text-align: center;
-        font-weight: 600;
-        color: theme-color("app-light");
-        &:hover {
-          background-color: theme-color("app-primary");
-        }
-
-        svg {
-          margin-right: 8px;
-        }
-      }
-    }
-  }
 }
 
 @include media-breakpoint-down(sm) {
@@ -110,34 +80,6 @@ body > .navbar {
       }
     }
   }
-
-  .session {
-    flex-direction: column;
-    align-items: center;
-
-    .navbar-user-panel {
-      text-align: center;
-
-      .gravatar {
-        border-radius: 35px;
-        border: 3px solid theme-color("app-primary");
-      }
-
-      .navbar-username {
-        margin-top: 5px;
-        margin-bottom: 15px;
-        font-size: 1.5em;
-      }
-    }
-
-    .navbar-user-links .nav-link-alt {
-      height: 45px !important;
-    }
-  }
-
-  #navbar-collapsible .session .navbar-user-panel {
-    pointer-events: none;
-  }
 }
 
 @include media-breakpoint-up(md) {
@@ -151,55 +93,6 @@ body > .navbar {
         color: theme-color("app-primary");
         &:hover {
           color: theme-color("app-highlight");
-        }
-      }
-    }
-
-    .session {
-      .navbar-user-panel {
-        display: flex;
-        align-items: center;
-        height: 40px;
-        padding-right: 0.5rem;
-        border-radius: 20px;
-        color: theme-color("app-dark");
-        background-color: theme-color("app-primary");
-        cursor: pointer;
-        &:hover {
-          background-color: theme-color("app-highlight");
-        }
-
-        .gravatar {
-          height: 40px;
-          margin-right: 8px;
-          border-radius: 20px;
-          border: 3px solid theme-color("app-secondary");
-        }
-
-        .navbar-username {
-          font-size: 1.1em;
-          font-weight: 600;
-        }
-      }
-
-      .navbar-user-links.logged-in {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 200px;
-        top: 50px;
-        right: 0;
-        padding: 10px 0;
-        background-color: rgba(theme-color("app-dark"), 0.7);
-        border-radius: 5px;
-        border: 2px solid theme-color("app-secondary");
-        box-shadow: 0 2px 7px 0 theme-color("app-shadow");
-        &.show {
-          visibility: show;
-        }
-        &.hide {
-          visibility: hidden;
         }
       }
     }
