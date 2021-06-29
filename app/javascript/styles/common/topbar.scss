@@ -1,0 +1,60 @@
+.topbar {
+  background-color: theme-color("app-dark");
+}
+
+@include media-breakpoint-down(sm) {
+  .topbar .navbar-brand {
+    img {
+      width: 30px;
+      object-fit: cover;
+      object-position: left;
+    }
+  }
+
+  .topbar .session {
+    .navbar-user-panel {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      width: min-content;
+      border-radius: 20px;
+      color: theme-color("app-dark");
+      background-color: theme-color("app-primary");
+      cursor: pointer;
+      &:hover {
+        background-color: theme-color("app-highlight");
+      }
+
+      .gravatar {
+        height: 40px;
+        border-radius: 20px;
+        border: 3px solid theme-color("app-secondary");
+      }
+
+      .navbar-username {
+        display: none;
+      }
+    }
+
+    .navbar-user-links {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 200px;
+      top: 50px;
+      right: 0;
+      padding: 10px 0;
+      background-color: rgba(theme-color("app-dark"), 0.7);
+      border-radius: 5px;
+      border: 2px solid theme-color("app-secondary");
+      box-shadow: 0 2px 7px 0 theme-color("app-shadow");
+      &.show {
+        visibility: show;
+      }
+      &.hide {
+        visibility: hidden;
+      }
+    }
+  }
+}

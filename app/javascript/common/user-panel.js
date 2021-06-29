@@ -9,7 +9,7 @@ function showElement(elem) {
 }
 
 $(document).on('turbolinks:load', function () {
-  if ($('#navbar-collapsible')[0]) {
+  if ($('#navbar-collapsible')[0] || $('.topbar')[0]) {
     $('.navbar-user-panel').on('click', function () {
       const userLinks = $('.navbar-user-links.logged-in');
       if (userLinks.hasClass('show')) {

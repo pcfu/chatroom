@@ -1,5 +1,3 @@
-// @import "globals";
-
 body > .navbar {
   padding: 0.5rem;
   background-color: theme-color("app-dark");
@@ -119,7 +117,6 @@ body > .navbar {
 
     .navbar-user-panel {
       text-align: center;
-      pointer-events: none;
 
       .gravatar {
         border-radius: 35px;
@@ -136,6 +133,10 @@ body > .navbar {
     .navbar-user-links .nav-link-alt {
       height: 45px !important;
     }
+  }
+
+  #navbar-collapsible .session .navbar-user-panel {
+    pointer-events: none;
   }
 }
 
