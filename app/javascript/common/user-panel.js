@@ -1,3 +1,7 @@
+function hasTopbar() {
+  return $('#navbar-collapsible').length > 0 || $('.topbar').length > 0;
+}
+
 function hideElement(elem) {
   elem.removeClass('show');
   elem.addClass('hide');
@@ -9,7 +13,7 @@ function showElement(elem) {
 }
 
 $(document).on('turbolinks:load', function () {
-  if ($('#navbar-collapsible')[0] || $('.topbar')[0]) {
+  if (hasTopbar()) {
     $('.navbar-user-panel').on('click', function () {
       const userLinks = $('.navbar-user-links.logged-in');
       if (userLinks.hasClass('show')) {
