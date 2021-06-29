@@ -1,7 +1,8 @@
-// Place all the styles related to the chatroom controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.chat-content {
+  background-color: theme-color("app-secondary");
+}
 
+/*
 #messages {
   margin: 50px 0;
   border: 2px solid teal;
@@ -20,3 +21,4 @@
 textarea {
   resize: none;
 }
+*/

@@ -16,6 +16,11 @@
       <%= render 'layouts/partials/main_content' %>
     <% else %>
       <%= render 'layouts/bars/topbar' %>
+      <div class="container-fluid p-0 flex-grow-1 d-flex justify-content-between">
+        <%= render 'layouts/bars/channels_bar' %>
+        <%= render 'layouts/partials/chat_content' %>
+        <%= render 'layouts/bars/users_bar' %>
+      </div>
     <% end %>
   </body>
 </html>
