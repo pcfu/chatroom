@@ -5,14 +5,41 @@
   .navbar-brand {
     padding: 0;
   }
+
+  .sidebar-toggler {
+    display: flex;
+    align-items: center;
+    color: theme-color("app-primary");
+
+    .icon {
+      font-size: 28px;
+      height: 28px;
+      line-height: 1em;
+    }
+
+    .label {
+      margin-left: 5px;
+      font-size: 18px;
+    }
+  }
+
+  .session {
+    margin-left: 1rem;
+  }
 }
 
 @include media-breakpoint-down(xs) {
-  .topbar .navbar-brand {
-    img {
-      width: 30px;
-      object-fit: cover;
-      object-position: left;
+  .topbar {
+    .navbar-brand {
+      img {
+        width: 30px;
+        object-fit: cover;
+        object-position: left;
+      }
+    }
+
+    .sidebar-toggler .label {
+      display: none;
     }
   }
 }

@@ -1,8 +1,21 @@
 <% brand = image_pack_tag("media/images/logo.svg", size: "132x30", alt: "Chatroom Logo") %>
 
 <nav class="nav topbar">
-  <div class="container-fluid d-flex justify-content-between">
+  <div class="container-fluid d-flex">
     <%= link_to brand, '/', class: 'navbar-brand' %>
+
+    <div class="sidebar-toggler">
+      <span class="icon"><i class="far fa-list-alt"></i></span>
+      <span class="label">Channels</span>
+    </div>
+
+    <div class="spacer flex-grow-1"></div>
+
+    <div class="sidebar-toggler">
+      <span class="icon"><i class="fas fa-user-friends"></i></span>
+      <span class="label">Members</span>
+    </div>
+
     <%= render 'layouts/bars/session' %>
   </div>
 </nav>

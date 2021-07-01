@@ -10,7 +10,7 @@ RSpec.describe "Chats", type: :system do
       expect(page).to have_css('nav.topbar')
     end
 
-    context "when extra small" do
+    context "when extra small screen" do
       before { resize_window_to_xs }
 
       it "has collapsed sidebars" do
