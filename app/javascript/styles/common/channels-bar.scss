@@ -1,4 +1,11 @@
 .channels-bar {
   width: 220px;
   background-color: darken(theme-color("app-secondary"), 3%);
+  border-right: 1px solid theme-color("app-dark");
+}
+
+@include media-breakpoint-down(xs) {
+  .channels-bar {
+    display: none;
+  }
 }
