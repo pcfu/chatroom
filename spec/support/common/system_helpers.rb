@@ -3,6 +3,10 @@ module SystemHelpers
     resize_window_to(1440, 900)
   end
 
+  def resize_window_to_xs
+    resize_window_to(575, 900)
+  end
+
   def resize_window_to_small
     resize_window_to(767, 900)
   end
