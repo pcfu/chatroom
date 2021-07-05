@@ -1,11 +1,11 @@
-.users-bar {
+.members-bar {
   width: 250px;
   background-color: darken(theme-color("app-secondary"), 3%);
   border-left: 1px solid theme-color("app-dark");
 }
 
 @include media-breakpoint-down(sm) {
-  .users-bar {
+  .members-bar {
     display: none;
   }
 }
