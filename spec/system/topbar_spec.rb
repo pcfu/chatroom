@@ -8,8 +8,7 @@ RSpec.describe "Topbar", type: :system, js: true do
     before { resize_window_to_xs }
 
     it "has icons only" do
-      logo_width = page.evaluate_script("$('.navbar-brand img').width()")
-      expect(logo_width).to eq(30)
+      expect_elem_width('.navbar-brand img', 30)
 
       expect(page).to have_css('.sidebar-toggler .icon', count: 2)
       expect(page).to have_no_css('.sidebar-toggler .label')
@@ -23,8 +22,7 @@ RSpec.describe "Topbar", type: :system, js: true do
     before { resize_window_to_small }
 
     it "has icons and labels" do
-      logo_width = page.evaluate_script("$('.navbar-brand img').width()")
-      expect(logo_width).to eq(132)
+      expect_elem_width('.navbar-brand img', 132)
 
       expect(page).to have_css('.sidebar-toggler .icon', count: 2)
       expect(page).to have_css('.sidebar-toggler .label', count: 2)
@@ -37,14 +35,19 @@ RSpec.describe "Topbar", type: :system, js: true do
   describe "on clicking channels" do
     context "when channels bar is expanded" do
       it "collapses the channels bar" do
-        expect(page).to have_css('.channels-bar')
+        expect(page).to have_no_css('.channels-bar.collapsed')
         find('.channels-toggler').click
-        expect(page).to have_no_css('.channels-bar')
+        expect(page).to have_css('.channels-bar.collapsed')
       end
     end
 
     context "when channels bar is collapsed" do
+      before { find('.channels-toggler').click }
+
       it "expands the channels bar" do
+        expect(page).to have_css('.channels-bar.collapsed')
+        find('.channels-toggler').click
+        expect(page).to have_no_css('.channels-bar.collapsed')
       end
     end
   end
