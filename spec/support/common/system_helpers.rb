@@ -29,6 +29,10 @@ module SystemHelpers
     expect(page).to have_selector("body.not-reloaded")
   end
 
+  def reload_page
+    page.driver.browser.navigate.refresh
+  end
+
   def gui_login_user(user)
     visit '/login'
     fill_in 'session_username', with: user.username

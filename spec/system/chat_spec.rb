@@ -14,8 +14,9 @@ RSpec.describe "Chats", type: :system do
       before { resize_window_to_xs }
 
       it "has collapsed sidebars" do
+        reload_page
         expect(page).to have_no_css('.channels-bar')
-        expect(page).to have_no_css('.users-bar')
+        expect(page).to have_no_css('.members-bar')
       end
     end
 
@@ -23,8 +24,9 @@ RSpec.describe "Chats", type: :system do
       before { resize_window_to_small }
 
       it "has expanded channels bar and collapsed users bar" do
+        reload_page
         expect(page).to have_css('.channels-bar')
-        expect(page).to have_no_css('.users-bar')
+        expect(page).to have_no_css('.members-bar')
       end
     end
 
@@ -32,8 +34,9 @@ RSpec.describe "Chats", type: :system do
       before { resize_window_to_medium }
 
       it "has expanded sidebars" do
+        reload_page
         expect(page).to have_css('.channels-bar')
-        expect(page).to have_css('.users-bar')
+        expect(page).to have_css('.members-bar')
       end
     end
   end
