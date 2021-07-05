@@ -2,13 +2,24 @@
   width: 220px;
   background-color: darken(theme-color("app-secondary"), 3%);
   border-right: 1px solid theme-color("app-dark");
-  &.hide {
-    display: none;
-  }
+  transition: width 0.25s;
 }
 
 @include media-breakpoint-down(xs) {
   .channels-bar {
-    display: none;
+    position: absolute;
+    height: 100%;
+    z-index: 999;
+    &.collapsed {
+      width: 0;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .channels-bar {
+    &.collapsed {
+      width: 15px;
+    }
   }
 }

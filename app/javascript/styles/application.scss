@@ -25,6 +25,14 @@ a {
   }
 }
 
+.no-transitions-on-load {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
 @include media-breakpoint-only(xs) {
   body {
     background-color: lighten(theme-color("app-secondary"), 3%);

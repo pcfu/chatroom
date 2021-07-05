@@ -2,10 +2,25 @@
   width: 250px;
   background-color: darken(theme-color("app-secondary"), 3%);
   border-left: 1px solid theme-color("app-dark");
+  transition: width 0.25s;
 }
 
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(xs) {
   .members-bar {
-    display: none;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    z-index: 998;
+    &.collapsed {
+      width: 0px;
+    }
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .members-bar {
+    &.collapsed {
+      width: 15px;
+    }
   }
 }
