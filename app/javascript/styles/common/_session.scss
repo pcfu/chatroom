@@ -66,12 +66,13 @@
     top: 40px;
     right: 0;
     padding: 10px 0;
+    z-index: 1000;
     background-color: rgba(theme-color("app-dark"), 0.7);
     border-radius: 5px;
     border: 2px solid theme-color("app-secondary");
     box-shadow: 0 2px 7px 0 theme-color("app-shadow");
     &.show {
-      visibility: show;
+      visibility: visible;
     }
     &.hide {
       visibility: hidden;
@@ -164,7 +165,7 @@
       border: 2px solid theme-color("app-secondary");
       box-shadow: 0 2px 7px 0 theme-color("app-shadow");
       &.show {
-        visibility: show;
+        visibility: visible;
       }
       &.hide {
         visibility: hidden;
