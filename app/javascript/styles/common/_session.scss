@@ -45,6 +45,9 @@
       width: 30px;
       border-radius: 15px;
       border: 3px solid theme-color("app-secondary");
+      &:hover {
+        border-color: theme-color("app-highlight");
+      }
     }
 
     .navbar-username {
