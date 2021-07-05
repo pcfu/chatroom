@@ -34,6 +34,8 @@ RSpec.describe "Topbar", type: :system, js: true do
 
   describe "on clicking channels" do
     context "when channels bar is expanded" do
+      before { page.evaluate_script("$('.channels-bar').removeClass('collapsed')") }
+
       it "collapses the channels bar" do
         expect(page).to have_no_css('.channels-bar.collapsed')
         find('.channels-toggler').click
@@ -42,7 +44,7 @@ RSpec.describe "Topbar", type: :system, js: true do
     end
 
     context "when channels bar is collapsed" do
-      before { find('.channels-toggler').click }
+      before { page.evaluate_script("$('.channels-bar').addClass('collapsed')") }
 
       it "expands the channels bar" do
         expect(page).to have_css('.channels-bar.collapsed')
@@ -53,5 +55,24 @@ RSpec.describe "Topbar", type: :system, js: true do
   end
 
   describe "on clicking members" do
+    context "when members bar is expanded" do
+      before { page.evaluate_script("$('.members-bar').removeClass('collapsed')") }
+
+      it "collapses the members bar" do
+        expect(page).to have_no_css('.members-bar.collapsed')
+        find('.members-toggler').click
+        expect(page).to have_css('.members-bar.collapsed')
+      end
+    end
+
+    context "when members bar is collapsed" do
+      before { page.evaluate_script("$('.members-bar').addClass('collapsed')") }
+
+      it "expands the members bar" do
+        expect(page).to have_css('.members-bar.collapsed')
+        find('.members-toggler').click
+        expect(page).to have_no_css('.members-bar.collapsed')
+      end
+    end
   end
 end
