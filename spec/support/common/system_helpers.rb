@@ -41,6 +41,12 @@ module SystemHelpers
     sleep 0.1
   end
 
+  def expect_elem_width(selector, target_width)
+    width = page.evaluate_script("$('#{selector}').width()")
+    delta = (target_width - width).abs
+    expect(delta).to be <= 1
+  end
+
   def expect_user_panel(username)
     expect(page).to have_css('.navbar-user-panel')
     expect(page).to have_css('.gravatar')
