@@ -3,6 +3,22 @@
   background-color: darken(theme-color("app-secondary"), 3%);
   border-right: 1px solid theme-color("app-dark");
   transition: width 0.25s;
+
+  .bar-toggler {
+    position: absolute;
+    top: 100px;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    color: theme-color("app-dark");
+    background-color: theme-color("app-primary");
+    border: 2px solid theme-color("app-dark");
+    border-radius: 15px;
+    cursor: pointer;
+    &:hover {
+      background-color: theme-color("app-highlight");
+    }
+  }
 }
 
 @include media-breakpoint-down(xs) {
@@ -10,16 +26,47 @@
     position: absolute;
     height: 100%;
     z-index: 999;
-    &.collapsed {
-      width: 0;
+
+    .bar-toggler {
+      .expand-icon {
+        display: none;
+      }
+
+      .collapse-icon {
+        display: initial;
+      }
+    }
+  }
+
+  .channels-bar.collapsed {
+    width: 0;
+
+    .bar-toggler {
+      display: none !important;
     }
   }
 }
 
 @include media-breakpoint-up(sm) {
   .channels-bar {
-    &.collapsed {
-      width: 15px;
+    .bar-toggler {
+      .expand-icon {
+        display: none;
+      }
+      .collapse-icon {
+        display: initial;
+      }
+    }
+  }
+
+  .channels-bar.collapsed {
+    width: 15px;
+
+    .expand-icon {
+      display: initial;
+    }
+    .collapse-icon {
+      display: none;
     }
   }
 }
