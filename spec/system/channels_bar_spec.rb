@@ -8,11 +8,11 @@ RSpec.describe "ChannelsBar", type: :system, js: true do
     before { page.evaluate_script("$('.channels-bar').removeClass('collapsed')") }
 
     it "has a collapse toggler" do
-      expect(page).to have_css('.bar-toggler > .collapse-icon')
+      expect(page).to have_css('.channels-bar .bar-toggler > .collapse-icon')
     end
 
     it "has no expand toggler" do
-      expect(page).to have_no_css('.bar-toggler > .expand-icon')
+      expect(page).to have_no_css('.channels-bar .bar-toggler > .expand-icon')
     end
 
     it "collapses on toggler click" do
@@ -32,9 +32,9 @@ RSpec.describe "ChannelsBar", type: :system, js: true do
       end
 
       it "has no toggler buttons" do
-        expect(page).to have_no_css('.bar-toggler')
-        expect(page).to have_no_css('.collapse-icon')
-        expect(page).to have_no_css('.expand-icon')
+        expect(page).to have_no_css('.channels-bar .bar-toggler')
+        expect(page).to have_no_css('.channels-bar .bar-toggler > .collapse-icon')
+        expect(page).to have_no_css('.channels-bar .bar-toggler > .expand-icon')
       end
     end
 
@@ -46,11 +46,11 @@ RSpec.describe "ChannelsBar", type: :system, js: true do
       end
 
       it "has an expand toggler" do
-        expect(page).to have_css('.bar-toggler > .expand-icon')
+        expect(page).to have_css('.channels-bar .bar-toggler > .expand-icon')
       end
 
       it "has no collapse toggler" do
-        expect(page).to have_no_css('.bar-toggler > .collapse-icon')
+        expect(page).to have_no_css('.channels-bar .bar-toggler > .collapse-icon')
       end
     end
 
