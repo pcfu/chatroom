@@ -1,13 +1,12 @@
 @import "bootstrap/scss/bootstrap";
 @import "common/globals";
-
-@import "common/navbar";
-@import "common/topbar";
-@import "common/sidebars";
 @import "common/session";
-
 @import "common/forms";
 @import "common/styleable-select";
 
-@import "users";
-@import "chat";
+@import "static_pages/navbar";
+@import "static_pages/users";
+
+@import "chat/chat";
+@import "chat/topbar";
+@import "chat/sidebars";
