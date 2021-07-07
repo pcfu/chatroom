@@ -1,7 +1,7 @@
 class ChatController < ApplicationController
 
   def index
-    @user = rand(1..1000).to_s.rjust(4, '0')
+    return redirect_to login_url if !logged_in?
   end
 
   def post_message
