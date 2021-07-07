@@ -1,13 +1,11 @@
-.members-bar {
-  width: 250px;
+.sidebar {
   background-color: darken(theme-color("app-secondary"), 3%);
-  border-left: 1px solid theme-color("app-dark");
+  border-right: 1px solid theme-color("app-dark");
   transition: width 0.25s;
 
   .bar-toggler {
     position: absolute;
     top: 100px;
-    left: -10px;
     width: 20px;
     height: 20px;
     color: theme-color("app-dark");
@@ -21,12 +19,27 @@
   }
 }
 
+.channels-bar {
+  width: 220px;
+
+  .bar-toggler {
+    right: -10px;
+  }
+}
+
+.members-bar {
+  width: 250px;
+
+  .bar-toggler {
+    left: -10px;
+  }
+}
+
 @include media-breakpoint-down(xs) {
-  .members-bar {
+  .sidebar {
     position: absolute;
-    right: 0;
     height: 100%;
-    z-index: 998;
+    z-index: 999;
 
     .bar-toggler {
       .expand-icon {
@@ -39,8 +52,8 @@
     }
   }
 
-  .members-bar.collapsed {
-    width: 0px;
+  .sidebar.collapsed {
+    width: 0;
 
     .bar-toggler {
       display: none !important;
@@ -49,7 +62,7 @@
 }
 
 @include media-breakpoint-up(sm) {
-  .members-bar {
+  .sidebar {
     .bar-toggler {
       .expand-icon {
         display: none;
@@ -60,7 +73,7 @@
     }
   }
 
-  .members-bar.collapsed {
+  .sidebar.collapsed {
     width: 15px;
 
     .expand-icon {
