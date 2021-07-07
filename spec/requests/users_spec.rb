@@ -28,7 +28,7 @@ RSpec.describe "Users", type: :request do
     end
 
     context "when invalid registration" do
-      it "something happens" do
+      it "it returns conflict" do
         post '/register', params: { user: attributes_for(:user, :username_too_short) }
         expect(controller.logged_in?).to be false
         expect(response).to have_http_status(:conflict)
