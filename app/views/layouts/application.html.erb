@@ -16,7 +16,8 @@
       <%= render 'layouts/partials/main_content' %>
     <% else %>
       <%= render 'layouts/bars/topbar' %>
-      <div class="container-fluid p-0 flex-grow-1 d-flex justify-content-between position-relative">
+      <div class="container-fluid p-0 flex-grow-1 d-flex overflow-hidden
+                  justify-content-between position-relative">
         <%= render 'layouts/bars/channels_bar' %>
         <%= render 'layouts/partials/chat_content' %>
         <%= render 'layouts/bars/members_bar' %>
