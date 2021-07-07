@@ -14,6 +14,11 @@ RSpec.describe "MembersBar", type: :system, js: true do
     it "has no expand toggler" do
       expect(page).to have_no_css('.members-bar .bar-toggler > .expand-icon')
     end
+
+    it "collapses on toggler click" do
+      find('.members-bar .bar-toggler').click
+      expect(page).to have_css('.members-bar.collapsed')
+    end
   end
 
   context "when collapsed" do
@@ -47,6 +52,11 @@ RSpec.describe "MembersBar", type: :system, js: true do
       it "has no collapse toggler" do
         expect(page).to have_no_css('.members-bar .bar-toggler > .collapse-icon')
       end
+    end
+
+    it "expands on toggler click" do
+      find('.members-bar .bar-toggler').click
+      expect(page).to have_no_css('.members-bar.collapsed')
     end
   end
 end

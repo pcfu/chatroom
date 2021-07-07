@@ -16,7 +16,7 @@ RSpec.describe "ChannelsBar", type: :system, js: true do
     end
 
     it "collapses on toggler click" do
-      find('.bar-toggler').click
+      find('.channels-bar .bar-toggler').click
       expect(page).to have_css('.channels-bar.collapsed')
     end
   end
@@ -55,7 +55,7 @@ RSpec.describe "ChannelsBar", type: :system, js: true do
     end
 
     it "expands on toggler click" do
-      find('.bar-toggler').click
+      find('.channels-bar .bar-toggler').click
       expect(page).to have_no_css('.channels-bar.collapsed')
     end
   end
