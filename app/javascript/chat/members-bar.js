@@ -10,4 +10,12 @@ export function initMembersBar() {
     bar.removeClass('no-transitions-on-load');
     clearTimeout(timeout);
   }, 100);
+
+  bar.find('.bar-toggler').click(function () {
+    if (bar.hasClass('collapsed')) {
+      bar.removeClass('collapsed');
+    } else {
+      bar.addClass('collapsed');
+    }
+  });
 }
