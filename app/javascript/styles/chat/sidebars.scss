@@ -59,6 +59,10 @@
       display: none !important;
     }
   }
+
+  .members-bar {
+    right: 0;
+  }
 }
 
 @include media-breakpoint-up(sm) {
