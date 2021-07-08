@@ -59,19 +59,19 @@ services:
     environment:
       <<: *common-env
       NODE_ENV: ${NODE_ENV:-test}
+      HEADLESS: 'false'
+
+  rspec-headless: 
+    <<: *rspec
+    environment:
+      <<: *common-env
+      NODE_ENV: ${NODE_ENV:-test}
       HEADLESS: 'true'
     depends_on:
       postgres:
         condition: service_healthy
       selenium:
         condition: service_healthy
-
-  rspec-browser:
-    <<: *rspec
-    environment:
-      <<: *common-env
-      NODE_ENV: ${NODE_ENV:-test}
-      HEADLESS: 'false'
 
   postgres:
     image: postgres:${PG_VERS}
