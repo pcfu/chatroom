@@ -45,6 +45,9 @@ GEM
     activerecord (6.0.3.5)
       activemodel (= 6.0.3.5)
       activesupport (= 6.0.3.5)
+    activerecord-postgres_enum (1.6.0)
+      activerecord (>= 5, < 6.2)
+      pg
     activestorage (6.0.3.5)
       actionpack (= 6.0.3.5)
       activejob (= 6.0.3.5)
@@ -227,6 +230,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activerecord-postgres_enum
   auto_strip_attributes (~> 2.6)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
@@ -253,4 +257,4 @@ RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   2.2.15
+   2.2.21
