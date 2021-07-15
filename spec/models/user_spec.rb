@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   subject(:user) { build_stubbed :user }
-  let(:another_user) { create :control_user }
+  let(:ctrl_user) { create :control_user }
 
   it { is_expected.to be_valid }
 
@@ -57,7 +57,7 @@ RSpec.describe User, type: :model do
     end
 
     it "is unique" do
-      user.username = another_user.username
+      user.username = ctrl_user.username
       user.valid?
       expect(user.errors[:username]).to include("has already been taken")
     end
@@ -109,7 +109,7 @@ RSpec.describe User, type: :model do
     end
 
     it "is unique" do
-      user.email = another_user.email
+      user.email = ctrl_user.email
       user.valid?
       expect(user.errors[:email]).to include("has already been taken")
     end
@@ -169,8 +169,9 @@ RSpec.describe User, type: :model do
     end
   end
 
-  it "downcases email on save" do
-    user = create(:user, :email_uppercase)
+  it "downcases email on validate" do
+    user.email = attributes_for(:user, :email_uppercase)[:email]
+    user.valid?
     expect(user.email).to eq(user.email.downcase)
   end
 

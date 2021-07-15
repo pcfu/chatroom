@@ -37,7 +37,7 @@ class User < ApplicationRecord
                        length: { in: MIN_PW_LEN..MAX_PW_LEN },
                        format: { with: /(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_-])/ }
 
-  before_save do
-    self.email = email.downcase
+  before_validation do
+    self.email = email.downcase if email.present?
   end
 end
