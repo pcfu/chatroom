@@ -27,7 +27,7 @@ class User < ApplicationRecord
   validates :username, presence: true,
                        length: { in: MIN_UNAME_LEN..MAX_UNAME_LEN },
                        format: { with: /\A[a-zA-Z0-9](\w|-)+[a-zA-Z0-9]\z/ },
-                       uniqueness: true
+                       uniqueness: { case_sensitive: false }
   validates :email, presence: true,
                     length: { maximum: MAX_EMAIL_LEN },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },

@@ -56,8 +56,8 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
 
-    it "is unique" do
-      user.username = ctrl_user.username
+    it "is case-insensitive unique" do
+      user.username = ctrl_user.username.upcase
       user.valid?
       expect(user.errors[:username]).to include("has already been taken")
     end
