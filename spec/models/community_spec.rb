@@ -50,25 +50,25 @@ RSpec.describe Community, type: :model do
     end
   end
 
-  describe "#type" do
+  describe "#access" do
     it "is required" do
-      generate_blanks.each do |type|
-        comm.type = type
+      generate_blanks.each do |access|
+        comm.access = access
         comm.valid?
-        expect(comm.errors[:type]).to include("can't be blank")
+        expect(comm.errors[:access]).to include("can't be blank")
       end
     end
 
     it "accepts only enum values" do
       %w[public private].each do |enum_val|
-        comm.type = enum_val
+        comm.access = enum_val
         comm.valid?
         expect(comm).to be_valid
       end
 
       expect {
-        comm.type = 'unknown'
-      }.to raise_error(ArgumentError).with_message(/is not a valid type/)
+        comm.access = 'unknown'
+      }.to raise_error(ArgumentError).with_message(/is not a valid access/)
     end
   end
 

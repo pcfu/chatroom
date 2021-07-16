@@ -3,7 +3,7 @@ class Community < ApplicationRecord
   MAX_CNAME_LEN = 50
   MAX_DESC_LEN  = 1000
 
-  enum type: { public: 'public', private: 'private' }, _prefix: :type
+  enum access: { public: 'public', private: 'private' }, _suffix: :access
   after_initialize :set_defaults
 
   auto_strip_attributes :name, :description
@@ -11,7 +11,7 @@ class Community < ApplicationRecord
                    length: { in: MIN_CNAME_LEN..MAX_CNAME_LEN },
                    uniqueness: true
   validates :description, presence: true, length: { maximum: MAX_DESC_LEN }
-  validates :type, presence: true
+  validates :access, presence: true
 
   before_validation do
     self.name = name.downcase if name.present?
@@ -19,6 +19,6 @@ class Community < ApplicationRecord
 
 
   def set_defaults
-    self.type ||= 'public'
+    self.access ||= 'public'
   end
 end
