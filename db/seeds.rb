@@ -8,5 +8,6 @@
 
 Community.create(
   name: 'global',
-  description: 'A global community that all users join by default'
+  description: 'A global community that all users join by default',
+  handle: 'GLOB'
 )
