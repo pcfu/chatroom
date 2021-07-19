@@ -50,6 +50,34 @@ RSpec.describe Community, type: :model do
     end
   end
 
+  describe "#handle" do
+    it "is required" do
+      generate_blanks.each do |handle|
+        comm.handle = handle
+        comm.valid?
+        expect(comm.errors[:handle]).to include("can't be blank")
+      end
+    end
+
+    it "has at least #{Community::MIN_HANDLE_LEN} chars" do
+      comm.handle = attributes_for(:community, :handle_too_short)[:handle]
+      comm.valid?
+      expect(comm.errors[:handle]).to include(/is too short/)
+    end
+
+    it "has at most #{Community::MAX_HANDLE_LEN} chars" do
+      comm.handle = attributes_for(:community, :handle_too_long)[:handle]
+      comm.valid?
+      expect(comm.errors[:handle]).to include(/is too long/)
+    end
+
+    it "is unique" do
+      comm.handle = ctrl_comm.handle
+      comm.valid?
+      expect(comm.errors[:handle]).to include("has already been taken")
+    end
+  end
+
   describe "#access" do
     it "is required" do
       generate_blanks.each do |access|
@@ -76,5 +104,11 @@ RSpec.describe Community, type: :model do
     comm.name = attributes_for(:community, :name_uppercase)[:name]
     comm.valid?
     expect(comm.name).to eq(comm.name.downcase)
+  end
+
+  it "upcases handle on validate" do
+    comm.handle = attributes_for(:community, :handle_lowercase)[:handle]
+    comm.valid?
+    expect(comm.handle).to eq(comm.handle.upcase)
   end
 end
