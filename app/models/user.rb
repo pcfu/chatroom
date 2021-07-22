@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :communities, through: :memberships
 
   MIN_UNAME_LEN = 3

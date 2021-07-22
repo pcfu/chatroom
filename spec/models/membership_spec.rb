@@ -36,4 +36,20 @@ RSpec.describe Membership, type: :model do
       expect(membership.role).to eq('regular')
     end
   end
+
+  describe "#associations" do
+    it "is destroyed when associated user is destroyed" do
+      membership.save
+      expect {
+        user.destroy
+      }.to change(Membership, :count).by -1
+    end
+
+    it "is destroyed when associated community is destroyed" do
+      membership.save
+      expect {
+        comm.destroy
+      }.to change(Membership, :count).by -1
+    end
+  end
 end

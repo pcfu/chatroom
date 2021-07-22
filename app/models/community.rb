@@ -1,5 +1,5 @@
 class Community < ApplicationRecord
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
 
   MIN_CNAME_LEN   = 2
