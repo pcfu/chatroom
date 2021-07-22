@@ -116,7 +116,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "#dob" do
-    it "is latest #{User.max_dob}" do
+    it "is latest #{User.max_dob} (#{User::MIN_USER_AGE} y.o)" do
       user.dob = attributes_for(:user, :dob_too_young)[:dob]
       user.valid?
       expect(user.errors[:dob]).to include("exceeded maximum date")
