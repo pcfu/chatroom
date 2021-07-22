@@ -43,4 +43,8 @@ class User < ApplicationRecord
   before_validation do
     self.email = email.downcase if email.present?
   end
+
+  after_create do
+    self.memberships.create(community: Community.find_by(name: 'global'))
+  end
 end

@@ -184,4 +184,14 @@ RSpec.describe User, type: :model do
     user.dob = attributes_for(:user, :dob_datetime_str)[:dob]
     expect(user.dob.class).to eq(Date)
   end
+
+  describe "#associations" do
+    let(:global) { Community.find_by(name: 'global') }
+
+    it "joins global community as regular member on create" do
+      user = create :user
+      membership = user.memberships.find_by(community: global)
+      expect(membership.regular?).to be true
+    end
+  end
 end
