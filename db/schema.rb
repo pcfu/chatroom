@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2021_07_22_001320) do
     "private",
   ], force: :cascade
 
-  create_enum :membership_level, [
+  create_enum :membership_role, [
     "owner",
     "moderator",
     "regular",
@@ -41,11 +41,11 @@ ActiveRecord::Schema.define(version: 2021_07_22_001320) do
   create_table "memberships", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "community_id"
-    t.enum "level", enum_name: "membership_level"
+    t.enum "role", enum_name: "membership_role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["community_id"], name: "index_memberships_on_community_id"
-    t.index ["level"], name: "index_memberships_on_level"
+    t.index ["role"], name: "index_memberships_on_role"
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
