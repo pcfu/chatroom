@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :memberships
+  has_many :communities, through: :memberships
+
   MIN_UNAME_LEN = 3
   MAX_UNAME_LEN = 20
   MAX_EMAIL_LEN = 255

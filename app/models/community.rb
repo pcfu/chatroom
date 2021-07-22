@@ -1,4 +1,7 @@
 class Community < ApplicationRecord
+  has_many :memberships
+  has_many :users, through: :memberships
+
   MIN_CNAME_LEN   = 2
   MAX_CNAME_LEN   = 50
   MAX_DESC_LEN    = 1000
