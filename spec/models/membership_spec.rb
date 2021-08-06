@@ -10,6 +10,14 @@ RSpec.describe Membership, type: :model do
 
   it { is_expected.to be_valid }
 
+  it "is unique per user" do
+    new_comm = create(:control_community)
+    user.memberships.create(community: new_comm)
+    membership = user.memberships.build(community: new_comm)
+    membership.valid?
+    expect(membership.errors[:community_id]).to include("has already been taken")
+  end
+
   describe "#role" do
     it "is required" do
       generate_blanks.each do |role|

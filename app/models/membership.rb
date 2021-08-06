@@ -11,6 +11,7 @@ class Membership < ApplicationRecord
   after_initialize :set_defaults
 
   validates :role, presence: true
+  validates_uniqueness_of :community_id, scope: :user_id
 
 
   def set_defaults
