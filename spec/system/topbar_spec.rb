@@ -52,6 +52,22 @@ RSpec.describe "Topbar", type: :system, js: true do
         expect(page).to have_no_css('.channels-bar.collapsed')
       end
     end
+
+    context "when extra small screen with collapsed channels bar and expanded members bar" do
+      before do
+        resize_window_to_xs
+        page.evaluate_script("$('.channels-bar').addClass('collapsed')")
+        page.evaluate_script("$('.members-bar').removeClass('collapsed')")
+      end
+
+      it "collapses the members bar and expands the channels bar" do
+        expect(page).to have_css('.channels-bar.collapsed')
+        expect(page).to have_no_css('.members-bar.collapsed')
+        find('.channels-toggler').click
+        expect(page).to have_css('.members-bar.collapsed')
+        expect(page).to have_no_css('.channels-bar.collapsed')
+      end
+    end
   end
 
   describe "on clicking members" do
@@ -71,6 +87,22 @@ RSpec.describe "Topbar", type: :system, js: true do
       it "expands the members bar" do
         expect(page).to have_css('.members-bar.collapsed')
         find('.members-toggler').click
+        expect(page).to have_no_css('.members-bar.collapsed')
+      end
+    end
+
+    context "when extra small screen with collapsed members bar and expanded channels bar" do
+      before do
+        resize_window_to_xs
+        page.evaluate_script("$('.members-bar').addClass('collapsed')")
+        page.evaluate_script("$('.channels-bar').removeClass('collapsed')")
+      end
+
+      it "collapses the channels bar and expands the members bar" do
+        expect(page).to have_css('.members-bar.collapsed')
+        expect(page).to have_no_css('.channels-bar.collapsed')
+        find('.members-toggler').click
+        expect(page).to have_css('.channels-bar.collapsed')
         expect(page).to have_no_css('.members-bar.collapsed')
       end
     end

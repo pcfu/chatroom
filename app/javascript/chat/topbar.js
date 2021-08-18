@@ -9,6 +9,14 @@ export function initTopBar() {
       } else {
         bar.addClass('collapsed');
       }
+
+      if (window.innerWidth < 576) {
+        const otherBarName = barName === 'channels' ? 'members' : 'channels';
+        const otherBar = $(`.${otherBarName}-bar`);
+        if (!otherBar.hasClass('collapsed')) {
+          otherBar.addClass('collapsed');
+        }
+      }
     });
   });
 }
