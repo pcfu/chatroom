@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_22_101205) do
+ActiveRecord::Schema.define(version: 2021_08_19_100903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 2021_07_22_101205) do
     "regular",
     "banned",
   ], force: :cascade
+
+  create_table "channels", force: :cascade do |t|
+    t.bigint "community_id", null: false
+    t.string "name", null: false
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["community_id", "name"], name: "index_channels_on_community_id_and_name", unique: true
+    t.index ["community_id"], name: "index_channels_on_community_id"
+  end
 
   create_table "communities", force: :cascade do |t|
     t.string "name", null: false
@@ -59,4 +69,5 @@ ActiveRecord::Schema.define(version: 2021_07_22_101205) do
     t.date "dob"
   end
 
+  add_foreign_key "channels", "communities"
 end
