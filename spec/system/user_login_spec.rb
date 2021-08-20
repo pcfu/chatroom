@@ -26,10 +26,10 @@ RSpec.describe "UserLogins", type: :system do
       end
     end
 
-    it "clears field errors on key up", js: true do
+    it "clears field errors on input", js: true do
         find(".btn[value=login]").click
         %w(username password).each do |field|
-          page.evaluate_script "$('#session_#{field}').trigger('keyup')"
+          find("#session_#{field}").native.send_keys(:semicolon)
           expect(page).to have_no_css("label[for='session_#{field}'] span.message")
         end
     end
