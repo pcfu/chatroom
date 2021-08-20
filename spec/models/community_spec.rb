@@ -100,6 +100,16 @@ RSpec.describe Community, type: :model do
     end
   end
 
+  describe "#associations" do
+    it "adds general channel on create" do
+      expect(Channel.where(community_id: ctrl_comm.id, name: 'general')).to exist
+    end
+
+    it "adds announcements channel on create" do
+      expect(Channel.where(community_id: ctrl_comm.id, name: 'announcements')).to exist
+    end
+  end
+
   it "downcases name on validate" do
     comm.name = attributes_for(:community, :name_uppercase)[:name]
     comm.valid?
