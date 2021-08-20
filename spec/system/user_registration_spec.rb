@@ -14,8 +14,8 @@ RSpec.describe "UserRegistrations", type: :system do
     it "has correct form elements", js: true do
       within 'form' do
         expect(page).to have_css('div.form-header', text: 'Create an account')
-        has_field_with_label('user_username', 'username')
-        has_field_with_label('user_email', 'email')
+        expect_field_with_label('user_username', 'username')
+        expect_field_with_label('user_email', 'email')
 
         expect(page).to have_css('label[for=user_dob]',  text: icase_exact('date of birth'))
         expect(page).to have_css('.styleable-select-prompt',  text: icase_exact('day'))
@@ -25,8 +25,8 @@ RSpec.describe "UserRegistrations", type: :system do
         expect(page).to have_css('.styleable-select-prompt',  text: icase_exact('year'))
         expect(page).to have_css('#user_dob_year .styleable-select-options', visible: false)
 
-        has_field_with_label('user_password', 'password')
-        has_field_with_label('user_password_confirmation', 'confirm password')
+        expect_field_with_label('user_password', 'password')
+        expect_field_with_label('user_password_confirmation', 'confirm password')
         expect(page).to have_button('register')
         expect(page).to have_link('Already have an account?', href: '/login')
       end

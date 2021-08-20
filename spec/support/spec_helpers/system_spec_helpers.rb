@@ -61,7 +61,7 @@ module SystemSpecHelpers
     expect(page).to have_no_link('Sample Link', href: '#')
   end
 
-  def has_field_with_label(field_name, label_text)
+  def expect_field_with_label(field_name, label_text)
     expect(page).to have_css "label[for=#{field_name}]", text: icase_exact(label_text)
     expect(page).to have_field field_name
   end

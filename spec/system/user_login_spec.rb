@@ -16,8 +16,8 @@ RSpec.describe "UserLogins", type: :system do
     it "has correct form elements", js: true do
       within 'form' do
         expect(page).to have_css('div.form-header', text: 'Welcome back')
-        has_field_with_label('session_username', 'username')
-        has_field_with_label('session_password', 'password')
+        expect_field_with_label('session_username', 'username')
+        expect_field_with_label('session_password', 'password')
 
         expect(page).to have_link('Forgot password?', href: '#')
         expect(page).to have_button('login')
