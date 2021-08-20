@@ -12,10 +12,13 @@ class User < ApplicationRecord
   has_secure_password
   auto_strip_attributes :username, :email
 
+  before_validation :downcase_username_and_email
+  after_create      :join_global_community
+
   validates :username, presence: true,
                        length: { in: MIN_UNAME_LEN..MAX_UNAME_LEN },
-                       format: { with: /\A[a-zA-Z0-9](\w|-)+[a-zA-Z0-9]\z/ },
-                       uniqueness: { case_sensitive: false }
+                       format: { with: /\A[a-zA-Z]+[a-zA-Z0-9]*\z/ },
+                       uniqueness: true
   validates :email, presence: true,
                     length: { maximum: MAX_EMAIL_LEN },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
@@ -25,10 +28,6 @@ class User < ApplicationRecord
   validates :password, presence: true,
                        length: { in: MIN_PW_LEN..MAX_PW_LEN },
                        format: { with: /(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*_-])/ }
-
-  before_validation :downcase_email
-  after_create      :join_global_community
-
 
   #################
   # Class Methods #
@@ -58,8 +57,9 @@ class User < ApplicationRecord
       end
     end
 
-    def downcase_email
-      self.email = email.downcase if email.present?
+    def downcase_username_and_email
+      self.username.downcase! if username.present?
+      self.email.downcase! if email.present?
     end
 
     def join_global_community

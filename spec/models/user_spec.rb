@@ -33,33 +33,30 @@ RSpec.describe User, type: :model do
       expect(user.errors[:username]).to include("is invalid")
     end
 
-    it "has at least 1 letter" do
-      user.username = attributes_for(:user, :username_no_letters)[:username]
+    it "has no special characters" do
+      special_chars.split('').each do |char|
+        user.username = "special#{char}chars"
+        user.valid?
+        expect(user.errors[:username]).to include("is invalid")
+      end
+    end
+
+    it "starts with a letter" do
+      user.username = attributes_for(:user, :username_number_prefix)[:username]
       user.valid?
       expect(user.errors[:username]).to include("is invalid")
     end
 
-    it "starts with a letter or number" do
-      user.username = attributes_for(:user, :username_dash_start)[:username]
-      user.valid?
-      expect(user.errors[:username]).to include("is invalid")
-    end
-
-    it "ends with a letter or number" do
-      user.username = attributes_for(:user, :username_dash_end)[:username]
-      user.valid?
-      expect(user.errors[:username]).to include("is invalid")
-    end
-
-    it "allows consecutive - and _" do
-      user.username = attributes_for(:user, :username_double_special_chars)[:username]
-      expect(user).to be_valid
-    end
-
-    it "is case-insensitive unique" do
-      user.username = ctrl_user.username.upcase
+    it "is unique" do
+      user.username = ctrl_user.username
       user.valid?
       expect(user.errors[:username]).to include("has already been taken")
+    end
+
+    it "is downcased on validate" do
+      user.username = attributes_for(:user, :username_uppercase)[:username]
+      user.valid?
+      expect(user.username).to eq(user.username.downcase)
     end
   end
 
@@ -113,6 +110,12 @@ RSpec.describe User, type: :model do
       user.valid?
       expect(user.errors[:email]).to include("has already been taken")
     end
+
+    it "is downcased on validate" do
+      user.email = attributes_for(:user, :email_uppercase)[:email]
+      user.valid?
+      expect(user.email).to eq(user.email.downcase)
+    end
   end
 
   describe "#dob" do
@@ -120,6 +123,16 @@ RSpec.describe User, type: :model do
       user.dob = attributes_for(:user, :dob_too_young)[:dob]
       user.valid?
       expect(user.errors[:dob]).to include("exceeded maximum date")
+    end
+
+    it "is converted to Date if DateTime" do
+      user.dob = attributes_for(:user, :dob_datetime)[:dob]
+      expect(user.dob.class).to eq(Date)
+    end
+
+    it "is converted to Date if DateTime string" do
+      user.dob = attributes_for(:user, :dob_datetime_str)[:dob]
+      expect(user.dob.class).to eq(Date)
     end
   end
 
@@ -167,22 +180,6 @@ RSpec.describe User, type: :model do
       user.valid?
       expect(user.errors[:password_confirmation]).to include("doesn't match Password")
     end
-  end
-
-  it "downcases email on validate" do
-    user.email = attributes_for(:user, :email_uppercase)[:email]
-    user.valid?
-    expect(user.email).to eq(user.email.downcase)
-  end
-
-  it "converts DateTime to Date for dob" do
-    user.dob = attributes_for(:user, :dob_datetime)[:dob]
-    expect(user.dob.class).to eq(Date)
-  end
-
-  it "converts datetimestring to Date for dob" do
-    user.dob = attributes_for(:user, :dob_datetime_str)[:dob]
-    expect(user.dob.class).to eq(Date)
   end
 
   describe "#associations" do

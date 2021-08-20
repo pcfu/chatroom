@@ -1,13 +1,13 @@
 FactoryBot.define do
-  factory :user, aliases: [:base_user] do
-    username { 'test_user-name' }
+  factory :user, aliases: [:minimum_user] do
+    username { 'testuser01' }
     email { 'test-user@chatroom.com' }
     dob { User.max_dob }
     password { 'P@ssw5rd' }
     password_confirmation { 'P@ssw5rd' }
 
     factory :control_user do
-      username { 'ctrl_user-name' }
+      username { 'ctrluser02' }
       email { 'control-user@chatroom.com' }
     end
 
@@ -25,20 +25,12 @@ FactoryBot.define do
       username { 't e s t u s e r' }
     end
 
-    trait :username_no_letters do
-      username { '_____' }
+    trait :username_number_prefix do
+      username { '01testuser' }
     end
 
-    trait :username_dash_start do
-      username { '-test-user' }
-    end
-
-    trait :username_dash_end do
-      username { 'test-user-' }
-    end
-
-    trait :username_double_special_chars do
-      username { 'test_-user' }
+    trait :username_uppercase do
+      username { 'TESTUSER01' }
     end
 
     ### email traits ###
