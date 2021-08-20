@@ -5,6 +5,10 @@ module CommonHelpers
     return blanks
   end
 
+  def special_chars
+    %q(!"#$%&'()*+,./:;<=>?@[\]^_`{|}~)
+  end
+
   def icase_exact(string)
     /\A#{string}\z/i
   end
