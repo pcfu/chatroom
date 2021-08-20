@@ -8,7 +8,7 @@ RSpec.describe Community, type: :model do
 
   describe "#name" do
     it "is required" do
-      generate_blanks.each do |name|
+      blank_strings.each do |name|
         comm.name = name
         comm.valid?
         expect(comm.errors[:name]).to include("can't be blank")
@@ -36,7 +36,7 @@ RSpec.describe Community, type: :model do
 
   describe "#description" do
     it "is required" do
-      generate_blanks.each do |desc|
+      blank_strings.each do |desc|
         comm.description = desc
         comm.valid?
         expect(comm.errors[:description]).to include("can't be blank")
@@ -52,7 +52,7 @@ RSpec.describe Community, type: :model do
 
   describe "#handle" do
     it "is required" do
-      generate_blanks.each do |handle|
+      blank_strings.each do |handle|
         comm.handle = handle
         comm.valid?
         expect(comm.errors[:handle]).to include("can't be blank")
@@ -80,7 +80,7 @@ RSpec.describe Community, type: :model do
 
   describe "#access" do
     it "is required" do
-      generate_blanks.each do |access|
+      blank_strings.each do |access|
         comm.access = access
         comm.valid?
         expect(comm.errors[:access]).to include("can't be blank")

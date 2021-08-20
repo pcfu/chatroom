@@ -8,7 +8,7 @@ RSpec.describe User, type: :model do
 
   describe "#username" do
     it "is required" do
-      generate_blanks.each do |username|
+      blank_strings.each do |username|
         user.username = username
         user.valid?
         expect(user.errors[:username]).to include("can't be blank")
@@ -65,7 +65,7 @@ RSpec.describe User, type: :model do
 
   describe "#email" do
     it "is required" do
-      generate_blanks.each do |email|
+      blank_strings.each do |email|
         user.email = email
         user.valid?
         expect(user.errors[:email]).to include("can't be blank")

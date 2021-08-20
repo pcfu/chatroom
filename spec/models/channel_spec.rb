@@ -9,7 +9,7 @@ RSpec.describe Channel, type: :model do
 
   describe "#name" do
     it "is required" do
-      generate_blanks.each do |name|
+      blank_strings.each do |name|
         ch.name = name
         ch.valid?
         expect(ch.errors[:name]).to include("can't be blank")

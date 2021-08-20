@@ -20,7 +20,7 @@ RSpec.describe Membership, type: :model do
 
   describe "#role" do
     it "is required" do
-      generate_blanks.each do |role|
+      blank_strings.each do |role|
         membership.role = role
         membership.valid?
         expect(membership.errors[:role]).to include("can't be blank")
