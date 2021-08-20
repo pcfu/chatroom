@@ -14,6 +14,11 @@ class Channel < ApplicationRecord
 
   before_validation :downcase_name
 
+
+  def user_has_access?(user)
+    user.communities.include? community
+  end
+
   private
 
     def downcase_name

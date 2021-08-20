@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Channel, type: :model do
+  let(:user)    { build_stubbed :user }
   let(:comm)    { create :community }
-  let(:ctrl_ch) { build(:control_channel, :community_id => comm.id) }
-  subject(:ch)  { build(:channel, :community_id => comm.id) }
+  let(:ctrl_ch) { create(:control_channel, :community_id => comm.id) }
+  subject(:ch)  { build_stubbed(:channel, :community_id => comm.id) }
 
   it { is_expected.to be_valid }
 
@@ -61,13 +62,18 @@ RSpec.describe Channel, type: :model do
     end
 
     it "is unique per channel" do
-      ch.save
-      ctrl_ch.name = ch.name
-      ctrl_ch.valid?
-      expect(ctrl_ch.errors[:name]).to include("has already been taken")
+      ch.name = ctrl_ch.name
+      ch.valid?
+      expect(ch.errors[:name]).to include("has already been taken")
 
-      ctrl_ch.community = create(:control_community)
-      expect(ctrl_ch).to be_valid
+      ch.community = create(:control_community)
+      expect(ch).to be_valid
+    end
+
+    it "is downcased on validate" do
+      ch.name = attributes_for(:channel, :name_uppercase)[:name]
+      ch.valid?
+      expect(ch.name).to eq(ch.name.downcase)
     end
   end
 
@@ -81,15 +87,22 @@ RSpec.describe Channel, type: :model do
 
   describe "#associations" do
     it "is destroyed when associated community is destroyed" do
-      ch.save
+      ch =  create(:channel, :community_id => comm.id)
       Community.find_by(:handle => 'TEST').destroy
       expect(Channel.where(:name => ch.name)).to_not exist
     end
   end
 
-  it "downcases name on validate" do
-    ch.name = attributes_for(:channel, :name_uppercase)[:name]
-    ch.valid?
-    expect(ch.name).to eq(ch.name.downcase)
+  describe "#methods" do
+    describe "user_has_access?" do
+      it "returns true if user is a member of community" do
+        user.memberships.create(community: comm)
+        expect(ch.user_has_access? user).to be true
+      end
+
+      it "returns false if user is not a member of community" do
+        expect(ch.user_has_access? user).to be false
+      end
+    end
   end
 end

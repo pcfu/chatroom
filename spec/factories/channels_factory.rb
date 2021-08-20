@@ -1,6 +1,6 @@
 FactoryBot.define do
-  factory :channel, aliases: [:base_channel] do
-    name        { 'main' }
+  factory :channel, aliases: [:minimum_channel] do
+    name { 'main' }
 
     factory :control_channel do
       name        { 'secondary' }
