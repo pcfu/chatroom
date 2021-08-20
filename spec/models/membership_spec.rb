@@ -1,21 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Membership, type: :model do
-  subject(:user)        { create :user }
-  subject(:comm)        { create :community }
+  let(:user) { create :user }
+  let(:comm) { create :community }
 
   subject(:membership)  do
-    user.memberships.build(community: comm, role: 'regular')
+    user.memberships.build(community: comm)
   end
 
   it { is_expected.to be_valid }
 
   it "is unique per user" do
-    new_comm = create(:control_community)
-    user.memberships.create(community: new_comm)
-    membership = user.memberships.build(community: new_comm)
+    membership.save
+    membership = user.memberships.build(community: comm)
     membership.valid?
     expect(membership.errors[:community_id]).to include("has already been taken")
+
+    membership = user.memberships.create(community: create(:control_community))
+    expect(membership).to be_valid
   end
 
   describe "#role" do
@@ -40,8 +42,7 @@ RSpec.describe Membership, type: :model do
     end
 
     it "defaults to regular on initialization" do
-      membership = user.memberships.build(community: comm)
-      expect(membership.role).to eq('regular')
+      expect(membership.regular?).to be true
     end
   end
 
@@ -49,12 +50,12 @@ RSpec.describe Membership, type: :model do
     it "is destroyed when associated user is destroyed" do
       membership.save
       user.destroy
-      expect(Membership.where(community: comm)).to_not exist
+      expect(Membership.where(user: user)).to_not exist
     end
 
     it "is destroyed when associated community is destroyed" do
       membership.save
-      user.destroy
+      comm.destroy
       expect(Membership.where(community: comm)).to_not exist
     end
   end
