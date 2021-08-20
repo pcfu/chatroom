@@ -34,7 +34,7 @@ module SystemSpecHelpers
   end
 
   def expect_elem_width(selector, target_width)
-    width = page.evaluate_script("$('#{selector}').width()")
+    width = page.evaluate_script("$('#{selector}').outerWidth()")
     delta = (target_width - width).abs
     expect(delta).to be <= 1
   end

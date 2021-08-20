@@ -60,7 +60,6 @@
       .expand-icon {
         display: none;
       }
-
       .collapse-icon {
         display: initial;
       }
@@ -69,7 +68,7 @@
 
   .sidebar.collapsed {
     width: 0;
-
+    border: none;
     .bar-toggler {
       display: none !important;
     }
