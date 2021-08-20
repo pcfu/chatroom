@@ -1,5 +1,6 @@
 .sidebar {
   background-color: darken(theme-color("app-secondary"), 3%);
+  border-left: 1px solid theme-color("app-dark");
   border-right: 1px solid theme-color("app-dark");
   transition: width 0.25s;
 
@@ -20,18 +21,32 @@
 }
 
 .channels-bar {
-  width: 220px;
-
+  width: 300px;
   .bar-toggler {
     right: -10px;
+  }
+  .channels-bar-inner {
+    min-width: 300px;
+    height: 100%;
+  }
+
+  &.collapsed .channels-bar-inner {
+    display: none;
   }
 }
 
 .members-bar {
-  width: 250px;
-
+  width: 220px;
   .bar-toggler {
     left: -10px;
+  }
+  .members-bar-inner {
+    min-width: 220px;
+    height: 100%;
+  }
+
+  &.collapsed .members-bar-inner {
+    display: none;
   }
 }
 
