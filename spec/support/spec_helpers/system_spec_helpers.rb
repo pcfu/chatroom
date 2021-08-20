@@ -1,4 +1,4 @@
-module SystemHelpers
+module SystemSpecHelpers
   def resize_window_to_default
     resize_window_to(1440, 900)
   end
@@ -15,6 +15,10 @@ module SystemHelpers
     resize_window_to(768, 900)
   end
 
+  def reload_page
+    page.driver.browser.navigate.refresh
+  end
+
   def page_should_reload
     page.evaluate_script "$(document.body).addClass('not-reloaded')"
     yield
@@ -27,18 +31,6 @@ module SystemHelpers
     yield
     sleep 0.1
     expect(page).to have_selector("body.not-reloaded")
-  end
-
-  def reload_page
-    page.driver.browser.navigate.refresh
-  end
-
-  def gui_login_user(user)
-    visit '/login'
-    fill_in 'session_username', with: user.username
-    fill_in 'session_password', with: user.password
-    find(".btn[value=login]").click
-    sleep 0.1
   end
 
   def expect_elem_width(selector, target_width)
@@ -90,5 +82,5 @@ module SystemHelpers
 end
 
 RSpec.configure do |config|
-  config.include SystemHelpers, type: :system
+  config.include SystemSpecHelpers, type: :system
 end
