@@ -33,7 +33,8 @@ function hasError(field) {
   return getLabel(field).parent('.field_with_errors')[0];
 }
 
-export function loginFns() {
+
+$(document).on('turbolinks:load', function () {
   $('form').on('ajax:before', event => {
     ['username', 'password'].forEach(field => {
       if (hasError(field)) {
@@ -71,4 +72,4 @@ export function loginFns() {
       removeError(field);
     }
   });
-}
+});

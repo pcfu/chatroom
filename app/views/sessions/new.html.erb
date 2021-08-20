@@ -1,5 +1,9 @@
 <% provide(:title, 'Login') %>
 
+<% content_for :assets do %>
+  <%= javascript_pack_tag 'static_pages/login', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
 <div class="form-wrapper page-center">
   <%= form_with(url: login_path, scope: :session) do |form| %>
     <div class="form-header text-center">Welcome back</div>

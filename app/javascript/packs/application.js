@@ -14,10 +14,6 @@ require("channels");
 // client-side-validations MUST come AFTER turbolinks
 require('@client-side-validations/client-side-validations');
 
-requireAll(require.context('common', true, /\.js$/));
-require('static_pages');
-require('chat');
-
 // Include jQuery in global and window scope
 const jQuery = require('jquery')
 global.$ = global.jQuery = jQuery;

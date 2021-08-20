@@ -1,22 +1,15 @@
+<% content_for :assets do %>
+  <%= javascript_pack_tag 'chat/index', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
 <div>
-  <h1>Welcome User#<%= @user  %>!</h1>
-
-  <div id="messages"></div>
-
-  <div id="message-box">
-    <%= form_with url: "/chatroom/post_message", method: :post do |form| %>
-      <div>
-        <%= form.hidden_field :user, value: @user  %>
-      </div>
-      <div>
-        <%= form.label :message, "Message:" %>
-      </div>
-      <div>
-        <%= form.text_area :message, size: "120x3" %>
-      </div>
-      <div>
-        <%= form.submit "Post" %>
-      </div>
-    <% end %>
+  <div>
+    Sample Message 1
+  </div>
+  <div>
+    Sample Message 2
+  </div>
+  <div>
+    Sample Message 3
   </div>
 </div>

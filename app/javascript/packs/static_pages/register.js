@@ -101,7 +101,7 @@ function shouldSetDobChanged() {
 }
 
 
-export function registerFns() {
+$(document).on('turbolinks:load', function () {
   loadMonths();
 
   // Set dob values for select options
@@ -161,4 +161,4 @@ export function registerFns() {
       return 'is invalid';
     }
   }
-}
+});
