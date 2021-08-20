@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Community, type: :model do
-  subject(:comm)      { build_stubbed :community }
-  subject(:ctrl_comm) { create :control_community }
+  subject(:comm)  { build_stubbed :community }
+  let(:ctrl_comm) { create :control_community }
 
   it { is_expected.to be_valid }
 
@@ -27,8 +27,8 @@ RSpec.describe Community, type: :model do
       expect(comm.errors[:name]).to include(/is too long/)
     end
 
-    it "is unique" do
-      comm.name = ctrl_comm.name
+    it "is case-insensitive unique" do
+      comm.name = ctrl_comm.name.upcase
       comm.valid?
       expect(comm.errors[:name]).to include("has already been taken")
     end
@@ -71,10 +71,30 @@ RSpec.describe Community, type: :model do
       expect(comm.errors[:handle]).to include(/is too long/)
     end
 
+    it "has no numbers" do
+      comm.handle = attributes_for(:community, :handle_with_numbers)[:handle]
+      comm.valid?
+      expect(comm.errors[:handle]).to include("is invalid")
+    end
+
+    it "has no special characters" do
+      special_chars.split('').each do |char|
+        comm.handle = "T#{char}"
+        comm.valid?
+        expect(comm.errors[:handle]).to include("is invalid")
+      end
+    end
+
     it "is unique" do
       comm.handle = ctrl_comm.handle
       comm.valid?
       expect(comm.errors[:handle]).to include("has already been taken")
+    end
+
+    it "it upcased on validate" do
+      comm.handle = attributes_for(:community, :handle_lowercase)[:handle]
+      comm.valid?
+      expect(comm.handle).to eq(comm.handle.upcase)
     end
   end
 
@@ -98,6 +118,11 @@ RSpec.describe Community, type: :model do
         comm.access = 'unknown'
       }.to raise_error(ArgumentError).with_message(/is not a valid access/)
     end
+
+    it "defaults to public on initialize" do
+      comm = Community.new
+      expect(comm.public_access?).to be true
+    end
   end
 
   describe "#associations" do
@@ -108,17 +133,5 @@ RSpec.describe Community, type: :model do
     it "adds announcements channel on create" do
       expect(Channel.where(community_id: ctrl_comm.id, name: 'announcements')).to exist
     end
-  end
-
-  it "downcases name on validate" do
-    comm.name = attributes_for(:community, :name_uppercase)[:name]
-    comm.valid?
-    expect(comm.name).to eq(comm.name.downcase)
-  end
-
-  it "upcases handle on validate" do
-    comm.handle = attributes_for(:community, :handle_lowercase)[:handle]
-    comm.valid?
-    expect(comm.handle).to eq(comm.handle.upcase)
   end
 end

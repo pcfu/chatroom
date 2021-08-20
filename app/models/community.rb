@@ -16,16 +16,17 @@ class Community < ApplicationRecord
   enum access: { public: 'public', private: 'private' }, _suffix: :access
 
   after_initialize  :set_default_access
-  before_validation :change_name_and_handle_cases
+  before_validation :upcase_handle
   after_create      :add_default_channels
 
   auto_strip_attributes :name, :description
   validates :name, presence: true,
                    length: { in: MIN_CNAME_LEN..MAX_CNAME_LEN },
-                   uniqueness: true
+                   uniqueness: { case_sensitive: false }
   validates :description, presence: true, length: { maximum: MAX_DESC_LEN }
   validates :handle, presence: true,
                      length: { in: MIN_HANDLE_LEN..MAX_HANDLE_LEN },
+                     format: { with: /\A[A-Z]+\z/ },
                      uniqueness: true
   validates :access, presence: true
 
@@ -36,8 +37,7 @@ class Community < ApplicationRecord
       self.access ||= 'public'
     end
 
-    def change_name_and_handle_cases
-      self.name.downcase! if name.present?
+    def upcase_handle
       self.handle.upcase! if handle.present?
     end
 
