@@ -3,8 +3,6 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-const requireAll = (r) => r.keys().forEach(r);
-
 import 'bootstrap';
 import "@fortawesome/fontawesome-free/js/all";
 require("@rails/ujs").start();
@@ -13,6 +11,7 @@ require("@rails/activestorage").start();
 require("channels");
 // client-side-validations MUST come AFTER turbolinks
 require('@client-side-validations/client-side-validations');
+require('./overrides/client-side-validations');
 
 // Include jQuery in global and window scope
 const jQuery = require('jquery')

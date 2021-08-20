@@ -135,7 +135,7 @@ function changePasswordConfirmationFocusOutBehaviour() {
   });
 }
 
-$(document).on('ready', function () {
+$(document).on('turbolinks:load', function () {
   if ($('form[action="/register"]')[0]) {
     changePasswordValidationOrder();
     changePasswordConfirmationKeyUpBehaviour();
