@@ -35,11 +35,12 @@ RSpec.describe Channel, type: :model do
     end
 
     it "has no special characters besides dash" do
-      ch.name = attributes_for(:channel, :name_with_dashes)[:name]
+      name = attributes_for(:channel, :name_with_dashes)[:name]
+      ch.name = name
       expect(ch).to be_valid
 
-      special_chars.split('').each do |char|
-        ch.name += char
+      special_chars.gsub('-', '').split('').each do |char|
+        ch.name = "special#{char}chars"
         ch.valid?
         expect(ch.errors[:name]).to include("is invalid")
       end

@@ -4,7 +4,7 @@ module ModelSpecHelpers
   end
 
   def special_chars
-    %q(!"#$%&'()*+,./:;<=>?@[\]^_`{|}~)
+    %q(!"#$%&'()*+-,./:;<=>?@[\]^_`{|}~)
   end
 end
 
